@@ -44,6 +44,7 @@ if __name__ == '__main__':
     stop = timeit.default_timer()
     print('setting up models took',stop-start,'sec')
     #prep_functions
+    start = timeit.default_timer()
     print('setting up prepfunctions...')
     prep_funs = dict()
     prep_funs['xception'] =    appl.xception.preprocess_input
