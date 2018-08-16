@@ -1,5 +1,6 @@
 package main;
 
+import kerasfeatures.DenseNet;
 import net.semanticmetadata.lire.builders.DocumentBuilder;
 import net.semanticmetadata.lire.builders.GlobalDocumentBuilder;
 import net.semanticmetadata.lire.imageanalysis.features.global.CEDD;

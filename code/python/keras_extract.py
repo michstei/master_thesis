@@ -5,7 +5,7 @@ from keras.preprocessing import image
 import keras.applications as appl
 from keras.models import Model
 filesdir = '/home/michael/master_thesis/data/Medico_2018_development_set/'
-
+csv_folder = '/home/michael/master_thesis/data/csv/'
 def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_input, model_targetsize):
    
     img = image.load_img(img_path, target_size=model_targetsize)
@@ -35,10 +35,10 @@ if __name__ == '__main__':
     # models['vgg19'] =       appl.vgg19.VGG19(weights=None, include_top=False,pooling='avg')
     # models['resnet50'] =    appl.resnet50.ResNet50(weights=None,include_top=False,pooling='avg')
     # models['inceptionv3'] = appl.inception_v3.InceptionV3(weights=None,include_top=False,pooling='avg')
-    models['incresnetv2'] = appl.inception_resnet_v2.InceptionResNetV2(weights=None,include_top=False,pooling='avg')
-    models['mobilenet'] =   appl.mobilenet.MobileNet(weights=None,include_top=False,pooling='avg')
-    models['densenet121'] = appl.densenet.DenseNet121(weights=None,include_top=False,pooling='avg')
-    models['densenet169'] = appl.densenet.DenseNet169(weights=None,include_top=False,pooling='avg')
+    # models['incresnetv2'] = appl.inception_resnet_v2.InceptionResNetV2(weights=None,include_top=False,pooling='avg')
+    # models['mobilenet'] =   appl.mobilenet.MobileNet(weights=None,include_top=False,pooling='avg')
+    # models['densenet121'] = appl.densenet.DenseNet121(weights=None,include_top=False,pooling='avg')
+    # models['densenet169'] = appl.densenet.DenseNet169(weights=None,include_top=False,pooling='avg')
     models['densenet201'] = appl.densenet.DenseNet201(weights=None,include_top=False,pooling='avg')
     print('all models set up')
     stop = timeit.default_timer()
@@ -90,7 +90,7 @@ if __name__ == '__main__':
     print('setting up csv_filenames...')
     csv_filenames = dict()
     for k in models.keys():
-        csv_filenames[k] = 'csv_' + k + '.csv'
+        csv_filenames[k] = csv_folder + k + '.csv'
     print('all csv_filenames set up')
     stop = timeit.default_timer()
     print('setting up other stuff took',stop-start,'sec')
