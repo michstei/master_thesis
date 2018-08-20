@@ -1,4 +1,4 @@
-package kerasfeatures;
+package keras;
 
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import net.semanticmetadata.lire.utils.MetricsUtils;
@@ -8,17 +8,17 @@ import utils.KerasCSVReader;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
-public class IncResNetV2 implements KerasFeature{
+public class MobileNet implements KerasFeature{
 
-    private final String featureName    = "IncResNetV2";
-    private final String fieldName      = "keras_incresnetv2";
+    private final String featureName    = "MobileNet";
+    private final String fieldName      = "keras_mobilenet";
     private double[] featureVector      = null;
     private String csvFilename          = null;
 
-    public IncResNetV2(){
+    public MobileNet(){
     }
 
-    public IncResNetV2(String csvFilename){
+    public MobileNet(String csvFilename){
         this.csvFilename = csvFilename;
     }
     @Override
@@ -33,10 +33,6 @@ public class IncResNetV2 implements KerasFeature{
         }
     }
 
-    @Override
-    public void extract(BufferedImage bufferedImage) {
-        throw new NotImplementedException();
-    }
 
     @Override
     public String getFeatureName() {

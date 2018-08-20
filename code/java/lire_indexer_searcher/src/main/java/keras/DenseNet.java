@@ -1,4 +1,4 @@
-package kerasfeatures;
+package keras;
 
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import net.semanticmetadata.lire.utils.MetricsUtils;
@@ -35,10 +35,7 @@ public class DenseNet{
             }
         }
 
-        @Override
-        public void extract(BufferedImage bufferedImage) {
-            throw new NotImplementedException();
-        }
+
 
         @Override
         public String getFeatureName() {
@@ -116,10 +113,6 @@ public class DenseNet{
             }
         }
 
-        @Override
-        public void extract(BufferedImage bufferedImage) {
-            throw new NotImplementedException();
-        }
 
         @Override
         public String getFeatureName() {
@@ -197,10 +190,7 @@ public class DenseNet{
             }
         }
 
-        @Override
-        public void extract(BufferedImage bufferedImage) {
-            throw new NotImplementedException();
-        }
+
 
         @Override
         public String getFeatureName() {

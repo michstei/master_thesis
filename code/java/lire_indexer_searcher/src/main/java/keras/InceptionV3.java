@@ -1,4 +1,4 @@
-package kerasfeatures;
+package keras;
 
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import net.semanticmetadata.lire.utils.MetricsUtils;
@@ -8,17 +8,17 @@ import utils.KerasCSVReader;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
-public class VGG16 implements KerasFeature{
+public class InceptionV3 implements KerasFeature{
 
-    private final String featureName    = "VGG16";
-    private final String fieldName      = "keras_vgg16";
+    private final String featureName    = "InceptionV3";
+    private final String fieldName      = "keras_inceptionv3";
     private double[] featureVector      = null;
     private String csvFilename          = null;
 
-    public VGG16(){
+    public InceptionV3(){
     }
 
-    public VGG16(String csvFilename){
+    public InceptionV3(String csvFilename){
         this.csvFilename = csvFilename;
     }
     @Override
@@ -33,10 +33,7 @@ public class VGG16 implements KerasFeature{
         }
     }
 
-    @Override
-    public void extract(BufferedImage bufferedImage) {
-        throw new NotImplementedException();
-    }
+
 
     @Override
     public String getFeatureName() {

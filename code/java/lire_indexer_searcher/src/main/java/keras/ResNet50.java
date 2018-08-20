@@ -1,4 +1,4 @@
-package kerasfeatures;
+package keras;
 
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import net.semanticmetadata.lire.utils.MetricsUtils;
@@ -8,17 +8,17 @@ import utils.KerasCSVReader;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
-public class MobileNet implements KerasFeature{
+public class ResNet50 implements KerasFeature{
 
-    private final String featureName    = "MobileNet";
-    private final String fieldName      = "keras_mobilenet";
+    private final String featureName    = "ResNet50";
+    private final String fieldName      = "keras_resnet50";
     private double[] featureVector      = null;
     private String csvFilename          = null;
 
-    public MobileNet(){
+    public ResNet50(){
     }
 
-    public MobileNet(String csvFilename){
+    public ResNet50(String csvFilename){
         this.csvFilename = csvFilename;
     }
     @Override
@@ -33,10 +33,7 @@ public class MobileNet implements KerasFeature{
         }
     }
 
-    @Override
-    public void extract(BufferedImage bufferedImage) {
-        throw new NotImplementedException();
-    }
+
 
     @Override
     public String getFeatureName() {

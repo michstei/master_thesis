@@ -1,4 +1,4 @@
-package kerasfeatures;
+package keras;
 
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import net.semanticmetadata.lire.utils.MetricsUtils;
@@ -8,17 +8,17 @@ import utils.KerasCSVReader;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
-public class Xception implements KerasFeature{
+public class IncResNetV2 implements KerasFeature{
 
-    private final String featureName    = "Xception";
-    private final String fieldName      = "keras_xception";
+    private final String featureName    = "IncResNetV2";
+    private final String fieldName      = "keras_incresnetv2";
     private double[] featureVector      = null;
     private String csvFilename          = null;
 
-    public Xception(){
+    public IncResNetV2(){
     }
 
-    public Xception(String csvFilename){
+    public IncResNetV2(String csvFilename){
         this.csvFilename = csvFilename;
     }
     @Override
@@ -33,10 +33,6 @@ public class Xception implements KerasFeature{
         }
     }
 
-    @Override
-    public void extract(BufferedImage bufferedImage) {
-        throw new NotImplementedException();
-    }
 
     @Override
     public String getFeatureName() {
