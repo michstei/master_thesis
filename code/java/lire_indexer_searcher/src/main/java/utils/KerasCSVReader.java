@@ -42,6 +42,7 @@ public class KerasCSVReader {
     public HashMap<String,ArrayList<Double>> getValues(){
         return this.values;
     }
+
     public double[] getValuesOfFile(String filename){
         ArrayList<Double> list = this.values.get(filename);
         if(list == null) return null;
