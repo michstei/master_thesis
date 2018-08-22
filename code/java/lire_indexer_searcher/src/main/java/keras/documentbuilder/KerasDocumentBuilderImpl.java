@@ -3,6 +3,7 @@ package keras.documentbuilder;
 import keras.features.KerasFeature;
 import net.semanticmetadata.lire.builders.DocumentBuilder;
 import net.semanticmetadata.lire.builders.GlobalDocumentBuilder;
+import net.semanticmetadata.lire.imageanalysis.features.GlobalFeature;
 import net.semanticmetadata.lire.indexers.hashing.BitSampling;
 import net.semanticmetadata.lire.indexers.hashing.LocalitySensitiveHashing;
 import net.semanticmetadata.lire.indexers.hashing.MetricSpaces;
@@ -10,6 +11,10 @@ import net.semanticmetadata.lire.indexers.parallel.ExtractorItem;
 import net.semanticmetadata.lire.utils.SerializationUtils;
 import org.apache.lucene.document.*;
 import org.apache.lucene.util.BytesRef;
+
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -19,7 +24,6 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
 
     private boolean useDocValues = false;
 
-    public enum HashingMode {BitSampling, LSH, MetricSpaces, None}
 
     private GlobalDocumentBuilder.HashingMode hashingMode = GlobalDocumentBuilder.HashingMode.BitSampling;
     private boolean hashingEnabled = false;
@@ -108,7 +112,7 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
      *
      * @param kerasFeatureClass
      */
-    public void addExtractor(Class<? extends KerasFeature> kerasFeatureClass) {
+    public void addExtractor(Class<? extends GlobalFeature> kerasFeatureClass) {
         addExtractor(new ExtractorItem(kerasFeatureClass));
     }
 
@@ -154,20 +158,34 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
     }
 
     /**
+     * Images are resized so as not to exceed the {@link DocumentBuilder#MAX_IMAGE_DIMENSION}, after that
+     * the feature is extracted using the given globalFeature.
+     *
+     * @param imagePath         is the imagePath
+     * @param kerasFeature selected global feature
+     * @return the input globalFeature
+     */
+    public GlobalFeature extractGlobalFeature(String imagePath, GlobalFeature kerasFeature) throws IOException {
+        assert (imagePath != null);
+
+        kerasFeature.extract(ImageIO.read(new File(imagePath)));
+        return kerasFeature;
+    }
+    /**
      * Extracts the global feature and returns the Lucene Fields for the selected image.
      *
      * @param imagePath         is the selected imagePath.
      * @param extractorItem           the features.
      * @return Lucene Fields.
      */
-    private Field[] getGlobalDescriptorFields(String imagePath, ExtractorItem extractorItem) {
+    private Field[] getGlobalDescriptorFields(String imagePath, ExtractorItem extractorItem) throws IOException {
         Field[] result;
 //        if (hashingEnabled) result = new Field[2];
 //        else result = new Field[1];
         Field hash = null;
         Field vector = null;
 
-        KerasFeature kerasFeature = extractKerasFeature(imagePath, (KerasFeature) extractorItem.getExtractorInstance());
+        GlobalFeature kerasFeature = extractorItem.getExtractorInstance() instanceof KerasFeature ? extractKerasFeature(imagePath, (KerasFeature) extractorItem.getExtractorInstance()) : extractGlobalFeature(imagePath,(GlobalFeature)extractorItem.getExtractorInstance());
 
         if (!useDocValues) {
             // TODO: Stored field is compressed and upon search decompression takes a lot of time (> 50% with a small index with 50k images). Find something else ...
@@ -204,7 +222,7 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
     }
 
     @Override
-    public Field[] createDescriptorFields(String imagePath) {
+    public Field[] createDescriptorFields(String imagePath) throws IOException {
         docsCreated = true;
         LinkedList<Field> resultList = new LinkedList<Field>();
         Field[] fields;
@@ -220,7 +238,7 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
     }
 
     @Override
-    public Document createDocument(String imagePath, String identifier) {
+    public Document createDocument(String imagePath, String identifier) throws IOException {
         Document doc = new Document();
 
         if (identifier != null) {

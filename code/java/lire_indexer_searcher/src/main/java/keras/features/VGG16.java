@@ -7,6 +7,7 @@ import utils.KerasCSVReader;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
+
 public class VGG16 implements KerasFeature{
 
     private final String featureName    = "VGG16";

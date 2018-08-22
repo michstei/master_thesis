@@ -2,6 +2,7 @@ package keras.searcher;
 
 
 import keras.features.KerasFeature;
+import net.semanticmetadata.lire.builders.GlobalDocumentBuilder;
 import net.semanticmetadata.lire.imageanalysis.features.GlobalFeature;
 import net.semanticmetadata.lire.indexers.hashing.MetricSpaces;
 import net.semanticmetadata.lire.searchers.*;
@@ -16,6 +17,7 @@ import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.similarities.ClassicSimilarity;
 
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -27,7 +29,7 @@ public class KerasMetricSpacesSearcher  {
     private int maxResultsHashBased = 1000;
     private int maximumHits = 100;
     private String featureFieldName = null;
-    private KerasFeature feature = null;
+    private GlobalFeature feature = null;
     private String hashesFieldName = null;
     private int numHashesUsedForQuery = 25;
     private boolean useDocValues = false;
@@ -39,9 +41,9 @@ public class KerasMetricSpacesSearcher  {
 
         try {
             this.metricSpacesParameters = MetricSpaces.loadReferencePoints(new FileInputStream(referencePointFile));
-            this.feature = (KerasFeature)this.metricSpacesParameters.featureClass.newInstance();
+            this.feature = (GlobalFeature) this.metricSpacesParameters.featureClass.newInstance();
             this.featureFieldName = this.feature.getFieldName();
-            this.hashesFieldName = this.featureFieldName + "_hash";
+            this.hashesFieldName = this.featureFieldName + GlobalDocumentBuilder.HASH_FIELD_SUFFIX;
         } catch (IOException var4) {
             System.err.println("Error reading hash functions from default location.");
             var4.printStackTrace();
@@ -57,7 +59,7 @@ public class KerasMetricSpacesSearcher  {
             this.metricSpacesParameters = MetricSpaces.loadReferencePoints(new FileInputStream(referencePointFile));
             this.feature = (KerasFeature)this.metricSpacesParameters.featureClass.newInstance();
             this.featureFieldName = this.feature.getFieldName();
-            this.hashesFieldName = this.featureFieldName + "_hash";
+            this.hashesFieldName = this.featureFieldName +  GlobalDocumentBuilder.HASH_FIELD_SUFFIX;
             if (useDocValues) {
                 this.docValues = MultiDocValues.getBinaryValues(reader, this.featureFieldName);
                 this.searcher = new IndexSearcher(reader);
@@ -75,7 +77,7 @@ public class KerasMetricSpacesSearcher  {
 
         try {
             this.metricSpacesParameters = MetricSpaces.loadReferencePoints(referencePoints);
-            this.feature = (KerasFeature)this.metricSpacesParameters.featureClass.newInstance();
+            this.feature = (GlobalFeature)this.metricSpacesParameters.featureClass.newInstance();
             this.featureFieldName = this.feature.getFieldName();
             this.hashesFieldName = this.featureFieldName + "_hash";
         } catch (IOException var5) {
@@ -92,9 +94,9 @@ public class KerasMetricSpacesSearcher  {
 
         try {
             this.metricSpacesParameters = MetricSpaces.loadReferencePoints(referencePoints);
-            this.feature = (KerasFeature)this.metricSpacesParameters.featureClass.newInstance();
+            this.feature = (GlobalFeature)this.metricSpacesParameters.featureClass.newInstance();
             this.featureFieldName = this.feature.getFieldName();
-            this.hashesFieldName = this.featureFieldName + "_hash";
+            this.hashesFieldName = this.featureFieldName + GlobalDocumentBuilder.HASH_FIELD_SUFFIX;
             if (useDocValues) {
                 this.docValues = MultiDocValues.getBinaryValues(reader, this.featureFieldName);
                 this.searcher = new IndexSearcher(reader);
@@ -108,8 +110,13 @@ public class KerasMetricSpacesSearcher  {
 
     public ImageSearchHits search(String image, IndexReader reader) throws IOException {
         try {
-            KerasFeature queryFeature = (KerasFeature)this.feature.getClass().newInstance();
-            queryFeature.extract(image);
+            GlobalFeature queryFeature = this.feature.getClass().newInstance();
+            if(queryFeature instanceof KerasFeature) {
+                ((KerasFeature)queryFeature).extract(image);
+            }
+            else{
+                queryFeature.extract(ImageIO.read(new File(image)));
+            }
             String query = MetricSpaces.generateBoostedQuery(queryFeature, this.numHashesUsedForQuery);
             return this.search(query, queryFeature, reader);
         } catch (Exception var5) {
@@ -122,7 +129,7 @@ public class KerasMetricSpacesSearcher  {
         GlobalFeature queryFeature = null;
 
         try {
-            queryFeature = (GlobalFeature)this.feature.getClass().newInstance();
+            queryFeature = this.feature.getClass().newInstance();
         } catch (IllegalAccessException | InstantiationException var6) {
             var6.printStackTrace();
             return null;

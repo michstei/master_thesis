@@ -4,6 +4,7 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public interface KerasDocumentBuilder {
 
@@ -13,7 +14,7 @@ public interface KerasDocumentBuilder {
      * @param imagePath path to the image to analyze.
      * @return the fields resulting from the analysis.
      */
-    Field[] createDescriptorFields(String imagePath);
+    Field[] createDescriptorFields(String imagePath) throws IOException;
 
     /**
      * Creates a new Lucene document from a BufferedImage. The identifier can be used like an id
@@ -23,6 +24,6 @@ public interface KerasDocumentBuilder {
      * @param identifier an id for the image, for instance the filename or a URL. Can be NULL.
      * @return a Lucene Document containing the indexed image.
      */
-    Document createDocument(String imagePath , String identifier) throws FileNotFoundException;
+    Document createDocument(String imagePath , String identifier) throws IOException;
 
 }
