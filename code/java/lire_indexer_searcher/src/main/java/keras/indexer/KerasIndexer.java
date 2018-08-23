@@ -27,6 +27,7 @@ public class KerasIndexer {
     private GlobalDocumentBuilder.HashingMode hashingMode = null;
     private boolean hashingEnabled = false;
     private boolean useDocValues = false;
+
     public KerasIndexer(String indexFolder,
                         boolean iwCreate,
                         LuceneUtils.AnalyzerType analyzerType,
@@ -45,6 +46,7 @@ public class KerasIndexer {
         this.indexWriter = LuceneUtils.createIndexWriter(this.indexFolder,iwCreate,analyzerType);
 
     }
+
 
     public void addExtractor(Class<? extends GlobalFeature> featureClass){
         documentBuilder.addExtractor(featureClass);
@@ -133,9 +135,9 @@ public class KerasIndexer {
         for(int index = 0; index < this.filesToindex.size(); index++){
             Document doc = documentBuilder.createDocument(this.filesToindex.get(index),this.filesToindex.get(index));
             indexWriter.addDocument(doc);
-            System.out.printf("%,.2f%%%n",(index / (float)this.filesToindex.size() * 100));
+            System.out.printf("\r%05.2f%%",(index / (float)this.filesToindex.size() * 100));
         }
-        System.out.printf("%,.2f%%%n",100.0);
+        System.out.printf("\r%05.2f%%%n",100.0);
         LuceneUtils.closeWriter(indexWriter);
     }
 

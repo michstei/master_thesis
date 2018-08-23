@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 public class ResNet50 implements KerasFeature{
 
     private final String featureName    = "ResNet50";
-    private final String fieldName      = "keras_resnet50";
+    private final String fieldName      = "ResNet50";
     private double[] featureVector      = null;
     private static String csvFilename          = null;
     private static KerasCSVReader reader = null;

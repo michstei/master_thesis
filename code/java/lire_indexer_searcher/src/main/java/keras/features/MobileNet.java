@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 public class MobileNet implements KerasFeature{
 
     private final String featureName    = "MobileNet";
-    private final String fieldName      = "keras_mobilenet";
+    private final String fieldName      = "MobileNet";
     private double[] featureVector      = null;
     private static String csvFilename          = null;
     private static KerasCSVReader reader = null;

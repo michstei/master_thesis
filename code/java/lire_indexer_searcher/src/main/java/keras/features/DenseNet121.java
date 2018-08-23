@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 public class DenseNet121 implements KerasFeature{
 
     private final String featureName    = "DenseNet121";
-    private final String fieldName      = "keras_densenet121";
+    private final String fieldName      = "DenseNet121";
     private double[] featureVector      = null;
 
     private static String csvFilename          = null;

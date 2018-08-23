@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 public class IncResNetV2 implements KerasFeature{
 
     private final String featureName    = "IncResNetV2";
-    private final String fieldName      = "keras_incresnetv2";
+    private final String fieldName      = "IncResNetV2";
     private double[] featureVector      = null;
     private static String csvFilename          = null;
     private static KerasCSVReader reader = null;

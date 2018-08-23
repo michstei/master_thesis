@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
 public class VGG16 implements KerasFeature{
 
     private final String featureName    = "VGG16";
-    private final String fieldName      = "keras_vgg16";
+    private final String fieldName      = "VGG16";
     private double[] featureVector      = null;
     private static String csvFilename          = null;
     private static KerasCSVReader reader = null;

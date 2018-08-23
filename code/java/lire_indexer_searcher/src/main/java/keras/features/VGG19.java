@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 public class VGG19 implements KerasFeature{
 
     private final String featureName    = "VGG19";
-    private final String fieldName      = "keras_vgg19";
+    private final String fieldName      = "VGG19";
     private double[] featureVector      = null;
     private static String csvFilename          = null;
     private static KerasCSVReader reader = null;

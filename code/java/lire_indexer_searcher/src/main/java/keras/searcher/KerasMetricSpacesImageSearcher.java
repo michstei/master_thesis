@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.TreeSet;
 
-public class KerasMetricSpacesSearcher  {
+public class KerasMetricSpacesImageSearcher {
     private MetricSpaces.Parameters metricSpacesParameters;
     private int maxResultsHashBased = 1000;
     private int maximumHits = 100;
@@ -36,7 +36,7 @@ public class KerasMetricSpacesSearcher  {
     private BinaryDocValues docValues = null;
     private IndexSearcher searcher = null;
 
-    public KerasMetricSpacesSearcher(int maximumHits, File referencePointFile) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public KerasMetricSpacesImageSearcher(int maximumHits, File referencePointFile) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         this.maximumHits = maximumHits;
 
         try {
@@ -51,7 +51,7 @@ public class KerasMetricSpacesSearcher  {
 
     }
 
-    public KerasMetricSpacesSearcher(int maximumHits, File referencePointFile, boolean useDocValues, IndexReader reader) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public KerasMetricSpacesImageSearcher(int maximumHits, File referencePointFile, boolean useDocValues, IndexReader reader) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         this.maximumHits = maximumHits;
         this.useDocValues = useDocValues;
 
@@ -71,7 +71,7 @@ public class KerasMetricSpacesSearcher  {
 
     }
 
-    public KerasMetricSpacesSearcher(int maximumHits, InputStream referencePoints, int numHashedResults) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public KerasMetricSpacesImageSearcher(int maximumHits, InputStream referencePoints, int numHashedResults) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         this.maximumHits = maximumHits;
         this.maxResultsHashBased = numHashedResults;
 
@@ -87,7 +87,7 @@ public class KerasMetricSpacesSearcher  {
 
     }
 
-    public KerasMetricSpacesSearcher(int maximumHits, InputStream referencePoints, int numHashedResults, boolean useDocValues, IndexReader reader) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public KerasMetricSpacesImageSearcher(int maximumHits, InputStream referencePoints, int numHashedResults, boolean useDocValues, IndexReader reader) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         this.maximumHits = maximumHits;
         this.maxResultsHashBased = numHashedResults;
         this.useDocValues = useDocValues;
@@ -156,7 +156,7 @@ public class KerasMetricSpacesSearcher  {
 
     private ImageSearchHits searchWithField(String hashes, GlobalFeature queryFeature, IndexReader reader) throws IOException {
         IndexSearcher searcher = new IndexSearcher(reader);
-        searcher.setSimilarity(new KerasMetricSpacesSearcher.BaseSimilarity());
+        searcher.setSimilarity(new KerasMetricSpacesImageSearcher.BaseSimilarity());
         QueryParser qp = new QueryParser(this.hashesFieldName, new WhitespaceAnalyzer());
         Query query = null;
 
@@ -197,7 +197,7 @@ public class KerasMetricSpacesSearcher  {
 
     private ImageSearchHits searchWithDocValues(String hashes, GlobalFeature queryFeature, IndexReader reader) throws IOException {
         IndexSearcher searcher = new IndexSearcher(reader);
-        searcher.setSimilarity(new KerasMetricSpacesSearcher.BaseSimilarity());
+        searcher.setSimilarity(new KerasMetricSpacesImageSearcher.BaseSimilarity());
         QueryParser qp = new QueryParser(this.hashesFieldName, new WhitespaceAnalyzer());
         Query query = null;
 

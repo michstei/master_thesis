@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 public class Xception implements KerasFeature{
 
     private final String featureName    = "Xception";
-    private final String fieldName      = "keras_xception";
+    private final String fieldName      = "Xception";
     private double[] featureVector      = null;
     private static String csvFilename          = null;
     private static KerasCSVReader reader = null;

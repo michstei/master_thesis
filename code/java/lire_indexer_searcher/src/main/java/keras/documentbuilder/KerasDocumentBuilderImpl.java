@@ -202,6 +202,7 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
             if (kerasFeature.getFeatureVector().length <= 3100) {
                 int[] hashes;
                 if (hashingMode == GlobalDocumentBuilder.HashingMode.BitSampling) {
+                    BitSampling.dimensions = kerasFeature.getFeatureVector().length;
                     hashes = BitSampling.generateHashes(kerasFeature.getFeatureVector());
                     hash = new TextField(extractorItems.get(extractorItem)[1], SerializationUtils.arrayToString(hashes), Field.Store.YES);
                 } else if (hashingMode == GlobalDocumentBuilder.HashingMode.LSH) {

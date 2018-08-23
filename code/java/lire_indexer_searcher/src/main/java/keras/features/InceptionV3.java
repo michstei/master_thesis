@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 public class InceptionV3 implements KerasFeature{
 
     private final String featureName    = "InceptionV3";
-    private final String fieldName      = "keras_inceptionv3";
+    private final String fieldName      = "InceptionV3";
     private double[] featureVector      = null;
     private static String csvFilename          = null;
     private static KerasCSVReader reader = null;
