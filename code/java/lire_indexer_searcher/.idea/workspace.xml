@@ -1,42 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e22a95c3-bbf2-4b09-9038-29e872be29d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/fileSnapshots.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/taskArtifacts.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/taskArtifacts.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/taskArtifacts.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/taskArtifacts.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/DenseNet121.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/DenseNet121.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/DenseNet169.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/DenseNet169.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/DenseNet201.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/DenseNet201.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/IncResNetV2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/IncResNetV2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/InceptionV3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/InceptionV3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/MobileNet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/MobileNet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/ResNet50.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/ResNet50.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/VGG16.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/VGG16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/VGG19.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/VGG19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/Xception.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/Xception.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/indexer/KerasIndexer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/indexer/KerasIndexer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/searcher/KerasBitSamplingImageSearcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/searcher/KerasBitSamplingImageSearcher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/searcher/KerasMetricSpacesImageSearcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/searcher/KerasMetricSpacesImageSearcher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet121.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet121.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet169.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet169.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet201.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet201.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/IncResNetV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/IncResNetV2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/InceptionV3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/InceptionV3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/MobileNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/MobileNet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/ResNet50.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/ResNet50.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/VGG16.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/VGG16.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/VGG19.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/VGG19.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/Xception.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/Xception.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/indexer/KerasIndexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/indexer/KerasIndexer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/searcher/KerasBitSamplingImageSearcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/searcher/KerasBitSamplingImageSearcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/searcher/KerasMetricSpacesImageSearcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/searcher/KerasMetricSpacesImageSearcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/KerasCSVReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/utils/KerasCSVReader.java" afterDir="false" />
-    </list>
+    <list default="true" id="e22a95c3-bbf2-4b09-9038-29e872be29d3" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -110,11 +75,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="202" lean-forward="true" selection-start-line="202" selection-end-line="202" />
+            <state relative-caret-position="165">
+              <caret line="186" column="9" lean-forward="true" selection-start-line="186" selection-start-column="9" selection-end-line="186" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -122,11 +87,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/main/classifier/ImageSearchHitClassifier.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="210">
+              <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -623,6 +588,15 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="lire_indexer_searcher" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lire_indexer_searcher" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="classifier" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -731,12 +705,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1533711529606</updated>
-      <workItem from="1535023999146" duration="6963000" />
+      <workItem from="1535023999146" duration="7101000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6963000" />
+    <option name="totallyTimeSpent" value="7101000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -751,7 +725,7 @@
     <frame x="1920" y="0" width="1920" height="1200" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17662753" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17662753" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -760,7 +734,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32990655" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32990655" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3317757" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.3317757" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32990655" />
@@ -1135,20 +1109,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/main/classifier/ImageSearchHitClassifier.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="165">
+          <caret line="186" column="9" lean-forward="true" selection-start-line="186" selection-start-column="9" selection-end-line="186" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/main/classifier/ImageSearchHitClassifier.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="202" lean-forward="true" selection-start-line="202" selection-end-line="202" />
+        <state relative-caret-position="210">
+          <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
