@@ -2,7 +2,7 @@ package keras.features;
 
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import net.semanticmetadata.lire.utils.MetricsUtils;
-import utils.KerasCSVReader;
+import keras.utils.KerasCSVReader;
 
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
@@ -23,6 +23,9 @@ public class DenseNet201 implements KerasFeature{
     }
 
     public DenseNet201(){
+    }
+    public DenseNet201(String csvFilename){
+        setCsvFilename(csvFilename);
     }
 
     @Override

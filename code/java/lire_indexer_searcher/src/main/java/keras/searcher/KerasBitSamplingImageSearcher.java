@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.TreeSet;
 
-public class KerasBitSamplingImageSearcher {
+public class KerasBitSamplingImageSearcher implements KerasSearcher{
     private int maxResultsHashBased = 1000;
     private int maximumHits = 100;
     private String featureFieldName = null;
@@ -150,8 +150,8 @@ public class KerasBitSamplingImageSearcher {
             e.printStackTrace();
         }
     }
-
-    public ImageSearchHits search(String image, IndexReader reader) throws IOException {
+    @Override
+    public ImageSearchHits search(String image, IndexReader reader) {
         try {
             GlobalFeature queryFeature = feature.getClass().newInstance();
             if(queryFeature instanceof KerasFeature){

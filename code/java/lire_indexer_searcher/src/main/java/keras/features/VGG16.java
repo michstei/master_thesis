@@ -2,7 +2,7 @@ package keras.features;
 
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import net.semanticmetadata.lire.utils.MetricsUtils;
-import utils.KerasCSVReader;
+import keras.utils.KerasCSVReader;
 
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
@@ -25,6 +25,10 @@ public class VGG16 implements KerasFeature{
     }
 
     public VGG16(){
+    }
+
+    public VGG16(String csvFilename){
+        setCsvFilename(csvFilename);
     }
 
 

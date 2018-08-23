@@ -21,7 +21,6 @@ public class KerasIndexer {
     private KerasDocumentBuilderImpl documentBuilder = null;
     private IndexWriter indexWriter = null;
     private ArrayList<String> filesToindex = null;
-    private String pathToFilesFolder = null;
     private String indexFolder = null;
 
     private GlobalDocumentBuilder.HashingMode hashingMode = null;
@@ -39,9 +38,24 @@ public class KerasIndexer {
         this.hashingEnabled = hashingEnabled;
         this.useDocValues = useDocValues;
         this.hashingMode = hashingMode;
-        this.pathToFilesFolder = pathToFilesFolder;
-        filesToindex = new ArrayList<>();
-        listFilesFromDirectory(this.pathToFilesFolder,this.filesToindex);
+        this.filesToindex = new ArrayList<>();
+        listFilesFromDirectory(pathToFilesFolder,this.filesToindex);
+        this.documentBuilder = new KerasDocumentBuilderImpl(this.hashingEnabled,this.hashingMode,this.useDocValues);
+        this.indexWriter = LuceneUtils.createIndexWriter(this.indexFolder,iwCreate,analyzerType);
+
+    }
+    public KerasIndexer(String indexFolder,
+                        boolean iwCreate,
+                        LuceneUtils.AnalyzerType analyzerType,
+                        boolean hashingEnabled,
+                        GlobalDocumentBuilder.HashingMode hashingMode,
+                        boolean useDocValues,
+                        Vector<String> files) throws IOException {
+        this.indexFolder = indexFolder;
+        this.hashingEnabled = hashingEnabled;
+        this.useDocValues = useDocValues;
+        this.hashingMode = hashingMode;
+        this.filesToindex = new ArrayList<>(files);
         this.documentBuilder = new KerasDocumentBuilderImpl(this.hashingEnabled,this.hashingMode,this.useDocValues);
         this.indexWriter = LuceneUtils.createIndexWriter(this.indexFolder,iwCreate,analyzerType);
 
@@ -132,12 +146,20 @@ public class KerasIndexer {
     }
 
     public void index() throws IOException {
+        String s ="|--------------------|";
+        int valOld = 0;
         for(int index = 0; index < this.filesToindex.size(); index++){
             Document doc = documentBuilder.createDocument(this.filesToindex.get(index),this.filesToindex.get(index));
             indexWriter.addDocument(doc);
-            System.out.printf("\r%05.2f%%",(index / (float)this.filesToindex.size() * 100));
+            double val = (index / (float)(this.filesToindex.size()-1) * 100);
+            if(((int)val)%5==0 && ((int)val) != valOld){
+                s = s.replaceFirst("-","#");
+            }
+            valOld = (int) val;
+            System.out.printf("\r%s%05.2f%%",s,val);
         }
-        System.out.printf("\r%05.2f%%%n",100.0);
+//        s ="|####################|";
+//        System.out.printf("\r$s%05.2f%%%n",s,100.0);
         LuceneUtils.closeWriter(indexWriter);
     }
 

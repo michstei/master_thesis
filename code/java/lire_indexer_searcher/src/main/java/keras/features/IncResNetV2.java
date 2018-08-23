@@ -2,7 +2,7 @@ package keras.features;
 
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import net.semanticmetadata.lire.utils.MetricsUtils;
-import utils.KerasCSVReader;
+import keras.utils.KerasCSVReader;
 
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
@@ -24,7 +24,9 @@ public class IncResNetV2 implements KerasFeature{
 
     public IncResNetV2(){
     }
-
+    public IncResNetV2(String csvFilename){
+        setCsvFilename(csvFilename);
+    }
 
     @Override
     public void extract(String imageFilename) {

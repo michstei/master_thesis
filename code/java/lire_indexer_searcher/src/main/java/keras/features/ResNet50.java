@@ -2,7 +2,7 @@ package keras.features;
 
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import net.semanticmetadata.lire.utils.MetricsUtils;
-import utils.KerasCSVReader;
+import keras.utils.KerasCSVReader;
 
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
@@ -23,6 +23,9 @@ public class ResNet50 implements KerasFeature{
     }
 
     public ResNet50(){
+    }
+    public ResNet50(String csvFilename){
+        setCsvFilename(csvFilename);
     }
 
     @Override

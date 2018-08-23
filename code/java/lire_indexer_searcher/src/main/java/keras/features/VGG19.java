@@ -2,7 +2,7 @@ package keras.features;
 
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import net.semanticmetadata.lire.utils.MetricsUtils;
-import utils.KerasCSVReader;
+import keras.utils.KerasCSVReader;
 
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
@@ -23,7 +23,9 @@ public class VGG19 implements KerasFeature{
     }
     public VGG19(){
     }
-
+    public VGG19(String csvFilename){
+        setCsvFilename(csvFilename);
+    }
 
     @Override
     public void extract(String imageFilename) {
