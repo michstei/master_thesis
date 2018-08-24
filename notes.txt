@@ -1,8 +1,4 @@
-Hashing Bitsampling:
-  Indexer:
-    ArrayOutOfBoundsExceptions:
-      Bitsampling set dimensions to lenght of featurevector
-  Searcher:
-    copy BitSamplingImageSearcher
-      modify search Method to support KerasFeatures
-        take String as argument and checkk if instance is Keras or GlobalFeature to call extract
+test different distance functions for features
+
+
+reduce length of keras featurevectors (pooling layers)

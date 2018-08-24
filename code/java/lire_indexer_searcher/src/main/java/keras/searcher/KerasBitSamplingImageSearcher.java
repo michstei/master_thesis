@@ -1,5 +1,6 @@
 package keras.searcher;
 
+import keras.documentbuilder.KerasDocumentBuilder;
 import keras.features.KerasFeature;
 import net.semanticmetadata.lire.builders.DocumentBuilder;
 import net.semanticmetadata.lire.imageanalysis.features.GlobalFeature;
@@ -14,6 +15,7 @@ import org.apache.lucene.search.similarities.ClassicSimilarity;
 
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.TreeSet;
@@ -40,7 +42,7 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
         this.hashesFieldName = hashesFieldName;
         this.feature = feature;
         try {
-            BitSampling.readHashFunctions();
+            BitSampling.readHashFunctions(new FileInputStream(KerasDocumentBuilder.hashFilePath));
         } catch (IOException e) {
             System.err.println("Error reading hash functions from default location.");
             e.printStackTrace();
@@ -58,12 +60,12 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
         this.featureFieldName = feature.getFieldName();
         this.hashesFieldName = featureFieldName + DocumentBuilder.HASH_FIELD_SUFFIX;
         this.feature = feature;
-        try {
-            BitSampling.readHashFunctions();
-        } catch (IOException e) {
-            System.err.println("Error reading hash functions from default location.");
-            e.printStackTrace();
-        }
+//        try {
+//            BitSampling.readHashFunctions(new FileInputStream(KerasDocumentBuilder.hashFilePath));
+//        } catch (IOException e) {
+//            System.err.println("Error reading hash functions from default location.");
+//            e.printStackTrace();
+//        }
     }
 
     /**
@@ -79,12 +81,12 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
         hashesFieldName = featureFieldName + DocumentBuilder.HASH_FIELD_SUFFIX;
         this.feature = feature;
         partialHashes = useFastSearch;
-        try {
-            BitSampling.readHashFunctions();
-        } catch (IOException e) {
-            System.err.println("Error reading hash functions from default location.");
-            e.printStackTrace();
-        }
+//        try {
+//            BitSampling.readHashFunctions(new FileInputStream(KerasDocumentBuilder.hashFilePath));
+//        } catch (IOException e) {
+//            System.err.println("Error reading hash functions from default location.");
+//            e.printStackTrace();
+//        }
     }
 
     /**
@@ -100,12 +102,12 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
         this.hashesFieldName = featureFieldName + DocumentBuilder.HASH_FIELD_SUFFIX;
         this.feature = feature;
         maxResultsHashBased = numHashedResults;
-        try {
-            BitSampling.readHashFunctions();
-        } catch (IOException e) {
-            System.err.println("Error reading hash functions from default location.");
-            e.printStackTrace();
-        }
+//        try {
+//            BitSampling.readHashFunctions(new FileInputStream(KerasDocumentBuilder.hashFilePath));
+//        } catch (IOException e) {
+//            System.err.println("Error reading hash functions from default location.");
+//            e.printStackTrace();
+//        }
     }
 
     public KerasBitSamplingImageSearcher(int maximumHits, String featureFieldName, String hashesFieldName, GlobalFeature feature, int numHashedResults) {
@@ -114,12 +116,12 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
         this.hashesFieldName = hashesFieldName;
         this.feature = feature;
         maxResultsHashBased = numHashedResults;
-        try {
-            BitSampling.readHashFunctions();
-        } catch (IOException e) {
-            System.err.println("Error reading hash functions from default location.");
-            e.printStackTrace();
-        }
+//        try {
+//            BitSampling.readHashFunctions(new FileInputStream(KerasDocumentBuilder.hashFilePath));
+//        } catch (IOException e) {
+//            System.err.println("Error reading hash functions from default location.");
+//            e.printStackTrace();
+//        }
     }
 
     public KerasBitSamplingImageSearcher(int maximumHits, String featureFieldName, String hashesFieldName, GlobalFeature feature, InputStream hashes) {
@@ -127,13 +129,13 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
         this.featureFieldName = featureFieldName;
         this.hashesFieldName = hashesFieldName;
         this.feature = feature;
-        try {
-            BitSampling.readHashFunctions(hashes);
-            hashes.close();
-        } catch (IOException e) {
-            System.err.println("Error reading has functions from given input stream.");
-            e.printStackTrace();
-        }
+//        try {
+//            BitSampling.readHashFunctions(hashes);
+//            hashes.close();
+//        } catch (IOException e) {
+//            System.err.println("Error reading has functions from given input stream.");
+//            e.printStackTrace();
+//        }
     }
 
     public KerasBitSamplingImageSearcher(int maximumHits, String featureFieldName, String hashesFieldName, GlobalFeature feature, InputStream hashes, int numHashedResults) {
@@ -142,13 +144,13 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
         this.hashesFieldName = hashesFieldName;
         this.feature = feature;
         maxResultsHashBased = numHashedResults;
-        try {
-            BitSampling.readHashFunctions(hashes);
-            hashes.close();
-        } catch (IOException e) {
-            System.err.println("Error reading has functions from given input stream.");
-            e.printStackTrace();
-        }
+//        try {
+//            BitSampling.readHashFunctions(hashes);
+//            hashes.close();
+//        } catch (IOException e) {
+//            System.err.println("Error reading has functions from given input stream.");
+//            e.printStackTrace();
+//        }
     }
     @Override
     public ImageSearchHits search(String image, IndexReader reader) {

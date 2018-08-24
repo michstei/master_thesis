@@ -14,6 +14,7 @@ import org.apache.lucene.util.BytesRef;
 
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ import java.util.Map;
 public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
 
     private boolean useDocValues = false;
-
+    public final int maxDimensions = 0;
 
     private GlobalDocumentBuilder.HashingMode hashingMode = GlobalDocumentBuilder.HashingMode.BitSampling;
     private boolean hashingEnabled = false;
@@ -107,6 +108,7 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
     }
 
 
+
     /**
      * Can be used to add global extractors.
      *
@@ -134,7 +136,12 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
     private static void testHashes() {
 //        Let's try to read the hash functions right here and we don't have to care about it right now.
         try {
-            BitSampling.readHashFunctions();
+                if(new File(hashFilePath).exists())
+                    new File(hashFilePath).delete();
+                BitSampling.dimensions = KerasDocumentBuilder.maxDimensions;
+                BitSampling.generateHashFunctions(hashFilePath);
+                BitSampling.readHashFunctions(new FileInputStream(new File(hashFilePath)));
+//            BitSampling.readHashFunctions();
 //            LocalitySensitiveHashing.readHashFunctions();
         } catch (Exception e) {
             System.err.println("Could not read BitSampling hashes from file when first creating a GlobalDocumentBuilder instance.");
@@ -202,7 +209,8 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
             if (kerasFeature.getFeatureVector().length <= 3100) {
                 int[] hashes;
                 if (hashingMode == GlobalDocumentBuilder.HashingMode.BitSampling) {
-                    BitSampling.dimensions = kerasFeature.getFeatureVector().length;
+
+
                     hashes = BitSampling.generateHashes(kerasFeature.getFeatureVector());
                     hash = new TextField(extractorItems.get(extractorItem)[1], SerializationUtils.arrayToString(hashes), Field.Store.YES);
                 } else if (hashingMode == GlobalDocumentBuilder.HashingMode.LSH) {

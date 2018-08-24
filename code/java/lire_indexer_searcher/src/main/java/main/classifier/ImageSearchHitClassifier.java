@@ -1,8 +1,9 @@
 package main.classifier;
 
 
-import java.util.HashMap;
-import java.util.Vector;
+import java.util.*;
+
+import static java.util.stream.Collectors.toMap;
 
 public class ImageSearchHitClassifier {
     private Vector<String> classes;
@@ -13,7 +14,7 @@ public class ImageSearchHitClassifier {
         this.imageSearchHits = imageSearchHits;
         this.filename = filename;
     }
-    public HashMap<String,Double> getPredictions(){
+    public Map<String,Double> getPredictions(){
         HashMap<String,Double> predictions = new HashMap<>();
         HashMap<String,Integer> counts = new HashMap<>();
         for(String key : classes){
@@ -33,7 +34,12 @@ public class ImageSearchHitClassifier {
             predictions.put(key,  (counts.get(key)/(double)imageSearchHits.size()));
         }
 
-        return (HashMap<String, Double>) predictions.entrySet().stream()
-                .sorted(HashMap.Entry.comparingByValue());
+        return  predictions.entrySet()
+                .stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .collect(
+                        toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
+                                LinkedHashMap::new));
+
     }
 }

@@ -149,17 +149,16 @@ public class KerasIndexer {
         String s ="|--------------------|";
         int valOld = 0;
         for(int index = 0; index < this.filesToindex.size(); index++){
+
             Document doc = documentBuilder.createDocument(this.filesToindex.get(index),this.filesToindex.get(index));
             indexWriter.addDocument(doc);
             double val = (index / (float)(this.filesToindex.size()-1) * 100);
-            if(((int)val)%5==0 && ((int)val) != valOld){
+            if(((int)val) != valOld && ((int)val) % 5 == 0){
                 s = s.replaceFirst("-","#");
             }
             valOld = (int) val;
             System.out.printf("\r%s%05.2f%%",s,val);
         }
-//        s ="|####################|";
-//        System.out.printf("\r$s%05.2f%%%n",s,100.0);
         LuceneUtils.closeWriter(indexWriter);
     }
 
