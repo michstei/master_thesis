@@ -12,7 +12,7 @@ public class DenseNet121 implements KerasFeature{
     private final String featureName    = "DenseNet121";
     private final String fieldName      = "DenseNet121";
     private double[] featureVector      = null;
-
+    public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCE_COSINE;
     private static String csvFilename          = null;
     private static KerasCSVReader reader = null;
     public static void setCsvFilename(String csvFilename) {
@@ -91,7 +91,7 @@ public class DenseNet121 implements KerasFeature{
         if(this.featureVector.length != lf.getFeatureVector().length){
             throw new UnsupportedOperationException("Lengths of featureVectors don't match");
         }
-        return MetricsUtils.cosineCoefficient(this.featureVector,lf.getFeatureVector());
+        return KerasFeature.getDistance(lf, USED_DISTANCE_FUN, this.featureVector);
     }
 
     @Override

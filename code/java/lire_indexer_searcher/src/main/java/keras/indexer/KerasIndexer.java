@@ -159,6 +159,7 @@ public class KerasIndexer {
             valOld = (int) val;
             System.out.printf("\r%s%05.2f%%",s,val);
         }
+        System.out.println();
         LuceneUtils.closeWriter(indexWriter);
     }
 

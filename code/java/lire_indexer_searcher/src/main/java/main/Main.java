@@ -29,11 +29,11 @@ import java.util.Vector;
 public class Main {
 
     public static void main(String[] args) {
-        boolean USE_METRIC_SPACES = false;
+        boolean USE_METRIC_SPACES = true;
 
         String folderPath = "/home/michael/master_thesis/data/Medico_2018_development_set/";
         String indexPath = USE_METRIC_SPACES?"/home/michael/master_thesis/data/indexMetricSpaces":"/home/michael/master_thesis/data/indexBitSampling";
-        String outputFilePath = USE_METRIC_SPACES?"/home/michael/master_thesis/data/MetricSpacesResults.txt":"/home/michael/master_thesis/data/BitSamplingResults.txt";
+        String outputFilePathBase = USE_METRIC_SPACES?"/home/michael/master_thesis/data/MetricSpacesResults_":"/home/michael/master_thesis/data/BitSamplingResults_";
         String inFileTrain = "/home/michael/master_thesis/data/indexCreationFiles/inFileTrain.lst";
         String inFileTest = "/home/michael/master_thesis/data/indexCreationFiles/inFileTest.lst";
 
@@ -65,75 +65,91 @@ public class Main {
         }
 
         index(USE_METRIC_SPACES, indexPath, inFileTrain, classes, outFiles, csvFiles, trainFiles);
+
         IndexReader reader = null;
         try {
             reader = DirectoryReader.open(FSDirectory.open(Paths.get(indexPath)));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        PrintStream out = null;
-        try {
-          out = new PrintStream(new File(outputFilePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int total = 0;
-        int correct = 0;
-        int incorrect = 0;
-        StringBuilder outStringBuilder = new StringBuilder();
-        int counter = 1;
-        for (String s : testFiles) {
-            ImageSearchHits hits[] = new ImageSearchHits[classes.length];
-
-            KerasSearcher[] searchers = new KerasSearcher[classes.length];
-
-            setupSearchers(USE_METRIC_SPACES, classes, outFiles, reader, searchers);
-
-            Thread[] threads = new Thread[classes.length];
-            SearchRunnable[] runnables = new SearchRunnable[classes.length];
-            for(int i = 0; i< hits.length; i++){
-                runnables[i] = new SearchRunnable(searchers[i],reader,s);
-                threads[i] = new Thread(runnables[i]);
-                threads[i].start();
+        for(KerasFeature.DistanceFunction df : KerasFeature.DistanceFunction.values()) {
+            DenseNet121.USED_DISTANCE_FUN = df;
+            DenseNet169.USED_DISTANCE_FUN = df;
+            DenseNet201.USED_DISTANCE_FUN = df;
+            InceptionV3.USED_DISTANCE_FUN = df;
+            IncResNetV2.USED_DISTANCE_FUN = df;
+            MobileNet.USED_DISTANCE_FUN =   df;
+            ResNet50.USED_DISTANCE_FUN =    df;
+            VGG16.USED_DISTANCE_FUN =       df;
+            VGG19.USED_DISTANCE_FUN =       df;
+            Xception.USED_DISTANCE_FUN =    df;
+            String outputFilePath = outputFilePathBase + df.name() + ".txt";
+            PrintStream out = null;
+            try {
+                out = new PrintStream(new File(outputFilePath));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+            System.out.println(df.name() + ":");
+            int total = 0;
+            int correct = 0;
+            int incorrect = 0;
+            StringBuilder outStringBuilder = new StringBuilder();
+            int counter = 1;
+            for (String s : testFiles) {
+                ImageSearchHits hits[] = new ImageSearchHits[classes.length];
 
-            for(int i = 0; i < hits.length; i++){
-                try {
-                    threads[i].join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                KerasSearcher[] searchers = new KerasSearcher[classes.length];
+
+                setupSearchers(USE_METRIC_SPACES, classes, outFiles, reader, searchers);
+
+                Thread[] threads = new Thread[classes.length];
+                SearchRunnable[] runnables = new SearchRunnable[classes.length];
+                for (int i = 0; i < hits.length; i++) {
+                    runnables[i] = new SearchRunnable(searchers[i], reader, s);
+                    threads[i] = new Thread(runnables[i]);
+                    threads[i].start();
                 }
-                hits[i] = runnables[i].getResult();
-            }
 
-
-            LinkedHashMap<String, Double> preds = getResults(hits, reader,s,allClasses);
-            outStringBuilder.append(s + System.lineSeparator());
-            int count = 0;
-            for (String k : preds.keySet()) {
-                if (count == 0) {
-                    if (s.contains(k)) {
-                        correct++;
-                    } else {
-                        incorrect++;
+                for (int i = 0; i < hits.length; i++) {
+                    try {
+                        threads[i].join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                    total++;
+                    hits[i] = runnables[i].getResult();
                 }
-                if(count < 3) {
-                    outStringBuilder.append(k + "\t" + preds.get(k) + System.lineSeparator());
+
+
+                LinkedHashMap<String, Double> preds = getResults(hits, reader, s, allClasses);
+                outStringBuilder.append(s + System.lineSeparator());
+                int count = 0;
+                for (String k : preds.keySet()) {
+                    if (count == 0) {
+                        if (s.contains(k)) {
+                            correct++;
+                        } else {
+                            incorrect++;
+                        }
+                        total++;
+                    }
+                    if (count < 3) {
+                        outStringBuilder.append(k + "\t" + preds.get(k) + System.lineSeparator());
+                    } else {
+                        break;
+                    }
+                    count++;
                 }
-                else{
-                    break;
-                }
-                count ++;
+
+
+                System.out.printf("\rprocessed file %4s of %d", (counter++) + "", testFiles.size());
             }
+            System.out.println();
 
-
-            System.out.printf("processed file %d of %d",counter++, testFiles.size());
+            outStringBuilder.append(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n", total, correct, incorrect, (correct / (float) total) * 100));
+            out.println(outStringBuilder.toString());
+            System.out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n", total, correct, incorrect, (correct / (float) total) * 100));
         }
-        outStringBuilder.append(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n",total,correct,incorrect,(correct/(float)total)*100 ));
-        out.println(outStringBuilder.toString());
-        System.out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n",total,correct,incorrect,(correct/(float)total)*100 ));
     }
 
     private static void setupSearchers(boolean useMetricSpaces, Class[] classes, String[] outFiles, IndexReader readers, KerasSearcher[] searchers) {

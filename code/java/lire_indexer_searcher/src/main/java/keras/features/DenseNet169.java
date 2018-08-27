@@ -11,6 +11,7 @@ public class DenseNet169 implements KerasFeature{
 
     private final String featureName    = "DenseNet169";
     private final String fieldName      = "DenseNet169";
+    public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCE_COSINE;
     private double[] featureVector      = null;
     private static String csvFilename          = null;
     private static KerasCSVReader reader = null;
@@ -91,7 +92,7 @@ public class DenseNet169 implements KerasFeature{
         if(this.featureVector.length != lf.getFeatureVector().length){
             throw new UnsupportedOperationException("Lengths of featureVectors don't match");
         }
-        return MetricsUtils.cosineCoefficient(this.featureVector,lf.getFeatureVector());
+        return KerasFeature.getDistance(lf, USED_DISTANCE_FUN, this.featureVector);
     }
 
     @Override

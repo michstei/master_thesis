@@ -11,6 +11,7 @@ public class VGG19 implements KerasFeature{
 
     private final String featureName    = "VGG19";
     private final String fieldName      = "VGG19";
+    public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCE_COSINE;
     private double[] featureVector      = null;
     private static String csvFilename          = null;
     private static KerasCSVReader reader = null;
@@ -88,7 +89,7 @@ public class VGG19 implements KerasFeature{
         if(this.featureVector.length != lf.getFeatureVector().length){
             throw new UnsupportedOperationException("Lengths of featureVectors don't match");
         }
-        return MetricsUtils.cosineCoefficient(this.featureVector,lf.getFeatureVector());
+        return KerasFeature.getDistance(lf, USED_DISTANCE_FUN, this.featureVector);
     }
 
     @Override
