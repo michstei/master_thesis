@@ -3,4 +3,5 @@
 /papers
 /data/csv/*.csv
 /.idea
-/code/java/lire_indexer_searcher/out/
+**/out/
+*.class
