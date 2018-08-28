@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e22a95c3-bbf2-4b09-9038-29e872be29d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/documentbuilder/KerasDocumentBuilderImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/documentbuilder/KerasDocumentBuilderImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet121.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet121.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet169.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet169.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet201.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet201.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/IncResNetV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/IncResNetV2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/InceptionV3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/InceptionV3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/MobileNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/MobileNet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/ResNet50.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/ResNet50.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/VGG16.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/VGG16.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/VGG19.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/VGG19.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/Xception.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/Xception.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/searcher/KerasBitSamplingImageSearcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/searcher/KerasBitSamplingImageSearcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/main/Quantization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Quantization.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -92,14 +79,14 @@
           <entry key="class" value="3" />
           <entry key="dummy" value="1" />
           <entry key="gradle" value="54" />
-          <entry key="java" value="22763" />
+          <entry key="java" value="22852" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CLASS" value="3" />
           <entry key="Groovy" value="54" />
-          <entry key="JAVA" value="22763" />
+          <entry key="JAVA" value="22852" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
@@ -122,8 +109,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/main/Quantization.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="57" column="9" lean-forward="true" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
+            <state relative-caret-position="120">
+              <caret line="8" column="131" selection-start-line="8" selection-start-column="131" selection-end-line="8" selection-end-column="131" />
             </state>
           </provider>
         </entry>
@@ -805,12 +792,12 @@
       <workItem from="1535023999146" duration="7169000" />
       <workItem from="1535091649230" duration="20561000" />
       <workItem from="1535350914970" duration="15348000" />
-      <workItem from="1535437730921" duration="10407000" />
+      <workItem from="1535437730921" duration="10986000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53485000" />
+    <option name="totallyTimeSpent" value="54064000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1198,8 +1185,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/main/Quantization.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="57" column="9" lean-forward="true" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
+        <state relative-caret-position="120">
+          <caret line="8" column="131" selection-start-line="8" selection-start-column="131" selection-end-line="8" selection-end-column="131" />
         </state>
       </provider>
     </entry>

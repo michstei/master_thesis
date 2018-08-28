@@ -6,7 +6,7 @@ public class Quantization {
 
     public static float[] quantizeDoubleToFloat(double[] values){
         float[] newValues = new float[values.length];
-        double min = getMin(values);
+        double min = getMin(values); //TODO: check if that has to be Double.MIN_VALUE/Double.MAX_VALUE instead of min/max of values
         double max = getMax(values);
         for(int i = 0;i < values.length; i++){
             double val = (values[i] - min)/(max - min);
