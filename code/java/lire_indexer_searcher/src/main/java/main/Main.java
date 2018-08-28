@@ -153,7 +153,7 @@ public class Main {
     }
 
     private static void setupSearchers(boolean useMetricSpaces, Class[] classes, String[] outFiles, IndexReader readers, KerasSearcher[] searchers) {
-        if (useMetricSpaces) //NOTE: Metricspaces searching
+        if (useMetricSpaces) //NOTE: MetricSpaces searching
         {
 
             try {
@@ -167,7 +167,7 @@ public class Main {
             }
 
         }
-        else//NOTE: Bitsampling searching
+        else//NOTE: BitSampling searching
         {
             try {
                 if(!(new File(KerasDocumentBuilder.hashFilePath).exists())){

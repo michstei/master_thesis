@@ -26,7 +26,7 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
     private String featureFieldName = null;
     private GlobalFeature feature = null;
     private String hashesFieldName = null;
-    private boolean partialHashes = true;
+    private boolean partialHashes = false;
 
     /**
      * Creates a new searcher for BitSampling based hashes.
@@ -50,7 +50,7 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
     }
 
     /**
-     * Creates a new searcher for BitSampling based hashes. The field names are inferred from the entries in //TODO {@ link GenericDocumentBuilder}
+     * Creates a new searcher for BitSampling based hashes. The field names are inferred from the entries in //
      *
      * @param maximumHits how many hits the searcher shall return.
      * @param feature     an instance of the feature.
@@ -69,7 +69,7 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
     }
 
     /**
-     * Creates a new searcher for BitSampling based hashes. The field names are inferred from the entries in //TODO {@ link GenericDocumentBuilder}
+     * Creates a new searcher for BitSampling based hashes. The field names are inferred from the entries in //
      *
      * @param maximumHits how many hits the searcher shall return.
      * @param feature     an instance of the feature.
@@ -90,7 +90,7 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
     }
 
     /**
-     * Creates a new searcher for BitSampling based hashes. The field names are inferred from the entries in //TODO {@ link GenericDocumentBuilder}
+     * Creates a new searcher for BitSampling based hashes. The field names are inferred from the entries in
      *
      * @param maximumHits      how many hits the searcher shall return.
      * @param feature          an instance of the feature.

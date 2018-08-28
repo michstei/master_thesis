@@ -195,7 +195,6 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
         GlobalFeature kerasFeature = extractorItem.getExtractorInstance() instanceof KerasFeature ? extractKerasFeature(imagePath, (KerasFeature) extractorItem.getExtractorInstance()) : extractGlobalFeature(imagePath,(GlobalFeature)extractorItem.getExtractorInstance());
 
         if (!useDocValues) {
-            // TODO: Stored field is compressed and upon search decompression takes a lot of time (> 50% with a small index with 50k images). Find something else ...
             vector = new StoredField(extractorItems.get(extractorItem)[0], new BytesRef(kerasFeature.getByteArrayRepresentation()));
         } else {
             // Alternative: The DocValues field. It's extremely fast to read, but it's all in RAM most likely.
@@ -205,7 +204,6 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
 
         // if BitSampling is an issue we add a field with the given hashFunctionsFileName and the suffix "hash":
         if (hashingEnabled) {
-            // TODO: check eventually if there is a more compressed string version of the integers. i.e. the hex string
             if (kerasFeature.getFeatureVector().length <= 3100) {
                 int[] hashes;
                 if (hashingMode == GlobalDocumentBuilder.HashingMode.BitSampling) {

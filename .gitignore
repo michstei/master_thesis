@@ -1,7 +1,7 @@
-/medico/data
 /data
 /papers
 /data/csv/*.csv
-/.idea
+**/.idea
+**/.vscode
 **/out/
 *.class

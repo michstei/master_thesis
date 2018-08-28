@@ -38,7 +38,7 @@ public class MobileNet implements KerasFeature{
             featureVector = reader.getValuesOfFile(imageFilename);
         }
         if(featureVector == null){
-            //get featureVector from python/features model
+            //TODO: get featureVector from somewhere else (python?)
         }
     }
 
@@ -55,7 +55,7 @@ public class MobileNet implements KerasFeature{
 
     @Override
     public byte[] getByteArrayRepresentation() {
-        ByteBuffer buffer = ByteBuffer.allocate(featureVector.length * 8);
+        ByteBuffer buffer = ByteBuffer.allocate(featureVector.length * Double.BYTES);
         for(double d : featureVector){
             buffer.putDouble(d);
         }
@@ -65,7 +65,7 @@ public class MobileNet implements KerasFeature{
     @Override
     public void setByteArrayRepresentation(byte[] bytes) {
         ByteBuffer buffer = ByteBuffer.wrap(bytes);
-        featureVector = new double[buffer.limit()/8];
+        featureVector = new double[buffer.limit()/Double.BYTES];
         int i = 0;
         while(buffer.position() < buffer.limit()){
             featureVector[i++] = buffer.getDouble();
@@ -75,7 +75,7 @@ public class MobileNet implements KerasFeature{
     @Override
     public void setByteArrayRepresentation(byte[] bytes, int offset, int length) {
         ByteBuffer buffer = ByteBuffer.wrap(bytes,offset,length);
-        featureVector = new double[buffer.limit()/8];
+        featureVector = new double[buffer.limit()/Double.BYTES];
         int i = 0;
         while(buffer.position() < buffer.limit()){
             featureVector[i++] = buffer.getDouble();
