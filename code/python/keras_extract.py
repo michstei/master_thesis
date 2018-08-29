@@ -18,7 +18,7 @@ def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_inp
     text = img_path + ','
     for x in features:
         for y in x:
-            text = text + str(y) + ','
+            text = text + "{:.40f}".format(y).rstrip('0').rstrip('.')+ ','
     text = text + '\n'
     return text
     
@@ -34,12 +34,12 @@ if __name__ == '__main__':
     # models['vgg16'] =       appl.vgg16.VGG16(                           weights="imagenet", include_top=False,pooling='avg')
     # models['vgg19'] =       appl.vgg19.VGG19(                           weights="imagenet", include_top=False,pooling='avg')
     # models['resnet50'] =    appl.resnet50.ResNet50(                     weights="imagenet", include_top=False,pooling='avg')
-    # models['inceptionv3'] = appl.inception_v3.InceptionV3(              weights="imagenet", include_top=False,pooling='avg')
+    models['inceptionv3'] = appl.inception_v3.InceptionV3(              weights="imagenet", include_top=False,pooling='avg')
     models['incresnetv2'] = appl.inception_resnet_v2.InceptionResNetV2( weights="imagenet", include_top=False,pooling='avg')
-    # models['mobilenet'] =   appl.mobilenet.MobileNet(                   weights="imagenet", include_top=False,pooling='avg')
-    # models['densenet121'] = appl.densenet.DenseNet121(                  weights="imagenet", include_top=False,pooling='avg')
-    # models['densenet169'] = appl.densenet.DenseNet169(                  weights="imagenet", include_top=False,pooling='avg')
-    # models['densenet201'] = appl.densenet.DenseNet201(                  weights="imagenet", include_top=False,pooling='avg')
+    models['mobilenet'] =   appl.mobilenet.MobileNet(                   weights="imagenet", include_top=False,pooling='avg')
+    models['densenet121'] = appl.densenet.DenseNet121(                  weights="imagenet", include_top=False,pooling='avg')
+    models['densenet169'] = appl.densenet.DenseNet169(                  weights="imagenet", include_top=False,pooling='avg')
+    models['densenet201'] = appl.densenet.DenseNet201(                  weights="imagenet", include_top=False,pooling='avg')
     print('all models set up')
     stop = timeit.default_timer()
     print('setting up models took',stop-start,'sec')
@@ -101,11 +101,12 @@ if __name__ == '__main__':
         i = 1
         for f in files:
             lines.append(extract_features_to_csv_string(f, models[k],reshape_params[k],prep_funs[k],inputsizes[k]))
-            print('processed', "{:.2f}".format(i/len(files)*100),'%')
+            print('processed', "{:.2f}".format(i/len(files)*100),'%',end='\r')
             i += 1
+
         with open(csv_filenames[k],'a') as csvfile:
             csvfile.writelines(lines)
-        print('processed model:',k)
+        print('\nprocessed model:',k)
     stop = timeit.default_timer()
     print('processing models took',stop-start,'sec')
 
