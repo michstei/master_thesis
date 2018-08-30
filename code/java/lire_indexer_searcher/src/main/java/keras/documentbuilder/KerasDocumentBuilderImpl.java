@@ -24,7 +24,6 @@ import java.util.Map;
 public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
 
     private boolean useDocValues = false;
-    public final int maxDimensions = 0;
 
     private GlobalDocumentBuilder.HashingMode hashingMode = GlobalDocumentBuilder.HashingMode.BitSampling;
     private boolean hashingEnabled = false;

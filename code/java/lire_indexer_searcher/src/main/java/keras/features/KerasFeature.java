@@ -1,48 +1,48 @@
 package keras.features;
 
 import net.semanticmetadata.lire.imageanalysis.features.GlobalFeature;
-import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import net.semanticmetadata.lire.utils.MetricsUtils;
 
 public interface KerasFeature extends GlobalFeature, KerasExtractor {
     enum DistanceFunction{
-        DISTANCE_COSINE,
-        DISTANCE_L1,
-        DISTANCE_L2,
-        DISTANCE_JSD,
-        DISTANCE_CHISQUARE,
-        DISTANCE_KSDIST,
-        DISTANCE_SIMPLEEMD,
-        DISTANCE_TANIMOTO
+        DISTANCEFUNCTION_COSINE,
+        DISTANCEFUNCTION_L1,
+        DISTANCEFUNCTION_L2,
+        DISTANCEFUNCTION_JSD,
+        DISTANCEFUNCTION_CHISQUARE,
+        DISTANCEFUNCTION_KSDIST,
+        DISTANCEFUNCTION_SIMPLEEMD,
+        DISTANCEFUNCTION_TANIMOTO
         }
-    static double getDistance(LireFeature lf, DistanceFunction usedDistanceFun, double[] featureVector) {
+
+    static double getDistance(double[] featureVectorSelf,double[] featureVectorOther, DistanceFunction usedDistanceFun ) {
         switch (usedDistanceFun) {
-            case DISTANCE_COSINE: {
-                return MetricsUtils.cosineCoefficient(featureVector, lf.getFeatureVector());
+            case DISTANCEFUNCTION_COSINE: {
+                return MetricsUtils.cosineCoefficient(featureVectorSelf, featureVectorOther);
             }
-            case DISTANCE_L1: {
-                return MetricsUtils.distL1(featureVector,lf.getFeatureVector());
+            case DISTANCEFUNCTION_L1: {
+                return MetricsUtils.distL1(featureVectorSelf,featureVectorOther);
             }
-            case DISTANCE_L2: {
-                return MetricsUtils.distL2(featureVector,lf.getFeatureVector());
+            case DISTANCEFUNCTION_L2: {
+                return MetricsUtils.distL2(featureVectorSelf,featureVectorOther);
             }
-            case DISTANCE_JSD: {
-                return MetricsUtils.jsd(featureVector,lf.getFeatureVector());
+            case DISTANCEFUNCTION_JSD: {
+                return MetricsUtils.jsd(featureVectorSelf,featureVectorOther);
             }
-            case DISTANCE_CHISQUARE: {
-                return MetricsUtils.chisquare(featureVector,lf.getFeatureVector());
+            case DISTANCEFUNCTION_CHISQUARE: {
+                return MetricsUtils.chisquare(featureVectorSelf,featureVectorOther);
             }
-            case DISTANCE_KSDIST: {
-                return MetricsUtils.ksDistance(featureVector,lf.getFeatureVector());
+            case DISTANCEFUNCTION_KSDIST: {
+                return MetricsUtils.ksDistance(featureVectorSelf,featureVectorOther);
             }
-            case DISTANCE_SIMPLEEMD: {
-                return MetricsUtils.simpleEMD(featureVector,lf.getFeatureVector());
+            case DISTANCEFUNCTION_SIMPLEEMD: {
+                return MetricsUtils.simpleEMD(featureVectorSelf,featureVectorOther);
             }
-            case DISTANCE_TANIMOTO: {
-                return MetricsUtils.cosineCoefficient(featureVector, lf.getFeatureVector());
+            case DISTANCEFUNCTION_TANIMOTO: {
+                return MetricsUtils.cosineCoefficient(featureVectorSelf, featureVectorOther);
             }
             default:
-                return MetricsUtils.cosineCoefficient(featureVector, lf.getFeatureVector());
+                return MetricsUtils.cosineCoefficient(featureVectorSelf, featureVectorOther);
         }
     }
 

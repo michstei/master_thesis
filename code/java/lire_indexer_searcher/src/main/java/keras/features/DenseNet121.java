@@ -1,7 +1,7 @@
 package keras.features;
 
+import keras.utils.Quantization;
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
-import net.semanticmetadata.lire.utils.MetricsUtils;
 import keras.utils.KerasCSVReader;
 
 import java.awt.image.BufferedImage;
@@ -12,7 +12,7 @@ public class DenseNet121 implements KerasFeature{
     private final String featureName    = "DenseNet121";
     private final String fieldName      = "DenseNet121";
     private double[] featureVector      = null;
-    public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCE_COSINE;
+    public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
     private static String csvFilename          = null;
     private static KerasCSVReader reader = null;
     public static void setCsvFilename(String csvFilename) {
@@ -91,12 +91,12 @@ public class DenseNet121 implements KerasFeature{
         if(this.featureVector.length != lf.getFeatureVector().length){
             throw new UnsupportedOperationException("Lengths of featureVectors don't match");
         }
-        return KerasFeature.getDistance(lf, USED_DISTANCE_FUN, this.featureVector);
+        return KerasFeature.getDistance(this.getFeatureVector(),lf.getFeatureVector(), USED_DISTANCE_FUN );
     }
 
     @Override
     public double[] getFeatureVector() {
-        return this.featureVector;
+        return Quantization.castToDoubleArray(this.featureVector);
     }
 
     @Override

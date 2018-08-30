@@ -1,7 +1,7 @@
 package keras.features;
 
+import keras.utils.Quantization;
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
-import net.semanticmetadata.lire.utils.MetricsUtils;
 import keras.utils.KerasCSVReader;
 
 import java.awt.image.BufferedImage;
@@ -12,7 +12,7 @@ public class VGG16 implements KerasFeature{
 
     private final String featureName    = "VGG16";
     private final String fieldName      = "VGG16";
-    public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCE_COSINE;
+    public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
     private double[] featureVector      = null;
     private static String csvFilename          = null;
     private static KerasCSVReader reader = null;
@@ -94,13 +94,13 @@ public class VGG16 implements KerasFeature{
         if(this.featureVector.length != lf.getFeatureVector().length){
             throw new UnsupportedOperationException("Lengths of featureVectors don't match");
         }
-        return KerasFeature.getDistance(lf, USED_DISTANCE_FUN, this.featureVector);
+        return KerasFeature.getDistance(this.getFeatureVector(),lf.getFeatureVector(), USED_DISTANCE_FUN );
 
     }
 
     @Override
     public double[] getFeatureVector() {
-        return this.featureVector;
+        return Quantization.castToDoubleArray(this.featureVector);
     }
 
     @Override
