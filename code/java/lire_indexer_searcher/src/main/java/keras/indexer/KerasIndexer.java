@@ -111,6 +111,7 @@ public class KerasIndexer {
             }
         }
 
+
         br.close();
         System.out.printf("Read %,d lines from the input file. Now selecting reference points.\n", lines.size());
         Collections.shuffle(lines);

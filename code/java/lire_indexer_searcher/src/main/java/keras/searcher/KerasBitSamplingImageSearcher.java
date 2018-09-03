@@ -183,7 +183,7 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
                     doc.getBinaryValue(featureFieldName).offset,
                     doc.getBinaryValue(featureFieldName).length);
             return search(doc.getValues(hashesFieldName)[0].split(" "), queryFeature, reader);
-//            return search(doc.getValues(hashesFieldName + "_q")[0].split(" "), queryFeature, reader);  // just for debug if a query feature is stored in the index.
+//            return search(doc.getValuesDouble(hashesFieldName + "_q")[0].split(" "), queryFeature, reader);  // just for debug if a query feature is stored in the index.
         } catch (Exception e) {
             e.printStackTrace();
         }

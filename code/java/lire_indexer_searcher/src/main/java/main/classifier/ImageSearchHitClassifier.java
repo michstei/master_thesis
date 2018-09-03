@@ -8,18 +8,14 @@ import static java.util.stream.Collectors.toMap;
 public class ImageSearchHitClassifier {
     private Vector<String> classes;
     private Vector<String> imageSearchHits;
-    private String filename;
-    public ImageSearchHitClassifier(Vector<String> classes, Vector<String> imageSearchHits, String filename){
+    public ImageSearchHitClassifier(Vector<String> classes, Vector<String> imageSearchHits){
         this.classes = classes;
         this.imageSearchHits = imageSearchHits;
-        this.filename = filename;
     }
     public Map<String,Double> getPredictions(){
         HashMap<String,Double> predictions = new HashMap<>();
         HashMap<String,Integer> counts = new HashMap<>();
-        for(String key : classes){
-            counts.put(key,0);
-        }
+
         for(String s : imageSearchHits){
             for(String c : classes){
                 if(s.contains(c)){

@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class Quantization {
@@ -140,15 +139,10 @@ public class Quantization {
 
     public static void quantizeCSVFile(String inFile, String outFile, QuantizationType type) throws IOException {
         KerasCSVReader reader = new KerasCSVReader(inFile,",");
-        HashMap<String, ArrayList<Double>> values = reader.getValues();
+        HashMap<String, double[]> values = reader.getValuesDouble();
         StringBuilder stringBuilder = new StringBuilder();
         for(String filename : values.keySet()){
-            ArrayList<Double> list = values.get(filename);
-            double[] array = new double[list.size()];
-
-            for(int i = 0; i < list.size(); i++ ){
-                array[i] = list.get(i);
-            }
+            double[] array = values.get(filename);
             double min = getMin(array);
             double max = getMax(array);
             stringBuilder.append(filename + ",");
@@ -238,16 +232,25 @@ public class Quantization {
 
     public static void main(String[] args) {
 
-        String inFile = "/home/michael/master_thesis/data/csv/vgg16.csv";
+        String inFile = "/home/michael/master_thesis/data/csv/";
         String outFileBase = "/home/michael/master_thesis/data/csv/quantized/";
-        
+        String[] filenames = new String[]{"inceptionv3","incresnetv2","mobilenet","resnet50","vgg16","vgg19","xception"};
         try {
-            Quantization.quantizeCSVFile(inFile,outFileBase + "vgg16_" + "double"    + ".csv",QuantizationType.QUANTIZATION_TYPE_DOUBLE);
-            Quantization.quantizeCSVFile(inFile,outFileBase + "vgg16_" + "float"     + ".csv",QuantizationType.QUANTIZATION_TYPE_FLOAT);
-            Quantization.quantizeCSVFile(inFile,outFileBase + "vgg16_" + "long"      + ".csv",QuantizationType.QUANTIZATION_TYPE_LONG);
-            Quantization.quantizeCSVFile(inFile,outFileBase + "vgg16_" + "int"       + ".csv",QuantizationType.QUANTIZATION_TYPE_INT);
-            Quantization.quantizeCSVFile(inFile,outFileBase + "vgg16_" + "short"     + ".csv",QuantizationType.QUANTIZATION_TYPE_SHORT);
-            Quantization.quantizeCSVFile(inFile,outFileBase + "vgg16_" + "byte"      + ".csv",QuantizationType.QUANTIZATION_TYPE_BYTE);
+            for(String s: filenames) {
+                Quantization.quantizeCSVFile(inFile + s + ".csv", outFileBase + s + "_double"    + ".csv", QuantizationType.QUANTIZATION_TYPE_DOUBLE);
+                System.out.println("File 1 processed");
+                Quantization.quantizeCSVFile(inFile + s + ".csv", outFileBase + s + "_float"     + ".csv", QuantizationType.QUANTIZATION_TYPE_FLOAT);
+                System.out.println("File 2 processed");
+                Quantization.quantizeCSVFile(inFile + s + ".csv", outFileBase + s + "_long"      + ".csv", QuantizationType.QUANTIZATION_TYPE_LONG);
+                System.out.println("File 3 processed");
+                Quantization.quantizeCSVFile(inFile + s + ".csv", outFileBase + s + "_int"       + ".csv", QuantizationType.QUANTIZATION_TYPE_INT);
+                System.out.println("File 4 processed");
+                Quantization.quantizeCSVFile(inFile + s + ".csv", outFileBase + s + "_short"     + ".csv", QuantizationType.QUANTIZATION_TYPE_SHORT);
+                System.out.println("File 5 processed");
+                Quantization.quantizeCSVFile(inFile + s + ".csv", outFileBase + s + "_byte"      + ".csv", QuantizationType.QUANTIZATION_TYPE_BYTE);
+                System.out.println("File 6 processed");
+                System.out.println(s + " processed");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
