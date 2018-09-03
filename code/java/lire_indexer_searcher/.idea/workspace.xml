@@ -2,45 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e22a95c3-bbf2-4b09-9038-29e872be29d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/fileSnapshots.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/fileSnapshots.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/taskArtifacts.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/taskArtifacts.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/taskArtifacts.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/3.2.1/taskArtifacts/taskArtifacts.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/DenseNet121.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/DenseNet121.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/DenseNet169.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/DenseNet169.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/DenseNet201.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/DenseNet201.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/IncResNetV2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/IncResNetV2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/InceptionV3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/InceptionV3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/KerasFeature.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/KerasFeature.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/MobileNet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/MobileNet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/ResNet50.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/ResNet50.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/VGG16.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/VGG16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/VGG19.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/VGG19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/features/Xception.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/features/Xception.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/keras/indexer/KerasIndexer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/keras/indexer/KerasIndexer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet121.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet121.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet169.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet169.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet201.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet201.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/IncResNetV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/IncResNetV2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/InceptionV3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/InceptionV3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/KerasFeature.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/KerasFeature.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/MobileNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/MobileNet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/ResNet50.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/ResNet50.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/VGG16.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/VGG16.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/VGG19.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/VGG19.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/Xception.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/Xception.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/indexer/KerasIndexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/indexer/KerasIndexer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/searcher/KerasBitSamplingImageSearcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/searcher/KerasBitSamplingImageSearcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/utils/KerasCSVReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/utils/KerasCSVReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/utils/Quantization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/utils/Quantization.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/main/classifier/ImageSearchHitClassifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/classifier/ImageSearchHitClassifier.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -101,7 +63,7 @@
           <entry key="csv" value="6" />
           <entry key="dat" value="3" />
           <entry key="gradle" value="2" />
-          <entry key="java" value="331" />
+          <entry key="java" value="333" />
           <entry key="lst" value="5" />
           <entry key="segments_1" value="1" />
           <entry key="xml" value="1" />
@@ -111,7 +73,7 @@
         <counts>
           <entry key="CLASS" value="48" />
           <entry key="Groovy" value="2" />
-          <entry key="JAVA" value="331" />
+          <entry key="JAVA" value="333" />
           <entry key="PLAIN_TEXT" value="16" />
           <entry key="XML" value="1" />
         </counts>
@@ -122,14 +84,14 @@
           <entry key="csv" value="1" />
           <entry key="dummy" value="1" />
           <entry key="gradle" value="98" />
-          <entry key="java" value="28566" />
+          <entry key="java" value="28719" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CLASS" value="3" />
           <entry key="Groovy" value="98" />
-          <entry key="JAVA" value="28566" />
+          <entry key="JAVA" value="28719" />
           <entry key="PLAIN_TEXT" value="2" />
         </counts>
       </usages-collector>
@@ -137,18 +99,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-532">
-              <caret line="71" column="64" lean-forward="true" selection-start-line="71" selection-start-column="64" selection-end-line="71" selection-end-column="64" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/Xception.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -158,11 +108,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/DenseNet201.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="62" column="5" lean-forward="true" selection-start-line="52" selection-start-column="3" selection-end-line="62" selection-end-column="5" />
+            <state relative-caret-position="221">
+              <caret line="63" column="55" lean-forward="true" selection-start-line="63" selection-start-column="55" selection-end-line="63" selection-end-column="55" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -176,14 +129,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/KerasFeature.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+            <state relative-caret-position="390">
+              <caret line="26" column="81" lean-forward="true" selection-start-line="26" selection-start-column="81" selection-end-line="26" selection-end-column="81" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/DenseNet121.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="197" column="5" lean-forward="true" selection-start-line="169" selection-start-column="4" selection-end-line="197" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -901,12 +863,12 @@
       <workItem from="1535523894686" duration="5997000" />
       <workItem from="1535610224231" duration="10596000" />
       <workItem from="1535696394615" duration="10755000" />
-      <workItem from="1535955926138" duration="16990000" />
+      <workItem from="1535955926138" duration="18371000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98533000" />
+    <option name="totallyTimeSpent" value="99914000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -921,15 +883,15 @@
     <frame x="1920" y="0" width="1920" height="1200" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19156884" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19156884" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32990655" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32990655" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3317757" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32990655" />
+      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.3317757" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32990655" />
@@ -1221,13 +1183,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/DenseNet121.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-398">
-          <caret line="197" column="5" lean-forward="true" selection-start-line="169" selection-start-column="4" selection-end-line="197" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/DenseNet169.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
@@ -1284,6 +1239,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/KerasFeature.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="81" lean-forward="true" selection-start-line="26" selection-start-column="81" selection-end-line="26" selection-end-column="81" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/DenseNet121.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="197" column="5" lean-forward="true" selection-start-line="169" selection-start-column="4" selection-end-line="197" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/Xception.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -1293,18 +1265,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-532">
-          <caret line="71" column="64" lean-forward="true" selection-start-line="71" selection-start-column="64" selection-end-line="71" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/KerasFeature.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+        <state relative-caret-position="221">
+          <caret line="63" column="55" lean-forward="true" selection-start-line="63" selection-start-column="55" selection-end-line="63" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -30,7 +30,7 @@ import java.util.Vector;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         boolean USE_METRIC_SPACES = false;
 
         String imageFolderPath = "/home/michael/master_thesis/data/Medico_2018_development_set/";
@@ -60,9 +60,10 @@ public class Main {
         Vector<String> allCategories = new Vector(Arrays.asList(new String[]{"blurry-nothing", "colon-clear", "dyed-lifted-polyps", "dyed-resection-margins", "esophagitis", "instruments", "normal-cecum", "normal-pylorus", "normal-z-line", "out-of-patient", "polyps", "retroflex-rectum", "retroflex-stomach", "stool-inclusions", "stool-plenty", "ulcerative-colitis"}));
         Class[] classes = {DenseNet121.class, DenseNet169.class, DenseNet201.class,InceptionV3.class,IncResNetV2.class, ResNet50.class, MobileNet.class,VGG16.class,VGG19.class,Xception.class};
         String[] classNames = {"DenseNet121", "DenseNet169", "DenseNet201","InceptionV3","IncResNetV2","ResNet50","MobileNet","VGG16","VGG19","Xception"};
+        if(classes.length > classNames.length) throw new Exception("More classes than classNames defined!");
         String[] outFiles = new String[classes.length];
         String[] csvFiles = new String[classes.length];
-        for(int i = 0; i < classNames.length; i++){
+        for(int i = 0; i < classes.length; i++){
             outFiles[i] = "/home/michael/master_thesis/data/indexCreationFiles/out." + classNames[i] + ".dat";
             csvFiles[i] = "/home/michael/master_thesis/data/csv/quantized/" + classNames[i].toLowerCase() + "_long.csv";
         }
