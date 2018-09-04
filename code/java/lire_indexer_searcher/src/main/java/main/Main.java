@@ -2,6 +2,7 @@ package main;
 
 import keras.documentbuilder.KerasDocumentBuilder;
 import keras.features.*;
+import keras.features.quantized.*;
 import keras.indexer.KerasIndexer;
 import keras.searcher.KerasBitSamplingImageSearcher;
 import keras.searcher.KerasMetricSpacesImageSearcher;
@@ -30,6 +31,19 @@ import java.util.Vector;
 
 public class Main {
 
+    public static Class[] classes_double = {DenseNet121_Double.class,DenseNet169_Double.class,DenseNet201_Double.class,InceptionV3_Double.class,IncResNetV2_Double.class,ResNet50_Double.class,MobileNet_Double.class,VGG16_Double.class,VGG19_Double.class,Xception_Double.class};
+    public static String[] classNames_double = {"DenseNet121_Double","DenseNet169_Double","DenseNet201_Double","InceptionV3_Double","IncResNetV2_Double","ResNet50_Double","MobileNet_Double","VGG16_Double","VGG19_Double","Xception_Double"};
+    public static Class[] classes_float = {DenseNet121_Float.class,DenseNet169_Float.class,DenseNet201_Float.class,InceptionV3_Float.class,IncResNetV2_Float.class,ResNet50_Float.class,MobileNet_Float.class,VGG16_Float.class,VGG19_Float.class,Xception_Float.class};
+    public static String[] classNames_float = {"DenseNet121_Float","DenseNet169_Float","DenseNet201_Float","InceptionV3_Float","IncResNetV2_Float","ResNet50_Float","MobileNet_Float","VGG16_Float","VGG19_Float","Xception_Float"};
+    public static Class[] classes_long = {DenseNet121_Long.class,DenseNet169_Long.class,DenseNet201_Long.class,InceptionV3_Long.class,IncResNetV2_Long.class,ResNet50_Long.class,MobileNet_Long.class,VGG16_Long.class,VGG19_Long.class,Xception_Long.class};
+    public static String[] classNames_long = {"DenseNet121_Long","DenseNet169_Long","DenseNet201_Long","InceptionV3_Long","IncResNetV2_Long","ResNet50_Long","MobileNet_Long","VGG16_Long","VGG19_Long","Xception_Long"};
+    public static Class[] classes_int = {DenseNet121_Int.class,DenseNet169_Int.class,DenseNet201_Int.class,InceptionV3_Int.class,IncResNetV2_Int.class,ResNet50_Int.class, MobileNet_Int.class, VGG16_Int.class, VGG19_Int.class, Xception_Int.class};
+    public static String[] classNames_int = {"DenseNet121_Int", "DenseNet169_Int", "DenseNet201_Int", "InceptionV3_Int", "IncResNetV2_Int", "ResNet50_Int", "MobileNet_Int", "VGG16_Int", "VGG19_Int", "Xception_Int"};
+    public static Class[] classes_short = {DenseNet121_Short.class, DenseNet169_Short.class, DenseNet201_Short.class, InceptionV3_Short.class, IncResNetV2_Short.class, ResNet50_Short.class, MobileNet_Short.class, VGG16_Short.class, VGG19_Short.class, Xception_Short.class};
+    public static String[] classNames_short = {"DenseNet121_Short", "DenseNet169_Short", "DenseNet201_Short", "InceptionV3_Short", "IncResNetV2_Short", "ResNet50_Short", "MobileNet_Short", "VGG16_Short", "VGG19_Short", "Xception_Short"};
+    public static Class[] classes_byte = {DenseNet121_Byte.class, DenseNet169_Byte.class, DenseNet201_Byte.class, InceptionV3_Byte.class, IncResNetV2_Byte.class, ResNet50_Byte.class, MobileNet_Byte.class, VGG16_Byte.class, VGG19_Byte.class, Xception_Byte.class};
+    public static String[] classNames_byte = {"DenseNet121_Byte", "DenseNet169_Byte", "DenseNet201_Byte", "InceptionV3_Byte", "IncResNetV2_Byte", "ResNet50_Byte", "MobileNet_Byte", "VGG16_Byte", "VGG19_Byte", "Xception_Byte"};
+
     public static void main(String[] args) throws Exception {
         boolean USE_METRIC_SPACES = false;
 
@@ -57,9 +71,10 @@ public class Main {
             e.printStackTrace();
         }
 
-        Vector<String> allCategories = new Vector(Arrays.asList(new String[]{"blurry-nothing", "colon-clear", "dyed-lifted-polyps", "dyed-resection-margins", "esophagitis", "instruments", "normal-cecum", "normal-pylorus", "normal-z-line", "out-of-patient", "polyps", "retroflex-rectum", "retroflex-stomach", "stool-inclusions", "stool-plenty", "ulcerative-colitis"}));
-        Class[] classes = {DenseNet121.class, DenseNet169.class, DenseNet201.class,InceptionV3.class,IncResNetV2.class, ResNet50.class, MobileNet.class,VGG16.class,VGG19.class,Xception.class};
-        String[] classNames = {"DenseNet121", "DenseNet169", "DenseNet201","InceptionV3","IncResNetV2","ResNet50","MobileNet","VGG16","VGG19","Xception"};
+        Vector<String> allCategories = new Vector<>(Arrays.asList("blurry-nothing", "colon-clear", "dyed-lifted-polyps", "dyed-resection-margins", "esophagitis", "instruments", "normal-cecum", "normal-pylorus", "normal-z-line", "out-of-patient", "polyps", "retroflex-rectum", "retroflex-stomach", "stool-inclusions", "stool-plenty", "ulcerative-colitis"));
+
+        Class[] classes = classes_double;
+        String[] classNames = classNames_double;
         if(classes.length > classNames.length) throw new Exception("More classes than classNames defined!");
         String[] outFiles = new String[classes.length];
         String[] csvFiles = new String[classes.length];
@@ -79,16 +94,16 @@ public class Main {
             e.printStackTrace();
         }
         for(KerasFeature.DistanceFunction df : KerasFeature.DistanceFunction.values()) {
-            DenseNet121.USED_DISTANCE_FUN = df;
-            DenseNet169.USED_DISTANCE_FUN = df;
-            DenseNet201.USED_DISTANCE_FUN = df;
-            InceptionV3.USED_DISTANCE_FUN = df;
-            IncResNetV2.USED_DISTANCE_FUN = df;
-            MobileNet.USED_DISTANCE_FUN =   df;
-            ResNet50.USED_DISTANCE_FUN =    df;
-            VGG16.USED_DISTANCE_FUN =       df;
-            VGG19.USED_DISTANCE_FUN =       df;
-            Xception.USED_DISTANCE_FUN =    df;
+            DenseNet121_Double.USED_DISTANCE_FUN = df;
+            DenseNet169_Double.USED_DISTANCE_FUN = df;
+            DenseNet201_Double.USED_DISTANCE_FUN = df;
+            InceptionV3_Double.USED_DISTANCE_FUN = df;
+            IncResNetV2_Double.USED_DISTANCE_FUN = df;
+            MobileNet_Double.USED_DISTANCE_FUN =   df;
+            ResNet50_Double.USED_DISTANCE_FUN =    df;
+            VGG16_Double.USED_DISTANCE_FUN =       df;
+            VGG19_Double.USED_DISTANCE_FUN =       df;
+            Xception_Double.USED_DISTANCE_FUN =    df;
             String outputFilePath = outputFilePathBase + df.name() + ".txt";
             PrintStream out = null;
             try {
@@ -104,12 +119,12 @@ public class Main {
             KerasSearcher[] searchers = new KerasSearcher[classes.length];
 
             setupSearchers(USE_METRIC_SPACES, classes, outFiles, readers, searchers);
+            ImageSearchHits hits[] = new ImageSearchHits[classes.length];
+            Thread[] threads = new Thread[classes.length];
+            SearchRunnable[] runnables = new SearchRunnable[classes.length];
             for (String s : testFiles) {
-                ImageSearchHits hits[] = new ImageSearchHits[classes.length];
 
 
-                Thread[] threads = new Thread[classes.length];
-                SearchRunnable[] runnables = new SearchRunnable[classes.length];
                 for (int i = 0; i < hits.length; i++) {
                     runnables[i] = new SearchRunnable(searchers[i], readers[i], s);
                     threads[i] = new Thread(runnables[i]);
