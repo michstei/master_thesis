@@ -26,8 +26,6 @@ def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_inp
 if __name__ == '__main__':
     files = get_files(filesdir)
     start = timeit.default_timer()
-
-
     models = dict()
     print('setting up models...')
     # models['xception'] =    appl.xception.Xception(                     weights="imagenet", include_top=False,pooling='avg')
@@ -40,7 +38,6 @@ if __name__ == '__main__':
     models['densenet121'] = appl.densenet.DenseNet121(                  weights="imagenet", include_top=False,pooling='avg')
     models['densenet169'] = appl.densenet.DenseNet169(                  weights="imagenet", include_top=False,pooling='avg')
     models['densenet201'] = appl.densenet.DenseNet201(                  weights="imagenet", include_top=False,pooling='avg')
-    print('all models set up')
     stop = timeit.default_timer()
     print('setting up models took',stop-start,'sec')
     #prep_functions
@@ -57,7 +54,6 @@ if __name__ == '__main__':
     prep_funs['densenet121'] = appl.densenet.preprocess_input
     prep_funs['densenet169'] = appl.densenet.preprocess_input
     prep_funs['densenet201'] = appl.densenet.preprocess_input
-    print('all prepfunctions set up')
     #inputsizes
     print('setting up inputsizes...')
     inputsizes = dict()
@@ -71,7 +67,6 @@ if __name__ == '__main__':
     inputsizes['densenet121'] = (224,224)
     inputsizes['densenet169'] = (224,224)
     inputsizes['densenet201'] = (224,224)
-    print('all inputsizes set up')
     #reshape params
     print('setting up reshape params...')
     reshape_params = dict()
@@ -85,13 +80,11 @@ if __name__ == '__main__':
     reshape_params['densenet121'] = (1024, 1)
     reshape_params['densenet169'] = (1664, 1)
     reshape_params['densenet201'] = (1920, 1)
-    print('all reshape params set up')
     #csv filenames
     print('setting up csv_filenames...')
     csv_filenames = dict()
     for k in models.keys():
         csv_filenames[k] = csv_folder + k + '.csv'
-    print('all csv_filenames set up')
     stop = timeit.default_timer()
     print('setting up other stuff took',stop-start,'sec')
     start = timeit.default_timer()

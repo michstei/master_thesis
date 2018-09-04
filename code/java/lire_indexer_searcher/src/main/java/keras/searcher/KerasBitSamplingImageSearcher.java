@@ -27,7 +27,6 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
     private GlobalFeature feature = null;
     private String hashesFieldName = null;
     private boolean partialHashes = false;
-
     /**
      * Creates a new searcher for BitSampling based hashes.
      *
@@ -60,6 +59,15 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
         this.featureFieldName = feature.getFieldName();
         this.hashesFieldName = featureFieldName + DocumentBuilder.HASH_FIELD_SUFFIX;
         this.feature = feature;
+        try {
+            if(!(new File(KerasDocumentBuilder.hashFilePath).exists())){
+                BitSampling.dimensions = KerasDocumentBuilder.maxDimensions;
+                BitSampling.generateHashFunctions(KerasDocumentBuilder.hashFilePath);
+            }
+            BitSampling.readHashFunctions(new FileInputStream(KerasDocumentBuilder.hashFilePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 //        try {
 //            BitSampling.readHashFunctions(new FileInputStream(KerasDocumentBuilder.hashFilePath));
 //        } catch (IOException e) {

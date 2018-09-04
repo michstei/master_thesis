@@ -1,11 +1,7 @@
-create kerasFeatures csv files with imagenet weights
-
 create kerasFeatures csv files with pooling layers to reduce Featurevector length
 
 
-
-try changing featurevector from double to float to see if it impacts performance
-    maybe try other quantiziation stuff
-    
-
 reduce length of keras featurevectors (pooling layers)
+
+
+add timing to Bitsampling stuff to find out what of it is so slow

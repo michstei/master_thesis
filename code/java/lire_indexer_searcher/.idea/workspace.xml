@@ -3,16 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e22a95c3-bbf2-4b09-9038-29e872be29d3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet121.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet121_Double.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet169.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet169_Double.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet201.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/DenseNet201_Double.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/IncResNetV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/IncResNetV2_Double.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/InceptionV3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/InceptionV3_Double.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/MobileNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/MobileNet_Double.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/ResNet50.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/ResNet50_Double.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/VGG16.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/VGG16_Double.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/VGG19.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/VGG19_Double.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/keras/features/Xception.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/features/Xception_Double.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/keras/searcher/KerasBitSamplingImageSearcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/keras/searcher/KerasBitSamplingImageSearcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/main/Main.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -71,11 +62,11 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="cfs" value="1" />
-          <entry key="class" value="48" />
+          <entry key="class" value="49" />
           <entry key="csv" value="6" />
           <entry key="dat" value="3" />
           <entry key="gradle" value="2" />
-          <entry key="java" value="458" />
+          <entry key="java" value="589" />
           <entry key="lst" value="5" />
           <entry key="segments_1" value="1" />
           <entry key="xml" value="1" />
@@ -83,9 +74,9 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="48" />
+          <entry key="CLASS" value="49" />
           <entry key="Groovy" value="2" />
-          <entry key="JAVA" value="458" />
+          <entry key="JAVA" value="589" />
           <entry key="PLAIN_TEXT" value="16" />
           <entry key="XML" value="1" />
         </counts>
@@ -96,14 +87,14 @@
           <entry key="csv" value="1" />
           <entry key="dummy" value="289" />
           <entry key="gradle" value="98" />
-          <entry key="java" value="29334" />
+          <entry key="java" value="30565" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CLASS" value="3" />
           <entry key="Groovy" value="98" />
-          <entry key="JAVA" value="29334" />
+          <entry key="JAVA" value="30565" />
           <entry key="PLAIN_TEXT" value="290" />
         </counts>
       </usages-collector>
@@ -111,14 +102,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="73" column="33" selection-start-line="73" selection-start-column="33" selection-end-line="73" selection-end-column="33" />
+            <state relative-caret-position="408">
+              <caret line="239" column="57" selection-start-line="239" selection-start-column="57" selection-end-line="239" selection-end-column="57" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4885#4918#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/keras/searcher/KerasBitSamplingImageSearcher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="127">
+              <caret line="43" column="98" lean-forward="true" selection-start-line="43" selection-start-column="98" selection-end-line="43" selection-end-column="98" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/keras/indexer/KerasIndexer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="393">
+              <caret line="58" column="46" selection-start-line="58" selection-start-column="46" selection-end-line="58" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/keras/documentbuilder/KerasDocumentBuilderImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
             </state>
           </provider>
         </entry>
@@ -129,9 +151,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="Arquillian JUnit Test Class" />
         <option value="AnnotationType" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -147,7 +169,6 @@
       <find>havin</find>
       <find>bitsampl</find>
       <find>usedoc</find>
-      <find>bitsampling</find>
       <find>ExtractorItem</find>
       <find>addex</find>
       <find>pathToFilesFolder</find>
@@ -163,6 +184,10 @@
       <find>folderPath</find>
       <find>reader</find>
       <find>Double</find>
+      <find>bitsampling</find>
+      <find>lookUp</find>
+      <find>BitSampling</find>
+      <find>Bit</find>
     </findStrings>
     <replaceStrings>
       <replace>Float</replace>
@@ -497,17 +522,44 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet121_Float.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet169_Float.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet201_Float.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet201_Int.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet201_Long.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet201_Short.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/InceptionV3_Byte.java" />
         <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/InceptionV3_Float.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/InceptionV3_Int.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/InceptionV3_Long.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/InceptionV3_Short.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Byte.java" />
         <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Float.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Int.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Long.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Short.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Byte.java" />
         <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Float.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Int.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Long.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Short.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Byte.java" />
         <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Float.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Int.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Long.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Short.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Byte.java" />
         <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Float.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Long.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Int.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Short.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Byte.java" />
         <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Float.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Int.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Long.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Short.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Byte.java" />
         <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Float.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/Xception_Double.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Int.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Long.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Short.java" />
         <option value="$PROJECT_DIR$/src/main/java/keras/features/DenseNet121_Double.java" />
         <option value="$PROJECT_DIR$/src/main/java/keras/features/DenseNet169_Double.java" />
         <option value="$PROJECT_DIR$/src/main/java/keras/features/DenseNet201_Double.java" />
@@ -517,36 +569,9 @@
         <option value="$PROJECT_DIR$/src/main/java/keras/features/ResNet50_Double.java" />
         <option value="$PROJECT_DIR$/src/main/java/keras/features/VGG16_Double.java" />
         <option value="$PROJECT_DIR$/src/main/java/keras/features/VGG19_Double.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet121_Int.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet169_Int.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet201_Int.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/InceptionV3_Int.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Int.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Int.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Int.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Int.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Int.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Int.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet121_Long.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet169_Long.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet201_Long.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/InceptionV3_Long.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Long.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Long.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Long.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Long.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Long.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Long.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Short.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Short.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Short.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Short.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Short.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Short.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/InceptionV3_Short.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet201_Short.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet169_Short.java" />
-        <option value="$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet121_Short.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/features/Xception_Double.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/utils/CustomBitSampling.java" />
+        <option value="$PROJECT_DIR$/src/main/java/keras/searcher/KerasBitSamplingImageSearcher.java" />
         <option value="$PROJECT_DIR$/src/main/java/main/Main.java" />
       </list>
     </option>
@@ -619,16 +644,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="keras" type="462c0819:PsiDirectoryNode" />
               <item name="features" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="lire_indexer_searcher" type="b2602c69:ProjectViewProjectNode" />
-              <item name="lire_indexer_searcher" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="keras" type="462c0819:PsiDirectoryNode" />
-              <item name="features" type="462c0819:PsiDirectoryNode" />
-              <item name="quantized" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="lire_indexer_searcher" type="b2602c69:ProjectViewProjectNode" />
@@ -813,12 +828,12 @@
       <workItem from="1535610224231" duration="10596000" />
       <workItem from="1535696394615" duration="10755000" />
       <workItem from="1535955926138" duration="19175000" />
-      <workItem from="1536042134720" duration="5664000" />
+      <workItem from="1536042134720" duration="17847000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106382000" />
+    <option name="totallyTimeSpent" value="118565000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -840,7 +855,7 @@
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32990655" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32990655" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32990655" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3317757" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -872,360 +887,379 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet121_Float.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="87" column="6" selection-start-line="87" selection-start-column="6" selection-end-line="87" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet169_Float.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="88" column="5" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet201_Float.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/InceptionV3_Float.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Float.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Float.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="86" column="4" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Float.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Float.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Float.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Float.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1125">
-          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/DenseNet121_Double.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/DenseNet169_Double.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/DenseNet201_Double.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="694">
-          <caret line="84" selection-start-line="84" selection-end-line="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/InceptionV3_Double.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/IncResNetV2_Double.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/MobileNet_Double.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/ResNet50_Double.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/VGG16_Double.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="677">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/VGG19_Double.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="649">
-          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/Xception_Double.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet121_Int.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet169_Int.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet201_Int.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
+        <state relative-caret-position="360">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/InceptionV3_Int.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Int.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Int.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Int.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Int.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Int.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Int.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet121_Long.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet169_Long.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet201_Long.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
+        <state relative-caret-position="174">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/InceptionV3_Long.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Long.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Long.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Long.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Long.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Long.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Long.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Short.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="58" column="13" lean-forward="true" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Short.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Short.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Short.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Short.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Short.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
+        <state relative-caret-position="324">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/InceptionV3_Short.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
+        <state relative-caret-position="234">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet201_Short.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Byte.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet169_Short.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Float.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/DenseNet121_Short.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Int.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Long.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/IncResNetV2_Short.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Byte.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Float.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Int.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Long.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/MobileNet_Short.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Byte.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Float.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Int.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Long.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/ResNet50_Short.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Byte.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Float.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Long.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Int.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG16_Short.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Byte.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Float.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Int.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Long.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/VGG19_Short.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Byte.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="31" column="5" lean-forward="true" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Float.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Int.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Long.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/quantized/Xception_Short.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/DenseNet121_Double.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/DenseNet169_Double.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/DenseNet201_Double.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/InceptionV3_Double.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/IncResNetV2_Double.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/MobileNet_Double.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/ResNet50_Double.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/VGG16_Double.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/VGG19_Double.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/utils/Quantization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="99" column="27" selection-start-line="99" selection-start-column="27" selection-end-line="99" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/features/Xception_Double.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="97" column="40" selection-start-line="97" selection-start-column="40" selection-end-line="97" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/lire.jar!/net/semanticmetadata/lire/indexers/hashing/BitSampling.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2370">
+          <caret line="180" column="1" lean-forward="true" selection-start-line="16" selection-end-line="180" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/utils/CustomBitSampling.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="28" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4943#4944#0" expanded="true" />
+            <element signature="e#4964#4965#0" expanded="true" />
+            <element signature="e#5036#5037#0" expanded="true" />
+            <element signature="e#5091#5092#0" expanded="true" />
+            <element signature="e#5126#5127#0" expanded="true" />
+            <element signature="e#5153#5154#0" expanded="true" />
+            <element signature="e#5197#5198#0" expanded="true" />
+            <element signature="e#5224#5225#0" expanded="true" />
+            <element signature="e#5259#5260#0" expanded="true" />
+            <element signature="e#5283#5284#0" expanded="true" />
+            <element signature="e#5332#5333#0" expanded="true" />
+            <element signature="e#5373#5374#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/indexer/KerasIndexer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="58" column="46" selection-start-line="58" selection-start-column="46" selection-end-line="58" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/documentbuilder/KerasDocumentBuilderImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="73" column="33" selection-start-line="73" selection-start-column="33" selection-end-line="73" selection-end-column="33" />
+        <state relative-caret-position="408">
+          <caret line="239" column="57" selection-start-line="239" selection-start-column="57" selection-end-line="239" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4885#4918#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/keras/searcher/KerasBitSamplingImageSearcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="43" column="98" lean-forward="true" selection-start-line="43" selection-start-column="98" selection-end-line="43" selection-end-column="98" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
