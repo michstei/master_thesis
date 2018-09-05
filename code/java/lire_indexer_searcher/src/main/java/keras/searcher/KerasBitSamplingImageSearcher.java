@@ -12,12 +12,15 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.*;
 import org.apache.lucene.search.similarities.ClassicSimilarity;
+import org.apache.lucene.util.BytesRef;
 
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.TreeSet;
 
 public class KerasBitSamplingImageSearcher implements KerasSearcher{
@@ -173,6 +176,7 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
             }
             BitSampling.dimensions = queryFeature.getFeatureVector().length;
             int[] ints = BitSampling.generateHashes(queryFeature.getFeatureVector());
+
             String[] hashes = new String[ints.length];
             for (int i = 0; i < ints.length; i++) {
                 hashes[i] = Integer.toString(ints[i]);
@@ -207,10 +211,12 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
         for (int i = 0; i < hashes.length; i++) {
             // be aware that the hashFunctionsFileName of the field must match the one you put the hashes in before.
             if (partialHashes) {
-                if (Math.random() < 0.5)
+                if (Math.random() < 0.5) {
                     builder.add(new BooleanClause(new TermQuery(new Term(hashesFieldName, hashes[i] + "")), BooleanClause.Occur.SHOULD));
-            } else
+                }
+            } else {
                 builder.add(new BooleanClause(new TermQuery(new Term(hashesFieldName, hashes[i] + "")), BooleanClause.Occur.SHOULD));
+            }
         }
         query = builder.build();
         TopDocs docs = searcher.search(query, maxResultsHashBased);
@@ -220,9 +226,10 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
         double maxDistance = -1d;
         double tmpScore;
         for (int i = 0; i < docs.scoreDocs.length; i++) {
-            feature.setByteArrayRepresentation(reader.document(docs.scoreDocs[i].doc).getBinaryValue(featureFieldName).bytes,
-                    reader.document(docs.scoreDocs[i].doc).getBinaryValue(featureFieldName).offset,
-                    reader.document(docs.scoreDocs[i].doc).getBinaryValue(featureFieldName).length);
+            BytesRef binaryValue = reader.document(docs.scoreDocs[i].doc).getBinaryValue(featureFieldName);
+            feature.setByteArrayRepresentation(binaryValue.bytes,
+                    binaryValue.offset,
+                    binaryValue.length);
             tmpScore = queryFeature.getDistance(feature);
             assert (tmpScore >= 0);
             if (resultScoreDocs.size() < maximumHits) {

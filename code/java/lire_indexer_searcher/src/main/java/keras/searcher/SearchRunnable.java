@@ -4,6 +4,8 @@ import net.semanticmetadata.lire.searchers.ImageSearchHits;
 import org.apache.lucene.index.IndexReader;
 
 import java.awt.*;
+import java.time.Duration;
+import java.time.Instant;
 
 public class SearchRunnable implements Runnable {
     private ImageSearchHits result;
@@ -19,6 +21,7 @@ public class SearchRunnable implements Runnable {
     @Override
     public void run() {
         this.result = searcher.search(this.imagePath,this.reader);
+
     }
 
     public ImageSearchHits getResult(){
