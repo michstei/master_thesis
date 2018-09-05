@@ -1,11 +1,17 @@
 import os
 import collections 
-base_paths = ["/home/michael/master_thesis/data/results/MetricSpaces/doubleFeatureVectors/",
-"/home/michael/master_thesis/data/results/MetricSpaces/floatFeatureVectors/",
-"/home/michael/master_thesis/data/results/MetricSpaces/longFeatureVectors/",
-"/home/michael/master_thesis/data/results/MetricSpaces/intFeatureVectors/",
-"/home/michael/master_thesis/data/results/MetricSpaces/shortFeatureVectors/",
-"/home/michael/master_thesis/data/results/MetricSpaces/byteFeatureVectors/"]
+base_paths = [  "/home/michael/master_thesis/data/results/MetricSpaces/doubleFeatureVectors/"   ,
+                "/home/michael/master_thesis/data/results/MetricSpaces/floatFeatureVectors/"    ,
+                "/home/michael/master_thesis/data/results/MetricSpaces/longFeatureVectors/"     ,
+                "/home/michael/master_thesis/data/results/MetricSpaces/intFeatureVectors/"      ,
+                "/home/michael/master_thesis/data/results/MetricSpaces/shortFeatureVectors/"    ,
+                "/home/michael/master_thesis/data/results/MetricSpaces/byteFeatureVectors/"     ,
+                "/home/michael/master_thesis/data/results/BitSampling/doubleFeatureVectors/"   ,
+                "/home/michael/master_thesis/data/results/BitSampling/floatFeatureVectors/"    ,
+                "/home/michael/master_thesis/data/results/BitSampling/longFeatureVectors/"     ,
+                "/home/michael/master_thesis/data/results/BitSampling/intFeatureVectors/"      ,
+                "/home/michael/master_thesis/data/results/BitSampling/shortFeatureVectors/"     ,
+                "/home/michael/master_thesis/data/results/BitSampling/byteFeatureVectors/"    ]
 
 def list_files(path, postfix, l):
     for file in os.listdir(path):
@@ -49,7 +55,7 @@ for base_path in base_paths:
     print(base_path)
     
     for key in false_predictions:
-        print("%-12s %s %s %s %s %s %s %s %s" % (key, "true:", true_predictions[key], "false:", false_predictions[key], "sum:",true_predictions[key] + false_predictions[key], "pcnt:", (true_predictions[key]/(true_predictions[key]+false_predictions[key]))*100 ))
+        print("%-12s %s %5s %s %5s %s %5s %s %5s" % (key, "true:", true_predictions[key], "false:", false_predictions[key], "sum:",true_predictions[key] + false_predictions[key], "pcnt:", (true_predictions[key]/(true_predictions[key]+false_predictions[key]))*100 ))
     
     m = max(false_predictions.values())
     for key in false_predictions:

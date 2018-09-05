@@ -22,7 +22,7 @@ public class Xception_Int implements KerasFeature{
 
 
     private int[] featureVector      = null;
-    private static KerasCSVReader reader = null;
+    public static KerasCSVReader reader = null;
 
     public static void setCsvFilename(String csvFilename) {
         if(csvFilename != null) {

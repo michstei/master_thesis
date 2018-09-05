@@ -1,7 +1,6 @@
-create kerasFeatures csv files with pooling layers to reduce Featurevector length
+try runs without InceeptionV3
 
 
 reduce length of keras featurevectors (pooling layers)
+    create kerasFeatures csv files with pooling layers to reduce Featurevector length
 
-
-add timing to Bitsampling stuff to find out what of it is so slow

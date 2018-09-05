@@ -20,7 +20,7 @@ public class DenseNet121_Float implements KerasFeature{
     }
 
     private float[] featureVector      = null;
-    private static KerasCSVReader reader = null;
+    public static KerasCSVReader reader = null;
 
     public static void setCsvFilename(String csvFilename) {
         if(csvFilename != null) {

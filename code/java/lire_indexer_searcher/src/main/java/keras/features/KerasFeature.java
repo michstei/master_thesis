@@ -9,9 +9,9 @@ public interface KerasFeature extends GlobalFeature, KerasExtractor {
         DISTANCEFUNCTION_L1,
         DISTANCEFUNCTION_L2,
         DISTANCEFUNCTION_JSD,
-//        DISTANCEFUNCTION_CHISQUARE,
-//        DISTANCEFUNCTION_KSDIST,
-//        DISTANCEFUNCTION_SIMPLEEMD,
+        DISTANCEFUNCTION_CHISQUARE,
+        DISTANCEFUNCTION_KSDIST,
+        DISTANCEFUNCTION_SIMPLEEMD,
         DISTANCEFUNCTION_TANIMOTO
         }
 
@@ -29,15 +29,15 @@ public interface KerasFeature extends GlobalFeature, KerasExtractor {
             case DISTANCEFUNCTION_JSD: {
                 return MetricsUtils.jsd(featureVectorSelf,featureVectorOther);
             }
-//            case DISTANCEFUNCTION_CHISQUARE: {
-//                return MetricsUtils.chisquare(featureVectorSelf,featureVectorOther);
-//            }
-//            case DISTANCEFUNCTION_KSDIST: {
-//                return MetricsUtils.ksDistance(featureVectorSelf,featureVectorOther);
-//            }
-//            case DISTANCEFUNCTION_SIMPLEEMD: {
-//                return MetricsUtils.simpleEMD(featureVectorSelf,featureVectorOther);
-//            }
+            case DISTANCEFUNCTION_CHISQUARE: {
+                return MetricsUtils.chisquare(featureVectorSelf,featureVectorOther);
+            }
+            case DISTANCEFUNCTION_KSDIST: {
+                return MetricsUtils.ksDistance(featureVectorSelf,featureVectorOther);
+            }
+            case DISTANCEFUNCTION_SIMPLEEMD: {
+                return MetricsUtils.simpleEMD(featureVectorSelf,featureVectorOther);
+            }
             case DISTANCEFUNCTION_TANIMOTO: {
                 return MetricsUtils.cosineCoefficient(featureVectorSelf, featureVectorOther);
             }

@@ -20,7 +20,7 @@ public class DenseNet121_Long implements KerasFeature{
     }
 
     private long[] featureVector      = null;
-    private static KerasCSVReader reader = null;
+    public static KerasCSVReader reader = null;
 
     public static void setCsvFilename(String csvFilename) {
         if(csvFilename != null) {

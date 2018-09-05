@@ -20,7 +20,7 @@ public class IncResNetV2_Byte implements KerasFeature{
     }
 
     private byte[] featureVector      = null;
-    private static KerasCSVReader reader = null;
+    public static KerasCSVReader reader = null;
 
     public static void setCsvFilename(String csvFilename) {
         if(csvFilename != null) {

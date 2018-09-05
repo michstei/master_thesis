@@ -20,7 +20,7 @@ public class DenseNet169_Double implements KerasFeature{
     }
 
     private double[] featureVector      = null;
-    private static KerasCSVReader reader = null;
+    public static KerasCSVReader reader = null;
 
     public static void setCsvFilename(String csvFilename) {
         if(csvFilename != null) {
