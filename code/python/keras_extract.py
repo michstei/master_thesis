@@ -6,7 +6,7 @@ import keras.applications as appl
 from keras.models import Model
 from keras.layers import MaxPooling2D, AveragePooling2D, GlobalAveragePooling2D,GlobalMaxPooling2D ,Dense
 filesdir = '/home/mst/master_thesis/data/Medico_2018_development_set/Medico_2018_development_set/'
-csv_folder = '/home/mst/master_thesis/code/python/csv/256Max/'
+csv_folder = '/home/mst/master_thesis/code/python/csv/512Avg/'
 def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_input, model_targetsize):
    
     img = image.load_img(img_path, target_size=model_targetsize)
@@ -26,8 +26,8 @@ def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_inp
 
 def addLayer(model):
     x = model.output
-    x = Dense(256)(x)
-    x = GlobalMaxPooling2D(name='gmaxpool')(x)
+    x = Dense(512)(x)
+    x = GlobalAveragePooling2D(name='gavgpool')(x)
     model = Model(model.input,x)
     return model
 
@@ -123,7 +123,7 @@ if __name__ == '__main__':
         lines = []
         i = 1
         for f in files:
-            lines.append(extract_features_to_csv_string(f, models[k],(256,1),prep_funs[k],inputsizes[k]))
+            lines.append(extract_features_to_csv_string(f, models[k],(512,1),prep_funs[k],inputsizes[k]))
             print('processed', "{:.2f}".format(i/len(files)*100),'%',end='\r')
             i += 1
         with open(csv_filenames[k],'a+') as csvfile:
