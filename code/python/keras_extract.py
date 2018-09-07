@@ -4,8 +4,9 @@ from util import get_files
 from keras.preprocessing import image
 import keras.applications as appl
 from keras.models import Model
-filesdir = '/home/michael/master_thesis/data/Medico_2018_development_set/'
-csv_folder = '/home/michael/master_thesis/data/csv/'
+from keras.layers import MaxPooling2D, AveragePooling2D, GlobalAveragePooling2D,GlobalMaxPooling2D ,Dense
+filesdir = '/home/mst/master_thesis/data/Medico_2018_development_set/Medico_2018_development_set/'
+csv_folder = '/home/mst/master_thesis/code/python/csv/256Max/'
 def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_input, model_targetsize):
    
     img = image.load_img(img_path, target_size=model_targetsize)
@@ -22,22 +23,50 @@ def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_inp
     text = text + '\n'
     return text
     
+
+def addLayer(model):
+    x = model.output
+    x = Dense(256)(x)
+    x = GlobalMaxPooling2D(name='gmaxpool')(x)
+    model = Model(model.input,x)
+    return model
+
 # create models
 if __name__ == '__main__':
     files = get_files(filesdir)
     start = timeit.default_timer()
     models = dict()
     print('setting up models...')
-    # models['xception'] =    appl.xception.Xception(                     weights="imagenet", include_top=False,pooling='avg')
-    # models['vgg16'] =       appl.vgg16.VGG16(                           weights="imagenet", include_top=False,pooling='avg')
-    # models['vgg19'] =       appl.vgg19.VGG19(                           weights="imagenet", include_top=False,pooling='avg')
-    # models['resnet50'] =    appl.resnet50.ResNet50(                     weights="imagenet", include_top=False,pooling='avg')
-    models['inceptionv3'] = appl.inception_v3.InceptionV3(              weights="imagenet", include_top=False,pooling='avg')
-    models['incresnetv2'] = appl.inception_resnet_v2.InceptionResNetV2( weights="imagenet", include_top=False,pooling='avg')
-    models['mobilenet'] =   appl.mobilenet.MobileNet(                   weights="imagenet", include_top=False,pooling='avg')
-    models['densenet121'] = appl.densenet.DenseNet121(                  weights="imagenet", include_top=False,pooling='avg')
-    models['densenet169'] = appl.densenet.DenseNet169(                  weights="imagenet", include_top=False,pooling='avg')
-    models['densenet201'] = appl.densenet.DenseNet201(                  weights="imagenet", include_top=False,pooling='avg')
+    model = appl.xception.Xception(weights='imagenet', include_top=False)
+    model =  addLayer(model)
+    models['xception'] =    model
+    model = appl.vgg16.VGG16(weights='imagenet', include_top=False)
+    model = addLayer(model)
+    models['vgg16'] =       model
+    model = appl.vgg19.VGG19(weights='imagenet', include_top=False)
+    model = addLayer(model)
+    models['vgg19'] =       model
+    model = appl.resnet50.ResNet50(weights='imagenet', include_top=False)
+    model = addLayer(model)
+    models['resnet50'] =    model
+    model = appl.inception_v3.InceptionV3(weights='imagenet', include_top=False)
+    model = addLayer(model)
+    models['inceptionv3'] = model
+    model = appl.inception_resnet_v2.InceptionResNetV2(weights='imagenet', include_top = False)
+    model = addLayer(model)
+    models['incresnetv2'] = model
+    model = appl.mobilenet.MobileNet(weights='imagenet', include_top=False)
+    model = addLayer(model)
+    models['mobilenet'] =   model
+    model = appl.densenet.DenseNet121(weights='imagenet' ,include_top = False)
+    model = addLayer(model)
+    models['densenet121'] = model
+    model = appl.densenet.DenseNet169(weights='imagenet', include_top=False)
+    model = addLayer(model)
+    models['densenet169'] = model
+    model = appl.densenet.DenseNet201(weights='imagenet', include_top=False)
+    model = addLayer(model)
+    models['densenet201'] = model
     stop = timeit.default_timer()
     print('setting up models took',stop-start,'sec')
     #prep_functions
@@ -89,17 +118,18 @@ if __name__ == '__main__':
     print('setting up other stuff took',stop-start,'sec')
     start = timeit.default_timer()
     for k in models.keys():
-        print(models[k].output_shape)
+        s= timeit.default_timer()
+        print("%12s : %s"%(k,models[k].output_shape))
         lines = []
         i = 1
         for f in files:
-            lines.append(extract_features_to_csv_string(f, models[k],reshape_params[k],prep_funs[k],inputsizes[k]))
+            lines.append(extract_features_to_csv_string(f, models[k],(256,1),prep_funs[k],inputsizes[k]))
             print('processed', "{:.2f}".format(i/len(files)*100),'%',end='\r')
             i += 1
-
-        with open(csv_filenames[k],'a') as csvfile:
+        with open(csv_filenames[k],'a+') as csvfile:
             csvfile.writelines(lines)
-        print('\nprocessed model:',k)
+        e = timeit.default_timer()
+        print('\nprocessed model:',k,e-s,'sec')
     stop = timeit.default_timer()
     print('processing models took',stop-start,'sec')
 
