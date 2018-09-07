@@ -1,6 +1,6 @@
-try runs without InceeptionV3
+do runs with 512Avg and 512Max Features 
 
 
-reduce length of keras featurevectors (pooling layers)
-    create kerasFeatures csv files with pooling layers to reduce Featurevector length
+reduce length of keras featurevectors (pooling layers) --> done with dense layer
+    create kerasFeatures csv files with pooling layers to reduce Featurevector length --> done with dense layer
 

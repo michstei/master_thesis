@@ -55,16 +55,16 @@ public class Main {
     }
     enum HashingMode{
         HASHING_MODE_METRIC_SPACES,
-        HASHINGMODE_BITSAMPLING,
+        HASHING_MODE_BITSAMPLING,
     }
+
     private static int maxHits = 3;
-    private static boolean CREATE_IN_FILE_LISTS = true;
+    private static boolean CREATE_IN_FILE_LISTS = false;
     private static String basePath = "/home/michael/master_thesis/data/";
     private static String inFileTrain = basePath + "indexCreationFiles/inFileTrain.lst";
     private static String inFileTest = basePath + "indexCreationFiles/inFileTest.lst";
     private static String imageFolderPath = basePath + "Medico_2018_development_set/";
     public static void main(String[] args) throws Exception {
-
         Instant start = Instant.now();
         if(CREATE_IN_FILE_LISTS){
             FilePrep prep = new FilePrep(imageFolderPath,5,inFileTrain,inFileTest);
