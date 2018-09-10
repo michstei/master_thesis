@@ -137,10 +137,6 @@ public class Quantization {
         return out;
     }
 
-    .idea
-*.iws
-*.iml
-*.ipr
 
     public static void quantizeCSVFile(KerasCSVReader reader, String outFile, QuantizationType type) throws IOException {
         HashMap<String, double[]> values = reader.getValuesDouble();
@@ -237,24 +233,26 @@ public class Quantization {
     public static void main(String[] args) {
 
         String inFile = "/home/michael/master_thesis/data/csv/";
-        String outFileBase = "/home/michael/master_thesis/data/csv/quantized/";
+        String outFileBase = "/home/michael/master_thesis/data/csv/";
         String[] filenames = new String[]{"inceptionv3","incresnetv2","mobilenet","resnet50","vgg16","vgg19","xception","densenet121","densenet169","densenet201"};
         try {
-            for(String s: filenames) {
-                KerasCSVReader reader = new KerasCSVReader(inFile + s + ".csv",",");
-                        Quantization.quantizeCSVFile(reader, outFileBase + s + "_double"    + ".csv", QuantizationType.QUANTIZATION_TYPE_DOUBLE);
-                System.out.println("File 1 processed");
-                Quantization.quantizeCSVFile(reader, outFileBase + s + "_float"     + ".csv", QuantizationType.QUANTIZATION_TYPE_FLOAT);
-                System.out.println("File 2 processed");
-                Quantization.quantizeCSVFile(reader, outFileBase + s + "_long"      + ".csv", QuantizationType.QUANTIZATION_TYPE_LONG);
-                System.out.println("File 3 processed");
-                Quantization.quantizeCSVFile(reader, outFileBase + s + "_int"       + ".csv", QuantizationType.QUANTIZATION_TYPE_INT);
-                System.out.println("File 4 processed");
-                Quantization.quantizeCSVFile(reader, outFileBase + s + "_short"     + ".csv", QuantizationType.QUANTIZATION_TYPE_SHORT);
-                System.out.println("File 5 processed");
-                Quantization.quantizeCSVFile(reader, outFileBase + s + "_byte"      + ".csv", QuantizationType.QUANTIZATION_TYPE_BYTE);
-                System.out.println("File 6 processed");
-                System.out.println(s + " processed");
+            for (String f : new String[]{"1024Avg/", "1024Max/"}){
+                for (String s : filenames) {
+                    KerasCSVReader reader = new KerasCSVReader(inFile + f + s + ".csv", ",");
+                    Quantization.quantizeCSVFile(reader, outFileBase + f +"quantized/" + s + "_double" + ".csv", QuantizationType.QUANTIZATION_TYPE_DOUBLE);
+                    System.out.println("File 1 processed");
+                    Quantization.quantizeCSVFile(reader, outFileBase + f +"quantized/" + s + "_float" + ".csv", QuantizationType.QUANTIZATION_TYPE_FLOAT);
+                    System.out.println("File 2 processed");
+                    Quantization.quantizeCSVFile(reader, outFileBase + f +"quantized/" + s + "_long" + ".csv", QuantizationType.QUANTIZATION_TYPE_LONG);
+                    System.out.println("File 3 processed");
+                    Quantization.quantizeCSVFile(reader, outFileBase + f +"quantized/" + s + "_int" + ".csv", QuantizationType.QUANTIZATION_TYPE_INT);
+                    System.out.println("File 4 processed");
+                    Quantization.quantizeCSVFile(reader, outFileBase + f +"quantized/" + s + "_short" + ".csv", QuantizationType.QUANTIZATION_TYPE_SHORT);
+                    System.out.println("File 5 processed");
+                    Quantization.quantizeCSVFile(reader, outFileBase + f +"quantized/" + s + "_byte" + ".csv", QuantizationType.QUANTIZATION_TYPE_BYTE);
+                    System.out.println("File 6 processed");
+                    System.out.println(s + " processed");
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

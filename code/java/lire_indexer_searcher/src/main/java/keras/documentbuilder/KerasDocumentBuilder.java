@@ -9,7 +9,7 @@ import java.io.IOException;
 public interface KerasDocumentBuilder {
 
     String hashFilePath = "/home/michael/master_thesis/data/hash/keras.obj";
-    int maxDimensions = 512;
+    int maxDimensions = 256;
     /**
      * Creates the feature fields for a Lucene Document without creating the document itself.
      *

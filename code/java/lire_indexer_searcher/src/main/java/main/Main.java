@@ -7,6 +7,7 @@ import keras.searcher.KerasBitSamplingImageSearcher;
 import keras.searcher.KerasMetricSpacesImageSearcher;
 import keras.searcher.KerasSearcher;
 import keras.searcher.SearchRunnable;
+import keras.utils.MedicoConfusionMatrix;
 import main.classifier.ImageSearchHitClassifier;
 import net.semanticmetadata.lire.builders.DocumentBuilder;
 import net.semanticmetadata.lire.builders.GlobalDocumentBuilder;
@@ -27,6 +28,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Vector;
 
 public class Main {
@@ -57,6 +59,8 @@ public class Main {
         HASHING_MODE_METRIC_SPACES,
         HASHING_MODE_BITSAMPLING,
     }
+
+
 
     private static int maxHits = 3;
     private static boolean CREATE_IN_FILE_LISTS = false;
@@ -210,7 +214,7 @@ public class Main {
                     int incorrect = 0;
                     int counter = 1;
 
-
+                    MedicoConfusionMatrix matrix = new MedicoConfusionMatrix();
                     for (String s : testFiles) {
                         Instant st = Instant.now();
 
@@ -232,7 +236,18 @@ public class Main {
 
                         LinkedHashMap<String, Double> preds = getResults(hits, readers, s, allCategories, classNames, outputFolderPath+df.name()+"_");
                         String k = preds.entrySet().iterator().next().getKey();
+                        MedicoConfusionMatrix.Category catGold = null,catPred = null;
+                        for(MedicoConfusionMatrix.Category c : MedicoConfusionMatrix.Category.values()){
+                            if(s.contains(c.getName())){
+                                catGold = c;
+                            }
+                            if(k.contains(c.getName())){
+                                catPred = c;
+                            }
+                        }
+                        matrix.increaseValue(catGold,catPred);
                         if (s.contains(k)) {
+
                             correct++;
                         } else {
                             incorrect++;
@@ -246,6 +261,8 @@ public class Main {
                     Instant endDf = Instant.now();
                     out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n", total, correct, incorrect, (correct / (float) total) * 100));
                     System.out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n%s", total, correct, incorrect, (correct / (float) total) * 100,Duration.between(startDf,endDf)));
+                    out.println(matrix.toString());
+                    matrix.printConfusionMatrix();
                 }
                 for(Class c :classes){
                     c.getDeclaredField("reader").set(null,null);
