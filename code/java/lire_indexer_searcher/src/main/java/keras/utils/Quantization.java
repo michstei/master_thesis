@@ -137,6 +137,11 @@ public class Quantization {
         return out;
     }
 
+    .idea
+*.iws
+*.iml
+*.ipr
+
     public static void quantizeCSVFile(KerasCSVReader reader, String outFile, QuantizationType type) throws IOException {
         HashMap<String, double[]> values = reader.getValuesDouble();
         StringBuilder stringBuilder = new StringBuilder();
@@ -144,7 +149,7 @@ public class Quantization {
             double[] array = values.get(filename);
             double min = getMin(array);
             double max = getMax(array);
-            stringBuilder.append(filename + ",");
+            stringBuilder.append(filename.replace("/home/mst/master_thesis/data/Medico_2018_development_set","/home/michael/master_thesis/data") + ",");
             switch (type) {
                 case QUANTIZATION_TYPE_DOUBLE:
                 {
