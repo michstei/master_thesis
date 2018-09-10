@@ -4,9 +4,9 @@ from util import get_files
 from keras.preprocessing import image
 import keras.applications as appl
 from keras.models import Model
-from keras.layers import MaxPooling2D, AveragePooling2D, GlobalAveragePooling2D,GlobalMaxPooling2D ,Dense
+from keras.layers import  GlobalAveragePooling2D,GlobalMaxPooling2D ,Dense
 filesdir = '/home/mst/master_thesis/data/Medico_2018_development_set/Medico_2018_development_set/'
-csv_folder = '/home/mst/master_thesis/code/python/csv/512Avg/'
+csv_folder = '/home/mst/master_thesis/code/python/csv/1024Max/'
 def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_input, model_targetsize):
    
     img = image.load_img(img_path, target_size=model_targetsize)
@@ -26,8 +26,8 @@ def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_inp
 
 def addLayer(model):
     x = model.output
-    x = Dense(512)(x)
-    x = GlobalAveragePooling2D(name='gavgpool')(x)
+    x = Dense(1024)(x)
+    x = GlobalMaxPooling2D(name='gmaxpool')(x)
     model = Model(model.input,x)
     return model
 
@@ -96,19 +96,6 @@ if __name__ == '__main__':
     inputsizes['densenet121'] = (224,224)
     inputsizes['densenet169'] = (224,224)
     inputsizes['densenet201'] = (224,224)
-    #reshape params
-    print('setting up reshape params...')
-    reshape_params = dict()
-    reshape_params['xception'] =    (2048, 1)
-    reshape_params['vgg16'] =       (512 , 1)
-    reshape_params['vgg19'] =       (512 , 1)
-    reshape_params['resnet50'] =    (2048, 1)
-    reshape_params['inceptionv3'] = (2048, 1)
-    reshape_params['incresnetv2'] = (1536, 1)
-    reshape_params['mobilenet'] =   (1024, 1)
-    reshape_params['densenet121'] = (1024, 1)
-    reshape_params['densenet169'] = (1664, 1)
-    reshape_params['densenet201'] = (1920, 1)
     #csv filenames
     print('setting up csv_filenames...')
     csv_filenames = dict()
@@ -123,7 +110,7 @@ if __name__ == '__main__':
         lines = []
         i = 1
         for f in files:
-            lines.append(extract_features_to_csv_string(f, models[k],(512,1),prep_funs[k],inputsizes[k]))
+            lines.append(extract_features_to_csv_string(f, models[k],(1024,1),prep_funs[k],inputsizes[k]))
             print('processed', "{:.2f}".format(i/len(files)*100),'%',end='\r')
             i += 1
         with open(csv_filenames[k],'a+') as csvfile:
