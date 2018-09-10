@@ -149,9 +149,8 @@ public class Quantization {
             switch (type) {
                 case QUANTIZATION_TYPE_DOUBLE:
                 {
-                    double [] newValues = array;
                     String valuesString = "";
-                    for (double f : newValues) {
+                    for (double f : array) {
                         String s = String.format("%.40f",f ).replaceAll("0+$", "");
                         valuesString += s + ",";
                     }
