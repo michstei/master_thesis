@@ -1,9 +1,10 @@
-package main;
+package utils;
 
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
@@ -29,6 +30,7 @@ public class FilePrep {
         Vector<String> all = new Vector<>();
         listFilesFromDirectory(folderPath,all);
         int num = (int) (all.size() * (testPercent/100.0));
+        addOneForEachCategory(test, MedicoConfusionMatrix.Category.values());
         Random gen = new Random(System.nanoTime());
         while (test.size()<num){
             String val = all.get(gen.nextInt(all.size()-1));
@@ -41,6 +43,15 @@ public class FilePrep {
                 train.add(s);
         }
         System.out.printf("Total Files: %d\nTraining Files: %d\nTesting Files: %d\n",all.size(),train.size(),test.size());
+    }
+
+    private void addOneForEachCategory(Vector<String> test, MedicoConfusionMatrix.Category[] values) {
+        for(MedicoConfusionMatrix.Category c : values){
+            ArrayList<String> files = new ArrayList<>();
+            listFilesFromDirectory(folderPath+c.getName() + "/",files);
+            Random gen = new Random(System.nanoTime());
+            test.add(files.get(gen.nextInt(files.size())));
+        }
     }
 
     private void listFilesFromDirectory(String directoryName, List<String> files) {

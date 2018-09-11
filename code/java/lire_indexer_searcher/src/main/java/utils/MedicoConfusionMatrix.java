@@ -1,4 +1,4 @@
-package keras.utils;
+package utils;
 
 public class MedicoConfusionMatrix {
     public enum Category {
@@ -71,7 +71,7 @@ public class MedicoConfusionMatrix {
 
     public void increaseValue(Category catGold, Category catPred){
         if(catGold != null && catPred != null)
-            confusionMatrix[catGold.ordinal()][catPred.ordinal()] = confusionMatrix[catGold.ordinal()][catPred.ordinal()] + 1;
+            confusionMatrix[catPred.ordinal()][catPred.ordinal()] = confusionMatrix[catGold.ordinal()][catPred.ordinal()] + 1;
     }
 
     public void printConfusionMatrix(){

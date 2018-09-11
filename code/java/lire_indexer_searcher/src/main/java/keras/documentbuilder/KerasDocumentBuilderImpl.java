@@ -24,7 +24,7 @@ import java.util.Map;
 public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
 
     private boolean useDocValues = false;
-
+    public static int maxDimensions = 256;
     private GlobalDocumentBuilder.HashingMode hashingMode = GlobalDocumentBuilder.HashingMode.BitSampling;
     private boolean hashingEnabled = false;
 
@@ -137,7 +137,7 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
         try {
                 if(new File(hashFilePath).exists())
                     new File(hashFilePath).delete();
-                BitSampling.dimensions = KerasDocumentBuilder.maxDimensions;
+                BitSampling.dimensions = maxDimensions;
                 BitSampling.generateHashFunctions(hashFilePath);
                 BitSampling.readHashFunctions(new FileInputStream(new File(hashFilePath)));
 //            BitSampling.readHashFunctions();

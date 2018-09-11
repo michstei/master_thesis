@@ -1,8 +1,8 @@
 package keras.features.quantized;
 
 import keras.features.KerasFeature;
-import keras.utils.KerasCSVReader;
-import keras.utils.Quantization;
+import utils.KerasCSVReader;
+import utils.Quantization;
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 
 import java.awt.image.BufferedImage;

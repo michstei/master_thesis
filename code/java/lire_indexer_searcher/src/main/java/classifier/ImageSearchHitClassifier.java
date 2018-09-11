@@ -1,4 +1,4 @@
-package main.classifier;
+package classifier;
 
 
 import java.util.*;
