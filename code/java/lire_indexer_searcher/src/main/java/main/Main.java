@@ -90,194 +90,186 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for(int featureIndex = 0; featureIndex < featureFolderNames.length; featureIndex++) {
-            String featureFolderName = featureFolderNames[featureIndex];
-            KerasDocumentBuilderImpl.maxDimensions = maxFeatureLengths[featureIndex];
-            Instant startFeature = Instant.now();
-            String csvBasePath = basePath + "csv/" + featureFolderName;
-            String outFileBasePath = basePath + "indexCreationFiles/" + featureFolderName;
-            for (HashingMode m : HashingMode.values()) {
-                for (DataType dt : DataType.values()) {
-                    if(dt == DataType.DATA_TYPE_LONG)continue;
-                    String outputFolderPath = m == HashingMode.HASHING_MODE_METRIC_SPACES ? basePath + "results/" + featureFolderName + "MetricSpaces/" : basePath + "results/" + featureFolderName + "BitSampling/";
-                    String indexPath = m == HashingMode.HASHING_MODE_METRIC_SPACES ? basePath + "index/" + featureFolderName + "MetricSpaces/" : basePath + "index/" + featureFolderName + "BitSampling/";
+        for(int classIndex = 0; classIndex < all_classes_double.length; classIndex++) {
+            for (int featureIndex = 0; featureIndex < featureFolderNames.length; featureIndex++) {
+                String featureFolderName = featureFolderNames[featureIndex];
+                KerasDocumentBuilderImpl.maxDimensions = maxFeatureLengths[featureIndex];
+                Instant startFeature = Instant.now();
 
+                for (HashingMode m : HashingMode.values()) {
+                    for (DataType dt : DataType.values()) {
+                        if (dt == DataType.DATA_TYPE_LONG) continue;
 
-                    Class[] classes = null;
-                    String[] classNames = null;
-                    switch (dt) {
+                        String postfix = "";
+                        Class[] classes = null;
+                        String[] classNames = null;
+                        switch (dt) {
 
-                        case DATA_TYPE_DOUBLE: {
-                            classes = all_classes_double;
-                            classNames = all_classNames_double;
-                            outputFolderPath += "doubleFeatureVectors/";
-                            indexPath += "double";
-                            outFileBasePath += "double/";
-                            break;
-                        }
-                        case DATA_TYPE_FLOAT: {
-                            classes = all_classes_float;
-                            classNames = all_classNames_float;
-                            outputFolderPath += "floatFeatureVectors/";
-                            indexPath += "float";
-                            outFileBasePath += "float/";
-                            break;
-                        }
-                        case DATA_TYPE_LONG: {
-                            classes = all_classes_long;
-                            classNames = all_classNames_long;
-                            outputFolderPath += "longFeatureVectors/";
-                            indexPath += "long";
-                            outFileBasePath += "long/";
-                            break;
-                        }
-                        case DATA_TYPE_INT: {
-                            classes = all_classes_int;
-                            classNames = all_classNames_int;
-                            outputFolderPath += "intFeatureVectors/";
-                            indexPath += "int";
-                            outFileBasePath += "int/";
-                            break;
-                        }
-                        case DATA_TYPE_SHORT: {
-                            classes = all_classes_short;
-                            classNames = all_classNames_short;
-                            outputFolderPath += "shortFeatureVectors/";
-                            indexPath += "short";
-                            outFileBasePath += "short/";
-                            break;
-                        }
-                        case DATA_TYPE_BYTE: {
-                            classes = all_classes_byte;
-                            classNames = all_classNames_byte;
-                            outputFolderPath += "byteFeatureVectors/";
-                            indexPath += "byte";
-                            outFileBasePath += "byte/";
-                            break;
-                        }
-                    }
-                    if (!(new File(outputFolderPath).exists())) {
-                        new File(outputFolderPath).mkdirs();
-                    }
-                    String outputFilePathBase = outputFolderPath + "results_";
-
-
-
-
-
-
-                    String[] outFiles = new String[classes.length];
-                    String[] csvFiles = new String[classes.length];
-                    for (int i = 0; i < classes.length; i++) {
-                        if (!(new File(outFileBasePath).exists()))
-                            new File(outFileBasePath).mkdirs();
-                        outFiles[i] = outFileBasePath + "out." + classNames[i] + ".dat";
-                        csvFiles[i] = csvBasePath + "quantized/" + classNames[i].toLowerCase() + ".csv";
-                    }
-
-
-                    index(m, indexPath, inFileTrain, classes, outFiles, csvFiles, trainFiles);
-
-                    IndexReader[] readers = new IndexReader[classes.length];
-                    try {
-                        for (int i = 0; i < readers.length; i++) {
-                            readers[i] = DirectoryReader.open(FSDirectory.open(Paths.get(indexPath)));
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    KerasSearcher[] searchers = new KerasSearcher[classes.length];
-
-                    setupSearchers(m, classes, outFiles, readers, searchers, maxHits);
-                    ImageSearchHits hits[] = new ImageSearchHits[classes.length];
-                    Thread[] threads = new Thread[classes.length];
-                    SearchRunnable[] runnables = new SearchRunnable[classes.length];
-
-                    for (KerasFeature.DistanceFunction df : KerasFeature.DistanceFunction.values()) {
-                        if ((df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_CHISQUARE) ||
-                                (df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_KSDIST) ||
-                                (df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_SIMPLEEMD) ||
-                                (df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_JSD)
-                        ) {
-                            continue;
-                        }
-                        Instant startDf = Instant.now();
-                        for (Class c : classes) {
-                            c.getDeclaredField("USED_DISTANCE_FUN").set(null, df);
-                        }
-
-                        String outputFilePath = outputFilePathBase + df.name() + ".txt";
-                        PrintStream out = null;
-                        try {
-
-                            if (!(new File(outputFilePath).exists())) {
-                                new File(outputFilePath).createNewFile();
+                            case DATA_TYPE_DOUBLE: {
+                                classes = new Class[]{all_classes_double[classIndex]};
+                                classNames = new String[]{all_classNames_double[classIndex]};
+                                postfix = "double/";
+                                break;
                             }
-                            out = new PrintStream(new File(outputFilePath));
+                            case DATA_TYPE_FLOAT: {
+                                classes = new Class[]{all_classes_float[classIndex]};
+                                classNames = new String[]{all_classNames_float[classIndex]};
+                                postfix = "double/";
+                                break;
+                            }
+                            case DATA_TYPE_LONG: {
+                                classes = new Class[]{all_classes_long[classIndex]};
+                                classNames = new String[]{all_classNames_long[classIndex]};
+                                postfix = "double/";
+                                break;
+                            }
+                            case DATA_TYPE_INT: {
+                                classes = new Class[]{all_classes_int[classIndex]};
+                                classNames = new String[]{all_classNames_int[classIndex]};
+                                postfix = "double/";
+                                break;
+                            }
+                            case DATA_TYPE_SHORT: {
+                                classes = new Class[]{all_classes_short[classIndex]};
+                                classNames = new String[]{all_classNames_short[classIndex]};
+                                postfix = "double/";
+                                break;
+                            }
+                            case DATA_TYPE_BYTE: {
+                                classes = new Class[]{all_classes_byte[classIndex]};
+                                classNames = new String[]{all_classNames_byte[classIndex]};
+                                postfix = "double/";
+                                break;
+                            }
+                        }
+                        featureFolderName += classNames[0] + "/";
+                        String outputFolderPath = m == HashingMode.HASHING_MODE_METRIC_SPACES ? basePath + "results/" + featureFolderName + "MetricSpaces/" : basePath + "results/" + featureFolderName + "BitSampling/";
+                        String indexPath = m == HashingMode.HASHING_MODE_METRIC_SPACES ? basePath + "index/" + featureFolderName + "MetricSpaces/" : basePath + "index/" + featureFolderName + "BitSampling/";
+                        String csvBasePath = basePath + "csv/" + featureFolderName;
+                        String outFileBasePath = basePath + "indexCreationFiles/" + featureFolderName;
+                        outputFolderPath += postfix;
+                        indexPath += postfix;
+                        outFileBasePath += postfix;
+                        if (!(new File(outputFolderPath).exists())) {
+                            new File(outputFolderPath).mkdirs();
+                        }
+                        String outputFilePathBase = outputFolderPath + "results_";
+
+
+                        String[] outFiles = new String[classes.length];
+                        String[] csvFiles = new String[classes.length];
+                        for (int i = 0; i < classes.length; i++) {
+                            if (!(new File(outFileBasePath).exists()))
+                                new File(outFileBasePath).mkdirs();
+                            outFiles[i] = outFileBasePath + "out." + classNames[i] + ".dat";
+                            csvFiles[i] = csvBasePath + "quantized/" + classNames[i].toLowerCase() + ".csv";
+                        }
+
+
+                        index(m, indexPath, inFileTrain, classes, outFiles, csvFiles, trainFiles);
+
+                        IndexReader[] readers = new IndexReader[classes.length];
+                        try {
+                            for (int i = 0; i < readers.length; i++) {
+                                readers[i] = DirectoryReader.open(FSDirectory.open(Paths.get(indexPath)));
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        System.out.println(df.name() + ":");
+                        KerasSearcher[] searchers = new KerasSearcher[classes.length];
 
-                        int counter = 1;
+                        setupSearchers(m, classes, outFiles, readers, searchers, maxHits);
+                        ImageSearchHits hits[] = new ImageSearchHits[classes.length];
+                        Thread[] threads = new Thread[classes.length];
+                        SearchRunnable[] runnables = new SearchRunnable[classes.length];
 
-                        MedicoConfusionMatrix matrix = new MedicoConfusionMatrix();
-                        for (String s : testFiles) {
-                            Instant st = Instant.now();
-
-                            for (int i = 0; i < hits.length; i++) {
-                                runnables[i] = new SearchRunnable(searchers[i], readers[i], s);
-                                threads[i] = new Thread(runnables[i]);
-                                threads[i].start();
+                        for (KerasFeature.DistanceFunction df : KerasFeature.DistanceFunction.values()) {
+                            if ((df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_CHISQUARE) ||
+                                    (df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_KSDIST) ||
+                                    (df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_SIMPLEEMD) ||
+                                    (df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_JSD)
+                            ) {
+                                continue;
+                            }
+                            Instant startDf = Instant.now();
+                            for (Class c : classes) {
+                                c.getDeclaredField("USED_DISTANCE_FUN").set(null, df);
                             }
 
-                            for (int i = 0; i < hits.length; i++) {
-                                try {
-                                    threads[i].join();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
+                            String outputFilePath = outputFilePathBase + df.name() + ".txt";
+                            PrintStream out = null;
+                            try {
+
+                                if (!(new File(outputFilePath).exists())) {
+                                    new File(outputFilePath).createNewFile();
                                 }
-                                hits[i] = runnables[i].getResult();
+                                out = new PrintStream(new File(outputFilePath));
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
+                            System.out.println(df.name() + ":");
 
+                            int counter = 1;
 
-                            LinkedHashMap<String, Double> preds = getResults(hits, readers, s, allCategories, classNames, outputFolderPath + df.name() + "_");
-                            String k = preds.entrySet().iterator().next().getKey();
+                            MedicoConfusionMatrix matrix = new MedicoConfusionMatrix();
+                            for (String s : testFiles) {
+                                Instant st = Instant.now();
 
-                            MedicoConfusionMatrix.Category catGold = null, catPred = null;
-                            for (MedicoConfusionMatrix.Category c : MedicoConfusionMatrix.Category.values()) {
-                                if (s.contains("/"+c.getName()+"/")) {
-                                    catGold = c;
+                                for (int i = 0; i < hits.length; i++) {
+                                    runnables[i] = new SearchRunnable(searchers[i], readers[i], s);
+                                    threads[i] = new Thread(runnables[i]);
+                                    threads[i].start();
                                 }
-                                if (k.equals(c.getName())) {
-                                    catPred = c;
+
+                                for (int i = 0; i < hits.length; i++) {
+                                    try {
+                                        threads[i].join();
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    hits[i] = runnables[i].getResult();
                                 }
+
+
+                                LinkedHashMap<String, Double> preds = getResults(hits, readers, s, allCategories, classNames, outputFolderPath + df.name() + "_");
+                                String k = preds.entrySet().iterator().next().getKey();
+
+                                MedicoConfusionMatrix.Category catGold = null, catPred = null;
+                                for (MedicoConfusionMatrix.Category c : MedicoConfusionMatrix.Category.values()) {
+                                    if (s.contains("/" + c.getName() + "/")) {
+                                        catGold = c;
+                                    }
+                                    if (k.equals(c.getName())) {
+                                        catPred = c;
+                                    }
+                                    if(catGold != null && catPred != null)
+                                        break;
+                                }
+
+                                matrix.increaseValue(catGold, catPred);
+
+                                Instant e = Instant.now();
+                                System.out.printf("\rprocessed file %4s of %d in %s", (counter++) + "", testFiles.size(), Duration.between(st, e));
                             }
-
-                            matrix.increaseValue(catGold, catPred);
-
-                            Instant e = Instant.now();
-                            System.out.printf("\rprocessed file %4s of %d in %s", (counter++) + "", testFiles.size(), Duration.between(st, e));
+                            System.out.println();
+                            Instant endDf = Instant.now();
+                            out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n", matrix.getTotal(), matrix.getCorrect(), matrix.getIncorrect(), matrix.getCorrectPcnt()));
+                            System.out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n%s", matrix.getTotal(), matrix.getCorrect(), matrix.getIncorrect(), matrix.getCorrectPcnt(), Duration.between(startDf, endDf)));
+                            out.println(matrix.toString());
+                            matrix.printConfusionMatrix();
                         }
-                        System.out.println();
-                        Instant endDf = Instant.now();
-                        out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n", matrix.getTotal(), matrix.getCorrect(), matrix.getIncorrect(), matrix.getCorrectPcnt()));
-                        System.out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n%s", matrix.getTotal(), matrix.getCorrect(), matrix.getIncorrect(), matrix.getCorrectPcnt(), Duration.between(startDf, endDf)));
-                        out.println(matrix.toString());
-                        matrix.printConfusionMatrix();
+                        for (Class c : classes) {
+                            try {
+                                c.getDeclaredField("reader").set(null, null);
+                            } catch (Exception e) {//catch and ignore exception to support global features in classes list
+                            }
+                        }
+                        System.gc();
                     }
-                    for (Class c : classes) {
-                        try {
-                            c.getDeclaredField("reader").set(null, null);
-                        }
-                        catch(Exception e){//catch and ignore exception to support global features in classes list
-                        }
-                    }
-                    System.gc();
                 }
+                Instant endFeature = Instant.now();
+                System.out.println(Duration.between(startFeature, endFeature));
             }
-            Instant endFeature = Instant.now();
-            System.out.println(Duration.between(startFeature, endFeature));
         }
         Instant endAll = Instant.now();
         System.out.println(Duration.between(startAll, endAll));
