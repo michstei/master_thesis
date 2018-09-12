@@ -1,6 +1,7 @@
 package keras.searcher;
 
 import keras.documentbuilder.KerasDocumentBuilder;
+import keras.documentbuilder.KerasDocumentBuilderImpl;
 import keras.features.KerasFeature;
 import net.semanticmetadata.lire.builders.DocumentBuilder;
 import net.semanticmetadata.lire.imageanalysis.features.GlobalFeature;
@@ -62,7 +63,7 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
         this.feature = feature;
         try {
             if(!(new File(KerasDocumentBuilder.hashFilePath).exists())){
-                BitSampling.dimensions = KerasDocumentBuilder.maxDimensions;
+                BitSampling.dimensions = KerasDocumentBuilderImpl.maxDimensions;
                 BitSampling.generateHashFunctions(KerasDocumentBuilder.hashFilePath);
             }
             BitSampling.readHashFunctions(new FileInputStream(KerasDocumentBuilder.hashFilePath));

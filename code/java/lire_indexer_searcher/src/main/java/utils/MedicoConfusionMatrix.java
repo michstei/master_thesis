@@ -71,19 +71,41 @@ public class MedicoConfusionMatrix {
 
     public void increaseValue(Category catGold, Category catPred){
         if(catGold != null && catPred != null)
-            confusionMatrix[catPred.ordinal()][catPred.ordinal()] = confusionMatrix[catGold.ordinal()][catPred.ordinal()] + 1;
+            confusionMatrix[catPred.ordinal()][catGold.ordinal()] = confusionMatrix[catPred.ordinal()][catGold.ordinal()] + 1;
     }
 
+    public int getTotal(){
+        int sum = 0;
+        for(int i = 0; i < confusionMatrix.length; i++){
+            for(int j = 0; j < confusionMatrix[0].length;j++){
+                sum += confusionMatrix[i][j];
+            }
+        }
+        return sum;
+    }
+    public int getCorrect(){
+        int correct = 0;
+        for(int i = 0; i < confusionMatrix.length; i++){
+            correct += confusionMatrix[i][i];
+        }
+        return correct;
+    }
+    public int getIncorrect(){
+        return getTotal() - getCorrect();
+    }
+    public double getCorrectPcnt(){
+        return  ((getCorrect()/(double)getTotal())*100);
+    }
     public void printConfusionMatrix(){
-        System.out.printf("%4s","");
+        System.out.printf("%5s","P \\ G");
         for(Category cat : Category.values()){
-            System.out.printf("%4s",cat.getShortName());
+            System.out.printf("%5s",cat.getShortName());
         }
         System.out.println();
         for(int i = 0; i < Category.values().length;i++){
-            System.out.printf("%4s",Category.values()[i].getShortName());
+            System.out.printf("%5s",Category.values()[i].getShortName());
             for(int j = 0; j < Category.values().length;j++){
-                System.out.printf("%4s", confusionMatrix[i][j] + "");
+                System.out.printf("%5s", confusionMatrix[i][j] + "");
             }
             System.out.println();
         }
@@ -91,15 +113,15 @@ public class MedicoConfusionMatrix {
     @Override
     public String toString(){
         StringBuilder b = new StringBuilder();
-        b.append(String.format("%4s",""));
+        b.append(String.format("%5s","P \\ G"));
         for(Category cat : Category.values()){
-            b.append(String.format("%4s",cat.getShortName()));
+            b.append(String.format("%5s",cat.getShortName()));
         }
         b.append("\n");
         for(int i = 0; i < Category.values().length;i++){
-            b.append(String.format("%4s",Category.values()[i].getShortName()));
+            b.append(String.format("%5s",Category.values()[i].getShortName()));
             for(int j = 0; j < Category.values().length;j++){
-                b.append(String.format("%4s", confusionMatrix[i][j] + ""));
+                b.append(String.format("%5s", confusionMatrix[i][j] + ""));
             }
             b.append("\n");
         }

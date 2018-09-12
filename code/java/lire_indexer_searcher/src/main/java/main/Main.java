@@ -34,18 +34,18 @@ import java.util.Vector;
 
 public class Main {
 
-    private static Class[]  all_classes_double =    {DenseNet121_Double.class,DenseNet169_Double.class,DenseNet201_Double.class,/*InceptionV3_Double.class,*/   /*IncResNetV2_Double.class,   */ResNet50_Double.class,MobileNet_Double.class, VGG16_Double.class,VGG19_Double.class,  Xception_Double.class  };
-    private static String[] all_classNames_double = {"DenseNet121_Double","DenseNet169_Double","DenseNet201_Double",/*"InceptionV3_Double",*/                   /*"IncResNetV2_Double",       */"ResNet50_Double","MobileNet_Double",         "VGG16_Double",   "VGG19_Double",          "Xception_Double"    };
-    private static Class[]  all_classes_float =     {DenseNet121_Float.class,DenseNet169_Float.class,DenseNet201_Float.class,/*InceptionV3_Float.class,*/       /*IncResNetV2_Float.class,    */ResNet50_Float.class,MobileNet_Float.class,   VGG16_Float.class,VGG19_Float.class,    Xception_Float.class   };
-    private static String[] all_classNames_float =  {"DenseNet121_Float","DenseNet169_Float","DenseNet201_Float",/*"InceptionV3_Float",*/                       /*"IncResNetV2_Float",        */"ResNet50_Float","MobileNet_Float",           "VGG16_Float",    "VGG19_Float",        "Xception_Float"       };
-    private static Class[]  all_classes_long =      {DenseNet121_Long.class,DenseNet169_Long.class,DenseNet201_Long.class,/*InceptionV3_Long.class,*/           /*IncResNetV2_Long.class,     */ResNet50_Long.class,MobileNet_Long.class,     VGG16_Long.class, VGG19_Long.class,      Xception_Long.class   };
-    private static String[] all_classNames_long =   {"DenseNet121_Long","DenseNet169_Long","DenseNet201_Long",/*"InceptionV3_Long",*/                           /*"IncResNetV2_Long",         */"ResNet50_Long","MobileNet_Long",             "VGG16_Long",     "VGG19_Long",          "Xception_Long"       };
-    private static Class[]  all_classes_int =       {DenseNet121_Int.class,DenseNet169_Int.class,DenseNet201_Int.class,/*InceptionV3_Int.class,*/               /*IncResNetV2_Int.class,      */ResNet50_Int.class, MobileNet_Int.class,      VGG16_Int.class,  VGG19_Int.class,       Xception_Int.class    };
-    private static String[] all_classNames_int =    {"DenseNet121_Int", "DenseNet169_Int", "DenseNet201_Int", /*"InceptionV3_Int", */                           /*"IncResNetV2_Int",          */"ResNet50_Int", "MobileNet_Int",              "VGG16_Int",      "VGG19_Int",           "Xception_Int"        };
-    private static Class[]  all_classes_short =     {DenseNet121_Short.class, DenseNet169_Short.class, DenseNet201_Short.class, /*InceptionV3_Short.class,*/    /*IncResNetV2_Short.class,    */ResNet50_Short.class, MobileNet_Short.class,  VGG16_Short.class,VGG19_Short.class,   Xception_Short.class    };
-    private static String[] all_classNames_short =  {"DenseNet121_Short", "DenseNet169_Short", "DenseNet201_Short", /*"InceptionV3_Short", */                   /*"IncResNetV2_Short",        */"ResNet50_Short", "MobileNet_Short",          "VGG16_Short",   "VGG19_Short",        "Xception_Short"     };
-    private static Class[]  all_classes_byte =      {DenseNet121_Byte.class, DenseNet169_Byte.class, DenseNet201_Byte.class, /*InceptionV3_Byte.class,*/        /*IncResNetV2_Byte.class,     */ResNet50_Byte.class, MobileNet_Byte.class,    VGG16_Byte.class,VGG19_Byte.class,     Xception_Byte.class    };
-    private static String[] all_classNames_byte =   {"DenseNet121_Byte", "DenseNet169_Byte", "DenseNet201_Byte", /*"InceptionV3_Byte",*/                        /*"IncResNetV2_Byte",         */"ResNet50_Byte", "MobileNet_Byte",            "VGG16_Byte","VGG19_Byte",             "Xception_Byte"         };
+    private static Class[]  all_classes_double =    {   DenseNet121_Double.class,  DenseNet169_Double.class,   DenseNet201_Double.class,   /*InceptionV3_Double.class,*/   /*IncResNetV2_Double.class,   */ResNet50_Double.class,  MobileNet_Double.class, VGG16_Double.class, VGG19_Double.class, Xception_Double.class   };
+    private static String[] all_classNames_double = {   "DenseNet121_Double",      "DenseNet169_Double",       "DenseNet201_Double",       /*"InceptionV3_Double",*/       /*"IncResNetV2_Double",       */"ResNet50_Double",      "MobileNet_Double",     "VGG16_Double",     "VGG19_Double",     "Xception_Double"       };
+    private static Class[]  all_classes_float =     {   DenseNet121_Float.class,   DenseNet169_Float.class,    DenseNet201_Float.class,    /*InceptionV3_Float.class,*/    /*IncResNetV2_Float.class,    */ResNet50_Float.class,   MobileNet_Float.class,  VGG16_Float.class,  VGG19_Float.class,  Xception_Float.class    };
+    private static String[] all_classNames_float =  {   "DenseNet121_Float",       "DenseNet169_Float",        "DenseNet201_Float",        /*"InceptionV3_Float",*/        /*"IncResNetV2_Float",        */"ResNet50_Float",       "MobileNet_Float",      "VGG16_Float",      "VGG19_Float",      "Xception_Float"        };
+    private static Class[]  all_classes_long =      {   DenseNet121_Long.class,    DenseNet169_Long.class,     DenseNet201_Long.class,     /*InceptionV3_Long.class,*/     /*IncResNetV2_Long.class,     */ResNet50_Long.class,    MobileNet_Long.class,   VGG16_Long.class,   VGG19_Long.class,   Xception_Long.class     };
+    private static String[] all_classNames_long =   {   "DenseNet121_Long",        "DenseNet169_Long",         "DenseNet201_Long",         /*"InceptionV3_Long",*/         /*"IncResNetV2_Long",         */"ResNet50_Long",        "MobileNet_Long",       "VGG16_Long",       "VGG19_Long",       "Xception_Long"         };
+    private static Class[]  all_classes_int =       {   DenseNet121_Int.class,     DenseNet169_Int.class,      DenseNet201_Int.class,      /*InceptionV3_Int.class,*/      /*IncResNetV2_Int.class,      */ResNet50_Int.class,     MobileNet_Int.class,    VGG16_Int.class,    VGG19_Int.class,    Xception_Int.class      };
+    private static String[] all_classNames_int =    {   "DenseNet121_Int",         "DenseNet169_Int",          "DenseNet201_Int",          /*"InceptionV3_Int", */         /*"IncResNetV2_Int",          */"ResNet50_Int",         "MobileNet_Int",        "VGG16_Int",        "VGG19_Int",        "Xception_Int"          };
+    private static Class[]  all_classes_short =     {   DenseNet121_Short.class,   DenseNet169_Short.class,    DenseNet201_Short.class,    /*InceptionV3_Short.class,*/    /*IncResNetV2_Short.class,    */ResNet50_Short.class,   MobileNet_Short.class,  VGG16_Short.class,  VGG19_Short.class,  Xception_Short.class    };
+    private static String[] all_classNames_short =  {   "DenseNet121_Short",       "DenseNet169_Short",        "DenseNet201_Short",        /*"InceptionV3_Short", */       /*"IncResNetV2_Short",        */"ResNet50_Short",       "MobileNet_Short",      "VGG16_Short",      "VGG19_Short",      "Xception_Short"        };
+    private static Class[]  all_classes_byte =      {   DenseNet121_Byte.class,    DenseNet169_Byte.class,     DenseNet201_Byte.class,     /*InceptionV3_Byte.class,*/     /*IncResNetV2_Byte.class,     */ResNet50_Byte.class,    MobileNet_Byte.class,   VGG16_Byte.class,   VGG19_Byte.class,   Xception_Byte.class     };
+    private static String[] all_classNames_byte =   {   "DenseNet121_Byte",        "DenseNet169_Byte",         "DenseNet201_Byte",         /*"InceptionV3_Byte",*/         /*"IncResNetV2_Byte",         */"ResNet50_Byte",        "MobileNet_Byte",       "VGG16_Byte",       "VGG19_Byte",       "Xception_Byte"         };
 
 
     enum DataType{
@@ -64,22 +64,19 @@ public class Main {
 
 
     private static int maxHits = 3;
-    private static boolean CREATE_IN_FILE_LISTS = true;
     private static String basePath = "/home/michael/master_thesis/data/";
     private static String inFileTrain = basePath + "indexCreationFiles/inFileTrain.lst";
     private static String inFileTest = basePath + "indexCreationFiles/inFileTest.lst";
     private static String imageFolderPath = basePath + "Medico_2018_development_set/";
-    private static String[] featureFolderNames = new String[]{"256Avg/","256Max/","512Avg/","512Max/","1024Avg/","1024Max/", "defaultModels/"};
-    private static int[] maxFeatureLengths = new int[] {256,256,512,512,1024,1024,2048};
+    private static String[] featureFolderNames = new String[]   {"256Avg/", "256Max/",     "512Avg/",    "512Max/",   "1024Avg/",      "1024Max/",   "defaultModels/"};
+    private static int[] maxFeatureLengths = new int[]          {256,        256,          512,          512,         1024,            1024,         2048};
     private static Vector<String> allCategories = new Vector<>(Arrays.asList("blurry-nothing", "colon-clear", "dyed-lifted-polyps", "dyed-resection-margins", "esophagitis", "instruments", "normal-cecum", "normal-pylorus", "normal-z-line", "out-of-patient", "polyps", "retroflex-rectum", "retroflex-stomach", "stool-inclusions", "stool-plenty", "ulcerative-colitis"));
 
     public static void main(String[] args) throws Exception {
 
         Instant startAll = Instant.now();
-        if(CREATE_IN_FILE_LISTS){
-            FilePrep prep = new FilePrep(imageFolderPath,5,inFileTrain,inFileTest);
-            prep.writeSetFiles();
-        }
+        FilePrep prep = new FilePrep(imageFolderPath,5,inFileTrain,inFileTest);
+        prep.writeSetFiles();
         Vector<String> trainFiles = null;
         try {
             trainFiles = new Vector<>(Files.readAllLines(Paths.get(inFileTrain)));
@@ -101,6 +98,7 @@ public class Main {
             String outFileBasePath = basePath + "indexCreationFiles/" + featureFolderName;
             for (HashingMode m : HashingMode.values()) {
                 for (DataType dt : DataType.values()) {
+                    if(dt == DataType.DATA_TYPE_LONG)continue;
                     String outputFolderPath = m == HashingMode.HASHING_MODE_METRIC_SPACES ? basePath + "results/" + featureFolderName + "MetricSpaces/" : basePath + "results/" + featureFolderName + "BitSampling/";
                     String indexPath = m == HashingMode.HASHING_MODE_METRIC_SPACES ? basePath + "index/" + featureFolderName + "MetricSpaces/" : basePath + "index/" + featureFolderName + "BitSampling/";
 
@@ -196,12 +194,13 @@ public class Main {
                     SearchRunnable[] runnables = new SearchRunnable[classes.length];
 
                     for (KerasFeature.DistanceFunction df : KerasFeature.DistanceFunction.values()) {
-                        if (df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_CHISQUARE ||
-                                df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_KSDIST ||
-                                df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_SIMPLEEMD ||
-                                df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_JSD
-                        )
+                        if ((df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_CHISQUARE) ||
+                                (df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_KSDIST) ||
+                                (df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_SIMPLEEMD) ||
+                                (df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_JSD)
+                        ) {
                             continue;
+                        }
                         Instant startDf = Instant.now();
                         for (Class c : classes) {
                             c.getDeclaredField("USED_DISTANCE_FUN").set(null, df);
@@ -219,9 +218,7 @@ public class Main {
                             e.printStackTrace();
                         }
                         System.out.println(df.name() + ":");
-                        int total = 0;
-                        int correct = 0;
-                        int incorrect = 0;
+
                         int counter = 1;
 
                         MedicoConfusionMatrix matrix = new MedicoConfusionMatrix();
@@ -246,36 +243,35 @@ public class Main {
 
                             LinkedHashMap<String, Double> preds = getResults(hits, readers, s, allCategories, classNames, outputFolderPath + df.name() + "_");
                             String k = preds.entrySet().iterator().next().getKey();
+
                             MedicoConfusionMatrix.Category catGold = null, catPred = null;
                             for (MedicoConfusionMatrix.Category c : MedicoConfusionMatrix.Category.values()) {
-                                if (s.contains(c.getName())) {
+                                if (s.contains("/"+c.getName()+"/")) {
                                     catGold = c;
                                 }
-                                if (k.contains(c.getName())) {
+                                if (k.equals(c.getName())) {
                                     catPred = c;
                                 }
                             }
-                            matrix.increaseValue(catGold, catPred);
-                            if (s.contains(k)) {
 
-                                correct++;
-                            } else {
-                                incorrect++;
-                            }
-                            total++;
+                            matrix.increaseValue(catGold, catPred);
 
                             Instant e = Instant.now();
                             System.out.printf("\rprocessed file %4s of %d in %s", (counter++) + "", testFiles.size(), Duration.between(st, e));
                         }
                         System.out.println();
                         Instant endDf = Instant.now();
-                        out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n", total, correct, incorrect, (correct / (float) total) * 100));
-                        System.out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n%s", total, correct, incorrect, (correct / (float) total) * 100, Duration.between(startDf, endDf)));
+                        out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n", matrix.getTotal(), matrix.getCorrect(), matrix.getIncorrect(), matrix.getCorrectPcnt()));
+                        System.out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n%s", matrix.getTotal(), matrix.getCorrect(), matrix.getIncorrect(), matrix.getCorrectPcnt(), Duration.between(startDf, endDf)));
                         out.println(matrix.toString());
                         matrix.printConfusionMatrix();
                     }
                     for (Class c : classes) {
-                        c.getDeclaredField("reader").set(null, null);
+                        try {
+                            c.getDeclaredField("reader").set(null, null);
+                        }
+                        catch(Exception e){//catch and ignore exception to support global features in classes list
+                        }
                     }
                     System.gc();
                 }
@@ -324,7 +320,11 @@ public class Main {
             try {
                 KerasIndexer indexer = new KerasIndexer(indexPath, true, LuceneUtils.AnalyzerType.WhitespaceAnalyzer, true, GlobalDocumentBuilder.HashingMode.MetricSpaces, false, filesToIndex);
                 for (int i = 0; i < classes.length; i++) {
-                    indexer.addExtractor(classes[i], csvFiles[i]);
+                    if(KerasFeature.class.isAssignableFrom(classes[i])) {
+                        indexer.addExtractor(classes[i], csvFiles[i]);
+                    } else {
+                        indexer.addExtractor(classes[i]);
+                    }
                     indexer.indexReferencePoints(classes[i], 500, 20, new File(inFile), new File(outFiles[i]));
                     indexer.loadReferencePoints(outFiles[i]);
                 }
