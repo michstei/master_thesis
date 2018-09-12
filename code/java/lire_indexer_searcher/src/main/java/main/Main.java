@@ -32,8 +32,12 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Vector;
 
+/**
+ * class to perfomr experiments for task
+ */
 public class Main {
 
+    //classes/classnames
     private static Class[]  all_classes_double =    {   DenseNet121_Double.class,  DenseNet169_Double.class,   DenseNet201_Double.class,   /*InceptionV3_Double.class,*/   /*IncResNetV2_Double.class,   */ResNet50_Double.class,  MobileNet_Double.class, VGG16_Double.class, VGG19_Double.class, Xception_Double.class   };
     private static String[] all_classNames_double = {   "DenseNet121_Double",      "DenseNet169_Double",       "DenseNet201_Double",       /*"InceptionV3_Double",*/       /*"IncResNetV2_Double",       */"ResNet50_Double",      "MobileNet_Double",     "VGG16_Double",     "VGG19_Double",     "Xception_Double"       };
     private static Class[]  all_classes_float =     {   DenseNet121_Float.class,   DenseNet169_Float.class,    DenseNet201_Float.class,    /*InceptionV3_Float.class,*/    /*IncResNetV2_Float.class,    */ResNet50_Float.class,   MobileNet_Float.class,  VGG16_Float.class,  VGG19_Float.class,  Xception_Float.class    };
@@ -46,7 +50,7 @@ public class Main {
     private static String[] all_classNames_short =  {   "DenseNet121_Short",       "DenseNet169_Short",        "DenseNet201_Short",        /*"InceptionV3_Short", */       /*"IncResNetV2_Short",        */"ResNet50_Short",       "MobileNet_Short",      "VGG16_Short",      "VGG19_Short",      "Xception_Short"        };
     private static Class[]  all_classes_byte =      {   DenseNet121_Byte.class,    DenseNet169_Byte.class,     DenseNet201_Byte.class,     /*InceptionV3_Byte.class,*/     /*IncResNetV2_Byte.class,     */ResNet50_Byte.class,    MobileNet_Byte.class,   VGG16_Byte.class,   VGG19_Byte.class,   Xception_Byte.class     };
     private static String[] all_classNames_byte =   {   "DenseNet121_Byte",        "DenseNet169_Byte",         "DenseNet201_Byte",         /*"InceptionV3_Byte",*/         /*"IncResNetV2_Byte",         */"ResNet50_Byte",        "MobileNet_Byte",       "VGG16_Byte",       "VGG19_Byte",       "Xception_Byte"         };
-
+    private static int[] defaultFeatureLengthsPerClass = {1024,                     1664,                       1920,                       /*2048,*/                       /*1536,*/                       2048,                   1024,                   512,                512,                2048                   };
 
     enum DataType{
         DATA_TYPE_DOUBLE,
@@ -93,7 +97,7 @@ public class Main {
         for(int classIndex = 0; classIndex < all_classes_double.length; classIndex++) {
             for (int featureIndex = 0; featureIndex < featureFolderNames.length; featureIndex++) {
                 String featureFolderName = featureFolderNames[featureIndex];
-                KerasDocumentBuilderImpl.maxDimensions = maxFeatureLengths[featureIndex];
+                KerasDocumentBuilderImpl.maxDimensions = featureIndex != featureFolderNames.length - 1? maxFeatureLengths[featureIndex]:defaultFeatureLengthsPerClass[classIndex];
                 Instant startFeature = Instant.now();
 
                 for (HashingMode m : HashingMode.values()) {
@@ -276,6 +280,15 @@ public class Main {
 
     }
 
+    /**
+     * creates the searchers depending on HashingMode <code>m</code>
+     * @param m HashingMode to be used
+     * @param classes classes for which a searcher is to be created
+     * @param outFiles  paths to outfiles (only for {@link Main.HashingMode#HASHING_MODE_METRIC_SPACES}
+     * @param readers   array of indexreaders
+     * @param searchers array for created searchers
+     * @param maxHits   maximum hits that searchers should generate
+     */
     private static void setupSearchers(HashingMode m, Class[] classes, String[] outFiles, IndexReader[] readers, KerasSearcher[] searchers, int maxHits) {
         if (  m == HashingMode.HASHING_MODE_METRIC_SPACES) //NOTE: MetricSpaces searching
         {
@@ -306,6 +319,16 @@ public class Main {
         }
     }
 
+    /**
+     * indexes the <code>filesToIndex</code> according to HashingMode <code>m</code>
+     * @param m HashingMode to be used
+     * @param indexPath path to folder for index
+     * @param inFile    inFiles (list of filenames) (only for {@link Main.HashingMode#HASHING_MODE_METRIC_SPACES})
+     * @param classes   classes that are used to create the index
+     * @param outFiles  list of filepaths for the outfiles
+     * @param csvFiles  list of CsvFiles with featurevectors for the files that are indexed
+     * @param filesToIndex  filepaths to the files to index
+     */
     private static void index(HashingMode m, String indexPath, String inFile, Class[] classes, String[] outFiles, String[] csvFiles, Vector<String> filesToIndex) {
         if(  m == HashingMode.HASHING_MODE_METRIC_SPACES)//NOTE: MetricSpaces indexing
         {
@@ -341,6 +364,16 @@ public class Main {
         }
     }
 
+    /**
+     * retrieves the results from the InmagesearchHits <code>hits</code> and generates a Map with predictions
+     * @param hits      search results from the searchers
+     * @param readers   array of indexreaders
+     * @param fname     name of the search file
+     * @param allCategories list of categories
+     * @param classNames    array of classnames
+     * @param outFilePathBase   path to folder for output
+     * @return map with predictions and scores
+     */
     public static  LinkedHashMap<String, Double> getResults(ImageSearchHits[] hits, IndexReader[] readers, String fname,Vector<String> allCategories, String[] classNames, String outFilePathBase) {
         Vector<String> hitsStrings = new Vector<>();
         StringBuilder builder = new StringBuilder();
