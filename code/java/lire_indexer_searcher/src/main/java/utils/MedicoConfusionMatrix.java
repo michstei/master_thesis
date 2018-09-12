@@ -1,6 +1,12 @@
 package utils;
 
+/**
+ * class to represent a confusionmatrix for the medico dataset
+ */
 public class MedicoConfusionMatrix {
+    /**
+     * Categories of the medicodataset
+     */
     public enum Category {
         CATEGORY_BLURRY_NOTHING,
         CATEGORY_COLON_CLEAR,
@@ -19,6 +25,9 @@ public class MedicoConfusionMatrix {
         CATEGORY_STOOL_PLENTY,
         CATEGORY_ULCERATIVE_COLITIS;
 
+        /**
+         * @return short version of the category
+         */
         public String getShortName(){
             switch(this){
 
@@ -58,22 +67,40 @@ public class MedicoConfusionMatrix {
                     return "";
             }
         }
+
+        /**
+         * @return aktual name of the category in the dataset (foldername)
+         */
         public String getName(){
             return this.name().replaceAll("CATEGORY_","").replaceAll("_","-").toLowerCase();
         }
     }
 
+    /**
+     * the matrix
+     */
     int [][] confusionMatrix = new int[Category.values().length][Category.values().length];
 
+    /**
+     * default constructor
+     */
     public MedicoConfusionMatrix(){
 
     }
 
+    /**
+     * increases value of cell [catPred][catGold] by 1
+     * @param catGold   actual category of image
+     * @param catPred   predicted category of image
+     */
     public void increaseValue(Category catGold, Category catPred){
         if(catGold != null && catPred != null)
             confusionMatrix[catPred.ordinal()][catGold.ordinal()] = confusionMatrix[catPred.ordinal()][catGold.ordinal()] + 1;
     }
 
+    /**
+     * @return total amount of entries (sum of all values in array)
+     */
     public int getTotal(){
         int sum = 0;
         for(int i = 0; i < confusionMatrix.length; i++){
@@ -83,6 +110,10 @@ public class MedicoConfusionMatrix {
         }
         return sum;
     }
+
+    /**
+     * @return number of correctly predicted entries (sum of diagonal values)
+     */
     public int getCorrect(){
         int correct = 0;
         for(int i = 0; i < confusionMatrix.length; i++){
@@ -90,12 +121,24 @@ public class MedicoConfusionMatrix {
         }
         return correct;
     }
+
+    /**
+     * @return number of incorrect entries ( total - correct )
+     */
     public int getIncorrect(){
         return getTotal() - getCorrect();
     }
+
+    /**
+     * @return percentage of correct entries
+     */
     public double getCorrectPcnt(){
         return  ((getCorrect()/(double)getTotal())*100);
     }
+
+    /**
+     * prints the confusionmatrix to stdout
+     */
     public void printConfusionMatrix(){
         System.out.printf("%5s","P \\ G");
         for(Category cat : Category.values()){
@@ -110,6 +153,10 @@ public class MedicoConfusionMatrix {
             System.out.println();
         }
     }
+
+    /**
+     * @return String representation of the Matrix (same as {@link MedicoConfusionMatrix#printConfusionMatrix()}  )
+     */
     @Override
     public String toString(){
         StringBuilder b = new StringBuilder();

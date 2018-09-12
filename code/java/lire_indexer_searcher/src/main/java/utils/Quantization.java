@@ -7,8 +7,14 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 
+/**
+ * class to do the quantization of the generated features of the keras models
+ */
 public class Quantization {
 
+    /**
+     * datatypes to convert to
+     */
     enum QuantizationType{
         QUANTIZATION_TYPE_DOUBLE,
         QUANTIZATION_TYPE_FLOAT,
@@ -18,6 +24,13 @@ public class Quantization {
         QUANTIZATION_TYPE_BYTE
     }
 
+    /**
+     * brings a double array in float range
+     * @param values    values to quantize
+     * @param min       minimum value of values
+     * @param max       maximum value of values
+     * @return          the quantized array
+     */
     public static float[] quantizeDoubleToFloat(double[] values, double min, double max){
         float[] newValues = new float[values.length];
         for(int i = 0;i < values.length; i++){
@@ -29,6 +42,13 @@ public class Quantization {
         }
         return newValues;
     }
+    /**
+     * brings a double array in long range
+     * @param values    values to quantize
+     * @param min       minimum value of values
+     * @param max       maximum value of values
+     * @return          the quantized array
+     */
     public static long[] quantizeDoubleToLong(double[] values, double min, double max){
         long[] newValues = new long[values.length];
         for(int i = 0;i < values.length; i++){
@@ -40,7 +60,13 @@ public class Quantization {
         }
         return newValues;
     }
-
+    /**
+     * brings a double array in int range
+     * @param values    values to quantize
+     * @param min       minimum value of values
+     * @param max       maximum value of values
+     * @return          the quantized array
+     */
     public static int[] quantizeDoubleToInt(double[] values, double min, double max){
         int[] newValues = new int[values.length];
         for(int i = 0;i < values.length; i++){
@@ -52,7 +78,13 @@ public class Quantization {
         }
         return newValues;
     }
-
+    /**
+     * brings a double array in short range
+     * @param values    values to quantize
+     * @param min       minimum value of values
+     * @param max       maximum value of values
+     * @return          the quantized array
+     */
     public static short[] quantizeDoubleToShort(double[] values, double min, double max){
         short[] newValues = new short[values.length];
         for(int i = 0;i < values.length; i++){
@@ -64,7 +96,13 @@ public class Quantization {
         }
         return newValues;
     }
-
+    /**
+     * brings a double array in byte range
+     * @param values    values to quantize
+     * @param min       minimum value of values
+     * @param max       maximum value of values
+     * @return          the quantized array
+     */
     public static byte[] quantizeDoubleToByte(double[] values, double min, double max){
         byte[] newValues = new byte[values.length];
         for(int i = 0;i < values.length; i++){
@@ -77,6 +115,11 @@ public class Quantization {
         return newValues;
     }
 
+    /***
+     * gets the minimum value of an array
+     * @param values array
+     * @return minimum of values
+     */
     public static double getMin(double[] values){
         double min = Double.MAX_VALUE;
 
@@ -87,6 +130,12 @@ public class Quantization {
         }
         return 0;
     }
+
+    /***
+     * gets the maximum value of an array
+     * @param values array
+     * @return maximum of array
+     */
     public static double getMax(double[] values){
         double max = Double.MIN_VALUE;
         for(double d : values){
@@ -96,10 +145,22 @@ public class Quantization {
         }
         return max;
     }
+
+    /***
+     *
+     * @param in
+     * @return  in
+     */
     public static double[] castToDoubleArray(double[] in){
 
         return in;
     }
+
+    /***
+     * casts  float[] to  double[]
+     * @param in array to cast
+     * @return  double[] version of in
+     */
     public static double[] castToDoubleArray(float[] in){
         double[] out = new double[in.length];
         for(int i = 0; i < in.length; i++){
@@ -107,6 +168,11 @@ public class Quantization {
         }
         return out;
     }
+    /***
+     * casts  long[] to  double[]
+     * @param in array to cast
+     * @return  double[] version of in
+     */
     public static double[] castToDoubleArray(long[] in){
         double[] out = new double[in.length];
         for(int i = 0; i < in.length; i++){
@@ -114,6 +180,11 @@ public class Quantization {
         }
         return out;
     }
+    /***
+     * casts  int[] to  double[]
+     * @param in array to cast
+     * @return  double[] version of in
+     */
     public static double[] castToDoubleArray(int[] in){
         double[] out = new double[in.length];
         for(int i = 0; i < in.length; i++){
@@ -121,6 +192,11 @@ public class Quantization {
         }
         return out;
     }
+    /***
+     * casts  short[] to  double[]
+     * @param in array to cast
+     * @return  double[] version of in
+     */
     public static double[] castToDoubleArray(short[] in){
         double[] out = new double[in.length];
         for(int i = 0; i < in.length; i++){
@@ -128,6 +204,11 @@ public class Quantization {
         }
         return out;
     }
+    /***
+     * casts  byte[] to  double[]
+     * @param in array to cast
+     * @return  double[] version of in
+     */
     public static double[] castToDoubleArray(byte[] in){
         double[] out = new double[in.length];
         for(int i = 0; i < in.length; i++){
@@ -136,7 +217,13 @@ public class Quantization {
         return out;
     }
 
-
+    /***
+     * takes a csv file with double values and generates a csv file with <code>type</code> values
+     * @param reader    KerasCsvReader to quantize
+     * @param outFile   path to the output csv file
+     * @param type      Type of the new csv file
+     * @throws IOException
+     */
     public static void quantizeCSVFile(KerasCSVReader reader, String outFile, QuantizationType type) throws IOException {
         HashMap<String, double[]> values = reader.getValuesDouble();
         StringBuilder stringBuilder = new StringBuilder();

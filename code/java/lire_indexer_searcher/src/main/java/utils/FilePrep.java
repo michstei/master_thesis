@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
+/**
+ *  class to prepare the developmentset for training and testing (splitting it up)
+ */
 public class FilePrep {
     private String folderPath = "/home/michael/master_thesis/data/Medico_2018_development_set/";
 
@@ -26,6 +29,9 @@ public class FilePrep {
         divide();
     }
 
+    /***
+     * divides the dataset into test and train set according to testPercent
+     */
     private  void divide(){
         Vector<String> all = new Vector<>();
         listFilesFromDirectory(folderPath,all);
@@ -40,6 +46,11 @@ public class FilePrep {
         System.out.printf("Total Files: %d\nTraining Files: %d\nTesting Files: %d\n",all.size(),train.size(),test.size());
     }
 
+    /***
+     * adds one file from each category/folder to test
+     * @param test      list of files used for testing NOT NULL
+     * @param values    array of Categories from which files are chosen
+     */
     private void addOneForEachCategory(Vector<String> test, MedicoConfusionMatrix.Category[] values) {
         for(MedicoConfusionMatrix.Category c : values){
             ArrayList<String> files = new ArrayList<>();
@@ -48,6 +59,13 @@ public class FilePrep {
             test.add(files.get(gen.nextInt(files.size())));
         }
     }
+
+    /***
+     * returns pcnt files (min 1) from Category cat as Vector , randomly chosen
+     * @param cat   Category from which files are chosen
+     * @param pcnt  Percentage of files to choose
+     * @return list of chosen file (min 1 file, max pcnt% files)
+     */
     private Vector<String>  getFromCategory(MedicoConfusionMatrix.Category cat, int pcnt) {
         ArrayList<String> files = new ArrayList<>();
         listFilesFromDirectory(folderPath+cat.getName() + "/",files);
@@ -63,6 +81,11 @@ public class FilePrep {
         return test;
     }
 
+    /***
+     * gets all filepaths in given directory (recursivly) and adds them to list
+     * @param directoryName path to directory
+     * @param files list to which filepaths are added
+     */
     private void listFilesFromDirectory(String directoryName, List<String> files) {
         File directory = new File(directoryName);
 
@@ -77,6 +100,9 @@ public class FilePrep {
         }
     }
 
+    /***
+     * writes the testset to file inFileTest
+     */
     public void writeTestSetFile(){
         try {
             if(!(new File(inFileTest).exists())){
@@ -87,7 +113,9 @@ public class FilePrep {
             e.printStackTrace();
         }
     }
-
+    /***
+     * writes the trainset to file inFileTrain
+     */
     public void writeTrainSetFile(){
         try {
             if(!(new File(inFileTrain).exists())){
@@ -98,6 +126,10 @@ public class FilePrep {
             e.printStackTrace();
         }
     }
+
+    /***
+     * writes the test and train sets to file
+     */
     public void writeSetFiles(){
         writeTrainSetFile();
         writeTestSetFile();
@@ -125,6 +157,7 @@ public class FilePrep {
     public int getTestPercent() {
         return testPercent;
     }
+
 
     public static void main(String[] args) {
         String folderPath = "/home/michael/master_thesis/data/Medico_2018_development_set/";
