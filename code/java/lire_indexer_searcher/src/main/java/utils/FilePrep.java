@@ -29,14 +29,9 @@ public class FilePrep {
     private  void divide(){
         Vector<String> all = new Vector<>();
         listFilesFromDirectory(folderPath,all);
-        int num = (int) (all.size() * (testPercent/100.0));
-        addOneForEachCategory(test, MedicoConfusionMatrix.Category.values());
-        Random gen = new Random(System.nanoTime());
-        while (test.size()<num){
-            String val = all.get(gen.nextInt(all.size()-1));
-            if(!test.contains(val))
-                test.add(val);
 
+        for(MedicoConfusionMatrix.Category c : MedicoConfusionMatrix.Category.values()){
+            test.addAll(getFromCategory(c,testPercent));
         }
         for(String s : all){
             if(!test.contains(s))
@@ -52,6 +47,20 @@ public class FilePrep {
             Random gen = new Random(System.nanoTime());
             test.add(files.get(gen.nextInt(files.size())));
         }
+    }
+    private Vector<String>  getFromCategory(MedicoConfusionMatrix.Category cat, int pcnt) {
+        ArrayList<String> files = new ArrayList<>();
+        listFilesFromDirectory(folderPath+cat.getName() + "/",files);
+        int num = Math.max(1,(int) (files.size() * (pcnt/100.0)));
+        Random gen = new Random(System.nanoTime());
+        Vector<String> test = new Vector<>();
+        while (test.size()<num){
+            String val = files.get(gen.nextInt(files.size()-1));
+            if(!test.contains(val))
+                test.add(val);
+
+        }
+        return test;
     }
 
     private void listFilesFromDirectory(String directoryName, List<String> files) {
