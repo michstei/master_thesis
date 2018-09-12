@@ -32,6 +32,9 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Vector;
 
+/***
+ * class to perform experiments for task
+ */
 public class Main {
 
     private static Class[]  all_classes_double =    {   DenseNet121_Double.class,  DenseNet169_Double.class,   DenseNet201_Double.class,   /*InceptionV3_Double.class,*/   /*IncResNetV2_Double.class,   */ResNet50_Double.class,  MobileNet_Double.class, VGG16_Double.class, VGG19_Double.class, Xception_Double.class   };
@@ -283,7 +286,15 @@ public class Main {
         System.out.println(Duration.between(startAll, endAll));
 
     }
-
+    /**
+     * creates the searchers depending on HashingMode <code>m</code>
+     * @param m HashingMode to be used
+     * @param classes classes for which a searcher is to be created
+     * @param outFiles  paths to outfiles (only for {@link Main.HashingMode#HASHING_MODE_METRIC_SPACES}
+     * @param readers   array of indexreaders
+     * @param searchers array for created searchers
+     * @param maxHits   maximum hits that searchers should generate
+     */
     private static void setupSearchers(HashingMode m, Class[] classes, String[] outFiles, IndexReader[] readers, KerasSearcher[] searchers, int maxHits) {
         if (  m == HashingMode.HASHING_MODE_METRIC_SPACES) //NOTE: MetricSpaces searching
         {
@@ -313,7 +324,16 @@ public class Main {
 
         }
     }
-
+    /**
+     * indexes the <code>filesToIndex</code> according to HashingMode <code>m</code>
+     * @param m HashingMode to be used
+     * @param indexPath path to folder for index
+     * @param inFile    inFiles (list of filenames) (only for {@link Main.HashingMode#HASHING_MODE_METRIC_SPACES})
+     * @param classes   classes that are used to create the index
+     * @param outFiles  list of filepaths for the outfiles
+     * @param csvFiles  list of CsvFiles with featurevectors for the files that are indexed
+     * @param filesToIndex  filepaths to the files to index
+     */
     private static void index(HashingMode m, String indexPath, String inFile, Class[] classes, String[] outFiles, String[] csvFiles, Vector<String> filesToIndex) {
         if(  m == HashingMode.HASHING_MODE_METRIC_SPACES)//NOTE: MetricSpaces indexing
         {
@@ -348,7 +368,16 @@ public class Main {
             }
         }
     }
-
+    /**
+     * retrieves the results from the InmagesearchHits <code>hits</code> and generates a Map with predictions
+     * @param hits      search results from the searchers
+     * @param readers   array of indexreaders
+     * @param fname     name of the search file
+     * @param allCategories list of categories
+     * @param classNames    array of classnames
+     * @param outFilePathBase   path to folder for output
+     * @return map with predictions and scores
+     */
     public static  LinkedHashMap<String, Double> getResults(ImageSearchHits[] hits, IndexReader[] readers, String fname,Vector<String> allCategories, String[] classNames, String outFilePathBase) {
         Vector<String> hitsStrings = new Vector<>();
         StringBuilder builder = new StringBuilder();
