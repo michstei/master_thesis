@@ -96,13 +96,13 @@ public class Main {
         }
         for(int classIndex = 0; classIndex < all_classes_double.length; classIndex++) {
             for (int featureIndex = 0; featureIndex < featureFolderNames.length; featureIndex++) {
-                String featureFolderName = featureFolderNames[featureIndex];
                 KerasDocumentBuilderImpl.maxDimensions = featureIndex != featureFolderNames.length - 1? maxFeatureLengths[featureIndex]:defaultFeatureLengthsPerClass[classIndex];
                 Instant startFeature = Instant.now();
 
                 for (HashingMode m : HashingMode.values()) {
                     for (DataType dt : DataType.values()) {
                         if (dt == DataType.DATA_TYPE_LONG) continue;
+                        String featureFolderName = featureFolderNames[featureIndex];
 
                         String postfix = "";
                         Class[] classes = null;
@@ -146,10 +146,10 @@ public class Main {
                                 break;
                             }
                         }
+                        String csvBasePath = basePath + "csv/" + featureFolderName;
                         featureFolderName += classNames[0] + "/";
                         String outputFolderPath = m == HashingMode.HASHING_MODE_METRIC_SPACES ? basePath + "results/" + featureFolderName + "MetricSpaces/" : basePath + "results/" + featureFolderName + "BitSampling/";
                         String indexPath = m == HashingMode.HASHING_MODE_METRIC_SPACES ? basePath + "index/" + featureFolderName + "MetricSpaces/" : basePath + "index/" + featureFolderName + "BitSampling/";
-                        String csvBasePath = basePath + "csv/" + featureFolderName;
                         String outFileBasePath = basePath + "indexCreationFiles/" + featureFolderName;
                         outputFolderPath += postfix;
                         indexPath += postfix;
