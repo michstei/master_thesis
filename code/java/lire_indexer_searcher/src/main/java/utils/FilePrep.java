@@ -69,7 +69,7 @@ public class FilePrep {
     private Vector<String>  getFromCategory(MedicoConfusionMatrix.Category cat, int pcnt) {
         ArrayList<String> files = new ArrayList<>();
         listFilesFromDirectory(folderPath+cat.getName() + "/",files);
-        int num = Math.max(1,(int) (files.size() * (pcnt/100.0)));
+        int num = Math.max(1,(int) (files.size() * (pcnt/100.0) + 0.5));
         Random gen = new Random(System.nanoTime());
         Vector<String> test = new Vector<>();
         while (test.size()<num){
