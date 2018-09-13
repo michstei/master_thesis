@@ -89,9 +89,9 @@ class Result():
         return self.confusion_matrix[idx_h][idx_w]
 
 
-filenames = get_files_prefix('/home/michael/master_thesis/data/result_all_models','results_')
+filenames = get_files_prefix('/home/michael/master_thesis/data/results','results_')
 worst_cat = dict()
-max_results = 5
+max_results = 20
 top_filenames = []
 top_filenames_ESO_NZL = []
 for f in filenames:
@@ -124,9 +124,9 @@ for f in filenames:
     top_filenames_ESO_NZL = list(set(top_filenames_ESO_NZL))
     top_filenames_ESO_NZL.sort(key=lambda tup: tup[0])
 
-    print(test.get_filename())
+    # print(test.get_filename())
     res = test.get_worst_category()
-    print(res)
+    # print(res)
     for l in res:
         if (l[1],l[2]) in worst_cat:
             worst_cat[(l[1],l[2])] = worst_cat[(l[1],l[2])] + 1
@@ -134,7 +134,7 @@ for f in filenames:
             worst_cat[(l[1],l[2])] = 1
        
     
-    print()
+    # print()
 
 for i in range(len(top_filenames)):
     print(i+1,':','{:<5}'.format(top_filenames[i][0]) + '%',top_filenames[i][1])
