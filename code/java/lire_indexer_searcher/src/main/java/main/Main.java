@@ -197,10 +197,8 @@ public class Main {
                     SearchRunnable[] runnables = new SearchRunnable[classes.length];
 
                     for (KerasFeature.DistanceFunction df : KerasFeature.DistanceFunction.values()) {
-                        if ((df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_CHISQUARE) ||
-                                (df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_KSDIST) ||
-                                (df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_SIMPLEEMD) ||
-                                (df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_JSD)
+                        if (!((df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_COSINE) ||
+                                (df == KerasFeature.DistanceFunction.DISTANCEFUNCTION_TANIMOTO))
                         ) {
                             continue;
                         }
