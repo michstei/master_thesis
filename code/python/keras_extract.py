@@ -31,7 +31,7 @@ def modelFromLayer(model, layer_name):
 
 def addLayer(model):
     x = model.output
-    x = Dense(1024)(x)
+    x = Dense(512)(x)
     x = GlobalAveragePooling2D(name='gavgpool')(x)
     model = Model(model.input,x)
     return model
@@ -115,7 +115,7 @@ if __name__ == '__main__':
         lines = []
         i = 1
         for f in files:
-            lines.append(extract_features_to_csv_string(f, models[k],(1024,1),prep_funs[k],inputsizes[k]))
+            lines.append(extract_features_to_csv_string(f, models[k],(512,1),prep_funs[k],inputsizes[k]))
             print('processed', "{:.2f}".format(i/len(files)*100),'%',end='\r')
             i += 1
         with open(csv_filenames[k],'a+') as csvfile:
