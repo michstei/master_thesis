@@ -86,13 +86,13 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            String csvBasePath = basePath + "csv/lessLayers/" ;
-            String outFileBasePath = basePath + "indexCreationFiles/" + "lessLayers/";
-            String outputFolderPath =  basePath + "results/" + "lessLayers/byte/";
+            String csvBasePath = basePath + "csv/lessLayers512/" ;
+            String outFileBasePath = basePath + "indexCreationFiles/" + "lessLayers512/";
+            String outputFolderPath =  basePath + "results/" + "lessLayers512/byte/";
             String[] indexPath = {basePath + "index/" + "lessLayers/" + "MetricSpaces/" , basePath + "index/" + "lessLayers/"+ "BitSampling/"};
-            KerasDocumentBuilderImpl.maxDimensions = 1024;
+            KerasDocumentBuilderImpl.maxDimensions = 512;
 
-            Class[] classes = all_classes_byte;
+            Class[] classes =        all_classes_byte;
             String[] classNames = all_classNames_byte;
 
             if (!(new File(outputFolderPath).exists())) {
