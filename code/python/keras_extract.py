@@ -16,7 +16,7 @@ def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_inp
     x = prep_input(x)
     features = model.predict(x)
     features = features.reshape(feature_reshape_param)
-    text = img_path + ','
+    text = img_path.replace('/home/mst/master_thesis/data/Medico_2018_development_set/','/home/michael/master_thesis/data/') + ','
     for x in features:
         for y in x:
             text = text + "{:.40f}".format(y).rstrip('0').rstrip('.')+ ','
@@ -25,11 +25,9 @@ def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_inp
     
 
 def modelFromLayer(model, layer_name):
-    x = model.get_layer(layer_name)
-    x = Dense(1024)(x)
-    x = GlobalAveragePooling2D(name='gavgpool')(x)
+    x = model.get_layer(layer_name).output
     model = Model(model.input,x)
-    return model
+    return addLayer(model)
 
 def addLayer(model):
     x = model.output
@@ -66,13 +64,13 @@ if __name__ == '__main__':
     model = modelFromLayer(model,'conv_pw_5_relu')
     models['mobilenet'] =   model
     model = appl.densenet.DenseNet121(weights='imagenet' ,include_top = False)
-    model = modelFromLayer(model,'pool4')
+    model = modelFromLayer(model,'pool4_pool')
     models['densenet121'] = model
     model = appl.densenet.DenseNet169(weights='imagenet', include_top=False)
-    model = modelFromLayer(model,'pool4')
+    model = modelFromLayer(model,'pool4_pool')
     models['densenet169'] = model
     model = appl.densenet.DenseNet201(weights='imagenet', include_top=False)
-    model = modelFromLayer(model,'pool4')
+    model = modelFromLayer(model,'pool4_pool')
     models['densenet201'] = model
     stop = timeit.default_timer()
     print('setting up models took',stop-start,'sec')
