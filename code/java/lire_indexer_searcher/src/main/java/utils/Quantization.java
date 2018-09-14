@@ -321,7 +321,7 @@ public class Quantization {
         String outFileBase = "/home/michael/master_thesis/data/csv/";
         String[] filenames = new String[]{"inceptionv3","incresnetv2","mobilenet","resnet50","vgg16","vgg19","xception","densenet121","densenet169","densenet201"};
         try {
-            for (String f : new String[]{"256Avg/", "512Avg/","512Max/", "defaultModels/"}){
+            for (String f : new String[]{"lessLayers/"}){
                 System.out.println(f + ":");
                 if(!(new File(outFileBase + f +"quantized/" ).exists())){
                     new File(outFileBase + f +"quantized/" ).mkdirs();
