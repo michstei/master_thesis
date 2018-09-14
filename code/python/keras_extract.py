@@ -6,7 +6,7 @@ import keras.applications as appl
 from keras.models import Model
 from keras.layers import  GlobalAveragePooling2D,GlobalMaxPooling2D ,Dense
 filesdir = '/home/mst/master_thesis/data/Medico_2018_development_set/Medico_2018_development_set/'
-csv_folder = '/home/mst/master_thesis/code/python/csv/1024Max/'
+csv_folder = '/home/mst/master_thesis/code/python/csv/lessLayers/'
 def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_input, model_targetsize):
    
     img = image.load_img(img_path, target_size=model_targetsize)
@@ -24,10 +24,17 @@ def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_inp
     return text
     
 
+def modelFromLayer(model, layer_name):
+    x = model.get_layer(layer_name)
+    x = Dense(1024)(x)
+    x = GlobalAveragePooling2D(name='gavgpool')(x)
+    model = Model(model.input,x)
+    return model
+
 def addLayer(model):
     x = model.output
     x = Dense(1024)(x)
-    x = GlobalMaxPooling2D(name='gmaxpool')(x)
+    x = GlobalAveragePooling2D(name='gavgpool')(x)
     model = Model(model.input,x)
     return model
 
@@ -38,34 +45,34 @@ if __name__ == '__main__':
     models = dict()
     print('setting up models...')
     model = appl.xception.Xception(weights='imagenet', include_top=False)
-    model =  addLayer(model)
+    model =  modelFromLayer(model,'block4_pool')
     models['xception'] =    model
     model = appl.vgg16.VGG16(weights='imagenet', include_top=False)
-    model = addLayer(model)
+    model = modelFromLayer(model,'block4_pool')
     models['vgg16'] =       model
     model = appl.vgg19.VGG19(weights='imagenet', include_top=False)
-    model = addLayer(model)
+    model = modelFromLayer(model,'block4_pool')
     models['vgg19'] =       model
     model = appl.resnet50.ResNet50(weights='imagenet', include_top=False)
-    model = addLayer(model)
+    model = modelFromLayer(model,'bn4a_branch1')
     models['resnet50'] =    model
     model = appl.inception_v3.InceptionV3(weights='imagenet', include_top=False)
-    model = addLayer(model)
+    model = modelFromLayer(model,'mixed9_1')
     models['inceptionv3'] = model
     model = appl.inception_resnet_v2.InceptionResNetV2(weights='imagenet', include_top = False)
-    model = addLayer(model)
+    model = modelFromLayer(model,'mixed_6a')
     models['incresnetv2'] = model
     model = appl.mobilenet.MobileNet(weights='imagenet', include_top=False)
-    model = addLayer(model)
+    model = modelFromLayer(model,'conv_pw_5_relu')
     models['mobilenet'] =   model
     model = appl.densenet.DenseNet121(weights='imagenet' ,include_top = False)
-    model = addLayer(model)
+    model = modelFromLayer(model,'pool4')
     models['densenet121'] = model
     model = appl.densenet.DenseNet169(weights='imagenet', include_top=False)
-    model = addLayer(model)
+    model = modelFromLayer(model,'pool4')
     models['densenet169'] = model
     model = appl.densenet.DenseNet201(weights='imagenet', include_top=False)
-    model = addLayer(model)
+    model = modelFromLayer(model,'pool4')
     models['densenet201'] = model
     stop = timeit.default_timer()
     print('setting up models took',stop-start,'sec')

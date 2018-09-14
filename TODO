@@ -1,6 +1,6 @@
 Runs to try:
-    ☐ only use COSINE and TANIMOTO distance functions   
-    ☐ use best 3-5 Models (from single model runs)
+    ✔ only use COSINE and TANIMOTO distance functions @done(18-09-14 09:17)
+    ☐ use best 3-5 Models (from single model runs) combine BItSampling and MetricSpaces
     ☐ only use one result per feature
     ☐ use 5 or more results per feature
 

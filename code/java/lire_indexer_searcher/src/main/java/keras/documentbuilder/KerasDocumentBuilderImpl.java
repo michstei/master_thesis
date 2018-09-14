@@ -25,6 +25,7 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
 
     private boolean useDocValues = false;
     public static int maxDimensions = 256;
+    private static int maxDimensionsOld = -1;
     private GlobalDocumentBuilder.HashingMode hashingMode = GlobalDocumentBuilder.HashingMode.BitSampling;
     private boolean hashingEnabled = false;
 
@@ -135,11 +136,14 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
     private static void testHashes() {
 //        Let's try to read the hash functions right here and we don't have to care about it right now.
         try {
-                if(new File(hashFilePath).exists())
+            if ((new File(hashFilePath).exists() && maxDimensions != maxDimensionsOld) || !(new File(hashFilePath).exists())) {
+                if (new File(hashFilePath).exists())
                     new File(hashFilePath).delete();
                 BitSampling.dimensions = maxDimensions;
                 BitSampling.generateHashFunctions(hashFilePath);
                 BitSampling.readHashFunctions(new FileInputStream(new File(hashFilePath)));
+                maxDimensionsOld = maxDimensions;
+            }
 //            BitSampling.readHashFunctions();
 //            LocalitySensitiveHashing.readHashFunctions();
         } catch (Exception e) {
@@ -206,7 +210,8 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
             if (kerasFeature.getFeatureVector().length <= 3100) {
                 int[] hashes;
                 if (hashingMode == GlobalDocumentBuilder.HashingMode.BitSampling) {
-
+//                    maxDimensions = kerasFeature.getFeatureVector().length;
+//                    testHashes();
 
                     hashes = BitSampling.generateHashes(kerasFeature.getFeatureVector());
                     hash = new TextField(extractorItems.get(extractorItem)[1], SerializationUtils.arrayToString(hashes), Field.Store.YES);
