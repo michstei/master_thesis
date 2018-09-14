@@ -51,19 +51,9 @@ public class Main {
     private static Class[]  all_classes_byte =      {   DenseNet121_Byte.class,    DenseNet169_Byte.class,     DenseNet201_Byte.class,     /*InceptionV3_Byte.class,*/     /*IncResNetV2_Byte.class,     */ResNet50_Byte.class,    MobileNet_Byte.class,   VGG16_Byte.class,   VGG19_Byte.class,   Xception_Byte.class     };
     private static String[] all_classNames_byte =   {   "DenseNet121_Byte",        "DenseNet169_Byte",         "DenseNet201_Byte",         /*"InceptionV3_Byte",*/         /*"IncResNetV2_Byte",         */"ResNet50_Byte",        "MobileNet_Byte",       "VGG16_Byte",       "VGG19_Byte",       "Xception_Byte"         };
 
-    private static Class[] best_classes_test =                  {DenseNet169_Double.class,  DenseNet169_Float.class,DenseNet169_Int.class};
-    private static String[] best_classnames_test  =             {"DenseNet169_Double",      "DenseNet169_FLoat",    "DenseNet169_Int"};
-    private static String[] featureFolderNames = new String[]   {"512Avg/",                 "1024Avg/",             "1024Avg/"};
 
 
-    enum DataType{
-        DATA_TYPE_DOUBLE,
-        DATA_TYPE_FLOAT,
-        DATA_TYPE_LONG,
-        DATA_TYPE_INT,
-        DATA_TYPE_SHORT,
-        DATA_TYPE_BYTE,
-        }
+
     enum HashingMode{
         HASHING_MODE_METRIC_SPACES,
         HASHING_MODE_BITSAMPLING,
@@ -81,8 +71,8 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         Instant startAll = Instant.now();
-        FilePrep prep = new FilePrep(imageFolderPath,5,inFileTrain,inFileTest);
-        prep.writeSetFiles();
+//        FilePrep prep = new FilePrep(imageFolderPath,5,inFileTrain,inFileTest);
+//        prep.writeSetFiles();
         Vector<String> trainFiles = null;
         try {
             trainFiles = new Vector<>(Files.readAllLines(Paths.get(inFileTrain)));
@@ -96,17 +86,14 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String[] csvBasePath = new String[featureFolderNames.length];
-        for(int i = 0; i < featureFolderNames.length; i++) {
-            csvBasePath[i] = basePath + "csv/" + featureFolderNames[i];
-        }
-            String outFileBasePath = basePath + "indexCreationFiles/" + "bestModelTest/";
-            String outputFolderPath =  basePath + "results/" + "bestModelsTest/";
-            String[] indexPath = {basePath + "index/" + "bestModelsTest/" + "MetricSpaces/" , basePath + "index/" + "bestModelsTest/"+ "BitSampling/"};
-            KerasDocumentBuilderImpl.maxDimensions = 1920;
+            String csvBasePath = basePath + "csv/lessLayers/" ;
+            String outFileBasePath = basePath + "indexCreationFiles/" + "lessLayers/";
+            String outputFolderPath =  basePath + "results/" + "lessLayers/byte/";
+            String[] indexPath = {basePath + "index/" + "lessLayers/" + "MetricSpaces/" , basePath + "index/" + "lessLayers/"+ "BitSampling/"};
+            KerasDocumentBuilderImpl.maxDimensions = 1024;
 
-            Class[] classes = best_classes_test;
-            String[] classNames = best_classnames_test;
+            Class[] classes = all_classes_byte;
+            String[] classNames = all_classNames_byte;
 
             if (!(new File(outputFolderPath).exists())) {
                 new File(outputFolderPath).mkdirs();
@@ -124,7 +111,7 @@ public class Main {
                 if (!(new File(outFileBasePath).exists()))
                     new File(outFileBasePath).mkdirs();
                 outFiles[i] = outFileBasePath + "out." + classNames[i] + ".dat";
-                csvFiles[i] = csvBasePath[i] + "quantized/" + classNames[i].toLowerCase() + ".csv";
+                csvFiles[i] = csvBasePath + "quantized/" + classNames[i].toLowerCase() + ".csv";
             }
 
 

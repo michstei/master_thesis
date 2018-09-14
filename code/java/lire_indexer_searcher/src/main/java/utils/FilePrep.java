@@ -13,19 +13,25 @@ import java.util.Vector;
  *  class to prepare the developmentset for training and testing (splitting it up)
  */
 public class FilePrep {
-    private String folderPath = "/home/michael/master_thesis/data/Medico_2018_development_set/";
+    private String folderPath;
 
     private Vector<String> train = new Vector<>();
 
     private Vector<String> test = new Vector<>();
-    private String inFileTrain = "/home/michael/master_thesis/data/indexCreationFiles/inFileTrain.lst";
-    private String inFileTest = "/home/michael/master_thesis/data/indexCreationFiles/inFileTest.lst";
-    private int testPercent = 0;
+    private String inFileTrain;
+    private String inFileTest;
+    private int testPercent;
     public FilePrep(String folderPath, int testPercent, String trainFilePath, String testFilePath) {
         this.folderPath = folderPath;
         this.testPercent = testPercent;
         this.inFileTrain = trainFilePath;
         this.inFileTest = testFilePath;
+        if(!(new File(new File(this.inFileTest).getParent()).exists())){
+            new File(new File(this.inFileTest).getParent()).mkdirs();
+        }
+        if(!(new File(new File(this.inFileTrain).getParent()).exists())){
+            new File(new File(this.inFileTrain).getParent()).mkdirs();
+        }
         divide();
     }
 
