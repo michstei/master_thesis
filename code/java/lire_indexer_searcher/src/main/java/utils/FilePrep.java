@@ -36,7 +36,7 @@ public class FilePrep {
         Vector<String> all = new Vector<>();
         listFilesFromDirectory(folderPath,all);
 
-        for(MedicoConfusionMatrix.Category c : MedicoConfusionMatrix.Category.values()){
+        for(Category c : Category.values()){
             test.addAll(getFromCategory(c,testPercent));
         }
         for(String s : all){
@@ -51,8 +51,8 @@ public class FilePrep {
      * @param test      list of files used for testing NOT NULL
      * @param values    array of Categories from which files are chosen
      */
-    private void addOneForEachCategory(Vector<String> test, MedicoConfusionMatrix.Category[] values) {
-        for(MedicoConfusionMatrix.Category c : values){
+    private void addOneForEachCategory(Vector<String> test, Category[] values) {
+        for(Category c : values){
             ArrayList<String> files = new ArrayList<>();
             listFilesFromDirectory(folderPath+c.getName() + "/",files);
             Random gen = new Random(System.nanoTime());
@@ -66,7 +66,7 @@ public class FilePrep {
      * @param pcnt  Percentage of files to choose
      * @return list of chosen file (min 1 file, max pcnt% files)
      */
-    private Vector<String>  getFromCategory(MedicoConfusionMatrix.Category cat, int pcnt) {
+    private Vector<String>  getFromCategory(Category cat, int pcnt) {
         ArrayList<String> files = new ArrayList<>();
         listFilesFromDirectory(folderPath+cat.getName() + "/",files);
         int num = Math.max(1,(int) (files.size() * (pcnt/100.0) + 0.5));

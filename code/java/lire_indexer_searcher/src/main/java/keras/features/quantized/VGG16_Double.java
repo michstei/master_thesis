@@ -1,5 +1,6 @@
-package keras.features;
+package keras.features.quantized;
 
+import keras.features.KerasFeature;
 import utils.Quantization;
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import utils.KerasCSVReader;
@@ -7,14 +8,16 @@ import utils.KerasCSVReader;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
-public class MobileNet_Double implements KerasFeature{
 
-    private final String featureName    = "MobileNet_Double";
-    private final String fieldName      = "MobileNet_Double";
+public class VGG16_Double implements KerasFeature {
+
+    private final String featureName    = "VGG16_Double";
+    private final String fieldName      = "VGG16_Double";
     public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
-    public MobileNet_Double(){
+    public VGG16_Double(){
     }
-    public MobileNet_Double(String csvFilename){
+
+    public VGG16_Double(String csvFilename){
         setCsvFilename(csvFilename);
     }
 

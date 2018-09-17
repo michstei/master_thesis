@@ -1,8 +1,10 @@
 Runs to try:
-    ☐ only use COSINE and TANIMOTO distance functions   
-    ☐ use best 3-5 Models (from single model runs)
-    ☐ only use one result per feature
-    ☐ use 5 or more results per feature
+    ✔ run tests with all models normal layers and 1024Max with both hashingmodes at once @done(18-09-17 14:06)
+    ✔ only use one result per feature @done(18-09-17 14:06)
+    ✔ use 5 or more results per feature @done(18-09-17 14:06)
+    ☐ global features single
+    ☐ combine best global features
+    ☐ combine best global feature combination with keras features
 
 
 

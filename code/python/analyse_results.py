@@ -89,7 +89,7 @@ class Result():
         return self.confusion_matrix[idx_h][idx_w]
 
 
-filenames = get_files_prefix('/home/michael/master_thesis/data/results','results_')
+filenames = get_files_prefix('/home/michael/master_thesis/data/','results_')
 worst_cat = dict()
 max_results = 20
 top_filenames = []

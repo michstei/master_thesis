@@ -1,5 +1,6 @@
-package keras.features;
+package keras.features.quantized;
 
+import keras.features.KerasFeature;
 import utils.Quantization;
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import utils.KerasCSVReader;
@@ -7,7 +8,7 @@ import utils.KerasCSVReader;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
-public class DenseNet201_Double implements KerasFeature{
+public class DenseNet201_Double implements KerasFeature {
 
     private final String featureName    = "DenseNet201_Double";
     private final String fieldName      = "DenseNet201_Double";

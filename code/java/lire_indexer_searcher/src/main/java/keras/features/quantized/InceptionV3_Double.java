@@ -1,5 +1,6 @@
-package keras.features;
+package keras.features.quantized;
 
+import keras.features.KerasFeature;
 import utils.Quantization;
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import utils.KerasCSVReader;
@@ -7,14 +8,16 @@ import utils.KerasCSVReader;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
-public class IncResNetV2_Double implements KerasFeature{
+public class InceptionV3_Double implements KerasFeature {
 
-    private final String featureName    = "IncResNetV2_Double";
-    private final String fieldName      = "IncResNetV2_Double";
+    private final String featureName    = "InceptionV3_Double";
+    private final String fieldName      = "InceptionV3_Double";
     public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
-    public IncResNetV2_Double(){
+
+    public InceptionV3_Double(){
     }
-    public IncResNetV2_Double(String csvFilename){
+
+    public InceptionV3_Double(String csvFilename){
         setCsvFilename(csvFilename);
     }
 
@@ -81,7 +84,6 @@ public class IncResNetV2_Double implements KerasFeature{
             featureVector[i++] = buffer.getDouble();
         }
     }
-
 
 
     @Override

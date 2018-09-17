@@ -1,5 +1,6 @@
-package keras.features;
+package keras.features.quantized;
 
+import keras.features.KerasFeature;
 import utils.Quantization;
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import utils.KerasCSVReader;
@@ -7,14 +8,14 @@ import utils.KerasCSVReader;
 import java.awt.image.BufferedImage;
 import java.nio.ByteBuffer;
 
-public class ResNet50_Double implements KerasFeature{
+public class MobileNet_Double implements KerasFeature {
 
-    private final String featureName    = "ResNet50_Double";
-    private final String fieldName      = "ResNet50_Double";
+    private final String featureName    = "MobileNet_Double";
+    private final String fieldName      = "MobileNet_Double";
     public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
-    public ResNet50_Double(){
+    public MobileNet_Double(){
     }
-    public ResNet50_Double(String csvFilename){
+    public MobileNet_Double(String csvFilename){
         setCsvFilename(csvFilename);
     }
 
@@ -39,6 +40,7 @@ public class ResNet50_Double implements KerasFeature{
             //TODO: get featureVector from somewhere else (python?)
         }
     }
+
 
 
     @Override
