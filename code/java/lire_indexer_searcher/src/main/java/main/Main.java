@@ -41,18 +41,18 @@ import java.util.Vector;
  */
 public class Main {
 
-    private static Class[]  all_classes_double =    {   DenseNet121_Double.class,  DenseNet169_Double.class,   DenseNet201_Double.class,   /*InceptionV3_Double.class,*/   /*IncResNetV2_Double.class,   */ResNet50_Double.class,  MobileNet_Double.class, VGG16_Double.class, VGG19_Double.class, Xception_Double.class   };
-    private static String[] all_classNames_double = {   "DenseNet121_Double",      "DenseNet169_Double",       "DenseNet201_Double",       /*"InceptionV3_Double",*/       /*"IncResNetV2_Double",       */"ResNet50_Double",      "MobileNet_Double",     "VGG16_Double",     "VGG19_Double",     "Xception_Double"       };
-    private static Class[]  all_classes_float =     {   DenseNet121_Float.class,   DenseNet169_Float.class,    DenseNet201_Float.class,    /*InceptionV3_Float.class,*/    /*IncResNetV2_Float.class,    */ResNet50_Float.class,   MobileNet_Float.class,  VGG16_Float.class,  VGG19_Float.class,  Xception_Float.class    };
-    private static String[] all_classNames_float =  {   "DenseNet121_Float",       "DenseNet169_Float",        "DenseNet201_Float",        /*"InceptionV3_Float",*/        /*"IncResNetV2_Float",        */"ResNet50_Float",       "MobileNet_Float",      "VGG16_Float",      "VGG19_Float",      "Xception_Float"        };
-    private static Class[]  all_classes_long =      {   DenseNet121_Long.class,    DenseNet169_Long.class,     DenseNet201_Long.class,     /*InceptionV3_Long.class,*/     /*IncResNetV2_Long.class,     */ResNet50_Long.class,    MobileNet_Long.class,   VGG16_Long.class,   VGG19_Long.class,   Xception_Long.class     };
-    private static String[] all_classNames_long =   {   "DenseNet121_Long",        "DenseNet169_Long",         "DenseNet201_Long",         /*"InceptionV3_Long",*/         /*"IncResNetV2_Long",         */"ResNet50_Long",        "MobileNet_Long",       "VGG16_Long",       "VGG19_Long",       "Xception_Long"         };
-    private static Class[]  all_classes_int =       {   DenseNet121_Int.class,     DenseNet169_Int.class,      DenseNet201_Int.class,      /*InceptionV3_Int.class,*/      /*IncResNetV2_Int.class,      */ResNet50_Int.class,     MobileNet_Int.class,    VGG16_Int.class,    VGG19_Int.class,    Xception_Int.class      };
-    private static String[] all_classNames_int =    {   "DenseNet121_Int",         "DenseNet169_Int",          "DenseNet201_Int",          /*"InceptionV3_Int", */         /*"IncResNetV2_Int",          */"ResNet50_Int",         "MobileNet_Int",        "VGG16_Int",        "VGG19_Int",        "Xception_Int"          };
-    private static Class[]  all_classes_short =     {   DenseNet121_Short.class,   DenseNet169_Short.class,    DenseNet201_Short.class,    /*InceptionV3_Short.class,*/    /*IncResNetV2_Short.class,    */ResNet50_Short.class,   MobileNet_Short.class,  VGG16_Short.class,  VGG19_Short.class,  Xception_Short.class    };
-    private static String[] all_classNames_short =  {   "DenseNet121_Short",       "DenseNet169_Short",        "DenseNet201_Short",        /*"InceptionV3_Short", */       /*"IncResNetV2_Short",        */"ResNet50_Short",       "MobileNet_Short",      "VGG16_Short",      "VGG19_Short",      "Xception_Short"        };
-    private static Class[]  all_classes_byte =      {   DenseNet121_Byte.class,    DenseNet169_Byte.class,     DenseNet201_Byte.class,     /*InceptionV3_Byte.class,*/     /*IncResNetV2_Byte.class,     */ResNet50_Byte.class,    MobileNet_Byte.class,   VGG16_Byte.class,   VGG19_Byte.class,   Xception_Byte.class     };
-    private static String[] all_classNames_byte =   {   "DenseNet121_Byte",        "DenseNet169_Byte",         "DenseNet201_Byte",         /*"InceptionV3_Byte",*/         /*"IncResNetV2_Byte",         */"ResNet50_Byte",        "MobileNet_Byte",       "VGG16_Byte",       "VGG19_Byte",       "Xception_Byte"         };
+    private static Class[]  all_classes_double =    {   DenseNet121_Double.class,  DenseNet169_Double.class,   DenseNet201_Double.class,   ResNet50_Double.class,  MobileNet_Double.class, VGG16_Double.class, VGG19_Double.class, Xception_Double.class   };
+    private static String[] all_classNames_double = {   "DenseNet121_Double",      "DenseNet169_Double",       "DenseNet201_Double",       "ResNet50_Double",      "MobileNet_Double",     "VGG16_Double",     "VGG19_Double",     "Xception_Double"       };
+    private static Class[]  all_classes_float =     {   DenseNet121_Float.class,   DenseNet169_Float.class,    DenseNet201_Float.class,    ResNet50_Float.class,   MobileNet_Float.class,  VGG16_Float.class,  VGG19_Float.class,  Xception_Float.class    };
+    private static String[] all_classNames_float =  {   "DenseNet121_Float",       "DenseNet169_Float",        "DenseNet201_Float",        "ResNet50_Float",       "MobileNet_Float",      "VGG16_Float",      "VGG19_Float",      "Xception_Float"        };
+    private static Class[]  all_classes_long =      {   DenseNet121_Long.class,    DenseNet169_Long.class,     DenseNet201_Long.class,      ResNet50_Long.class,    MobileNet_Long.class,   VGG16_Long.class,   VGG19_Long.class,   Xception_Long.class     };
+    private static String[] all_classNames_long =   {   "DenseNet121_Long",        "DenseNet169_Long",         "DenseNet201_Long",         "ResNet50_Long",        "MobileNet_Long",       "VGG16_Long",       "VGG19_Long",       "Xception_Long"         };
+    private static Class[]  all_classes_int =       {   DenseNet121_Int.class,     DenseNet169_Int.class,      DenseNet201_Int.class,      ResNet50_Int.class,     MobileNet_Int.class,    VGG16_Int.class,    VGG19_Int.class,    Xception_Int.class      };
+    private static String[] all_classNames_int =    {   "DenseNet121_Int",         "DenseNet169_Int",          "DenseNet201_Int",          "ResNet50_Int",         "MobileNet_Int",        "VGG16_Int",        "VGG19_Int",        "Xception_Int"          };
+    private static Class[]  all_classes_short =     {   DenseNet121_Short.class,   DenseNet169_Short.class,    DenseNet201_Short.class,    ResNet50_Short.class,   MobileNet_Short.class,  VGG16_Short.class,  VGG19_Short.class,  Xception_Short.class    };
+    private static String[] all_classNames_short =  {   "DenseNet121_Short",       "DenseNet169_Short",        "DenseNet201_Short",        "ResNet50_Short",       "MobileNet_Short",      "VGG16_Short",      "VGG19_Short",      "Xception_Short"        };
+    private static Class[]  all_classes_byte =      {   DenseNet121_Byte.class,    DenseNet169_Byte.class,     DenseNet201_Byte.class,     ResNet50_Byte.class,    MobileNet_Byte.class,   VGG16_Byte.class,   VGG19_Byte.class,   Xception_Byte.class     };
+    private static String[] all_classNames_byte =   {   "DenseNet121_Byte",        "DenseNet169_Byte",         "DenseNet201_Byte",         "ResNet50_Byte",        "MobileNet_Byte",       "VGG16_Byte",       "VGG19_Byte",       "Xception_Byte"         };
 
     private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{AutoColorCorrelogram.class, CEDD.class, ACCID.class, ColorLayout.class, EdgeHistogram.class, FCTH.class, FuzzyColorHistogram.class, Gabor.class, JCD.class, LuminanceLayout.class,PHOG.class, ScalableColor.class, Tamura.class};
 
@@ -110,7 +110,7 @@ public class Main {
 //            classNames[i] = globalFeaturesNames[i-all_classes_int.length];
 //        }
 
-        int featureIndex = 2;
+        int featureIndex = 6; //stopped at FCTH - index 5
         Class[] classes = new Class[]{globalFeatures[featureIndex]};
         String[] classNames = new String[]{globalFeatures[featureIndex].getName().replace("net.semanticmetadata.lire.imageanalysis.features.global.","")};
         if (!(new File(outputFolderPath).exists())) {
