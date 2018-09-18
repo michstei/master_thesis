@@ -54,7 +54,7 @@ public class Main {
     private static Class[]  all_classes_byte =      {   DenseNet121_Byte.class,    DenseNet169_Byte.class,     DenseNet201_Byte.class,     ResNet50_Byte.class,    MobileNet_Byte.class,   VGG16_Byte.class,   VGG19_Byte.class,   Xception_Byte.class     };
     private static String[] all_classNames_byte =   {   "DenseNet121_Byte",        "DenseNet169_Byte",         "DenseNet201_Byte",         "ResNet50_Byte",        "MobileNet_Byte",       "VGG16_Byte",       "VGG19_Byte",       "Xception_Byte"         };
 
-    private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{AutoColorCorrelogram.class, CEDD.class, ACCID.class, ColorLayout.class, EdgeHistogram.class, FCTH.class, FuzzyColorHistogram.class, Gabor.class, JCD.class, LuminanceLayout.class,PHOG.class, ScalableColor.class, Tamura.class};
+    private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{AutoColorCorrelogram.class, CEDD.class, ACCID.class, ColorLayout.class, EdgeHistogram.class, FCTH.class,  Gabor.class, JCD.class, LuminanceLayout.class,PHOG.class, ScalableColor.class, Tamura.class};
 
 
 
@@ -110,7 +110,7 @@ public class Main {
 //            classNames[i] = globalFeaturesNames[i-all_classes_int.length];
 //        }
 
-        int featureIndex = 6; //stopped at FCTH - index 5
+        int featureIndex = 11; //stopped at FCTH - index 5
         Class[] classes = new Class[]{globalFeatures[featureIndex]};
         String[] classNames = new String[]{globalFeatures[featureIndex].getName().replace("net.semanticmetadata.lire.imageanalysis.features.global.","")};
         if (!(new File(outputFolderPath).exists())) {
@@ -224,7 +224,7 @@ public class Main {
                 matrix.increaseValue(catGold, catPred);
 
                 Instant e = Instant.now();
-                System.out.printf("\rprocessed file %4s of %d in %s", (counter++) + "", testFiles.size(), Duration.between(st, e));
+                System.out.printf("\rprocessed file %4s of %d in %s / total %s", (counter++) + "", testFiles.size(), Duration.between(st, e),Duration.between(startDf, e));
             }
             System.out.println();
             Instant endDf = Instant.now();
