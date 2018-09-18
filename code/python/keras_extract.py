@@ -6,7 +6,7 @@ import keras.applications as appl
 from keras.models import Model
 from keras.layers import  GlobalAveragePooling2D,GlobalMaxPooling2D ,Dense
 filesdir = '/home/mst/master_thesis/data/Medico_2018_development_set/Medico_2018_development_set/'
-csv_folder = '/home/mst/master_thesis/code/python/csv/lessLayers/'
+csv_folder = '/home/mst/master_thesis/code/python/csv/1024orLess/'
 def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_input, model_targetsize):
    
     img = image.load_img(img_path, target_size=model_targetsize)
@@ -31,7 +31,7 @@ def modelFromLayer(model, layer_name):
 
 def addLayer(model):
     x = model.output
-    x = Dense(512)(x)
+    x = Dense(1024)(x)
     x = GlobalAveragePooling2D(name='gavgpool')(x)
     model = Model(model.input,x)
     return model
@@ -43,34 +43,32 @@ if __name__ == '__main__':
     models = dict()
     print('setting up models...')
     model = appl.xception.Xception(weights='imagenet', include_top=False)
-    model =  modelFromLayer(model,'block4_pool')
+    model =  addLayer(model)
     models['xception'] =    model
-    model = appl.vgg16.VGG16(weights='imagenet', include_top=False)
-    model = modelFromLayer(model,'block4_pool')
+    model = appl.vgg16.VGG16(weights='imagenet', include_top=False, pooling='max')
     models['vgg16'] =       model
-    model = appl.vgg19.VGG19(weights='imagenet', include_top=False)
-    model = modelFromLayer(model,'block4_pool')
+    model = appl.vgg19.VGG19(weights='imagenet', include_top=False, pooling='max')
     models['vgg19'] =       model
     model = appl.resnet50.ResNet50(weights='imagenet', include_top=False)
-    model = modelFromLayer(model,'bn4a_branch1')
+    model = addLayer(model)
     models['resnet50'] =    model
     model = appl.inception_v3.InceptionV3(weights='imagenet', include_top=False)
-    model = modelFromLayer(model,'mixed9_1')
+    model = addLayer(model)
     models['inceptionv3'] = model
     model = appl.inception_resnet_v2.InceptionResNetV2(weights='imagenet', include_top = False)
-    model = modelFromLayer(model,'mixed_6a')
+    model = addLayer(model)
     models['incresnetv2'] = model
     model = appl.mobilenet.MobileNet(weights='imagenet', include_top=False)
-    model = modelFromLayer(model,'conv_pw_5_relu')
+    model = addLayer(model)
     models['mobilenet'] =   model
     model = appl.densenet.DenseNet121(weights='imagenet' ,include_top = False)
-    model = modelFromLayer(model,'pool4_pool')
+    model = addLayer(model)
     models['densenet121'] = model
     model = appl.densenet.DenseNet169(weights='imagenet', include_top=False)
-    model = modelFromLayer(model,'pool4_pool')
+    model = addLayer(model)
     models['densenet169'] = model
     model = appl.densenet.DenseNet201(weights='imagenet', include_top=False)
-    model = modelFromLayer(model,'pool4_pool')
+    model = addLayer(model)
     models['densenet201'] = model
     stop = timeit.default_timer()
     print('setting up models took',stop-start,'sec')
@@ -101,6 +99,18 @@ if __name__ == '__main__':
     inputsizes['densenet121'] = (224,224)
     inputsizes['densenet169'] = (224,224)
     inputsizes['densenet201'] = (224,224)
+
+    reshape_params = dict()
+    reshape_params['xception'] =    (1024, 1)
+    reshape_params['vgg16'] =       (512 , 1)
+    reshape_params['vgg19'] =       (512 , 1)
+    reshape_params['resnet50'] =    (1024, 1)
+    reshape_params['inceptionv3'] = (1024, 1)
+    reshape_params['incresnetv2'] = (1024, 1)
+    reshape_params['mobilenet'] =   (1024, 1)
+    reshape_params['densenet121'] = (1024, 1)
+    reshape_params['densenet169'] = (1024, 1)
+    reshape_params['densenet201'] = (1024, 1)
     #csv filenames
     print('setting up csv_filenames...')
     csv_filenames = dict()
@@ -115,7 +125,7 @@ if __name__ == '__main__':
         lines = []
         i = 1
         for f in files:
-            lines.append(extract_features_to_csv_string(f, models[k],(512,1),prep_funs[k],inputsizes[k]))
+            lines.append(extract_features_to_csv_string(f, models[k],reshape_params[k],prep_funs[k],inputsizes[k]))
             print('processed', "{:.2f}".format(i/len(files)*100),'%',end='\r')
             i += 1
         with open(csv_filenames[k],'a+') as csvfile:
