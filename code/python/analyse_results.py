@@ -89,7 +89,7 @@ class Result():
         return self.confusion_matrix[idx_h][idx_w]
 
 
-filenames = get_files_prefix('/home/michael/master_thesis/data/','results_')
+filenames = get_files_prefix('/home/michael/master_thesis/data/results/global','results_')
 worst_cat = dict()
 max_results = 20
 top_filenames = []
@@ -142,9 +142,10 @@ print()
 for i in range(len(top_filenames_ESO_NZL)):
     print(i+1,':','{:<5}'.format(top_filenames_ESO_NZL[i][0]),top_filenames_ESO_NZL[i][1])
 print()
-print('1 worst cat:',max(worst_cat.items(),key= operator.itemgetter(1)))
-for i in range(len(worst_cat)):
-    del worst_cat[max(worst_cat.items(),key= operator.itemgetter(1))[0]]
-    if len(worst_cat) == 0:
-        break
-    print(i+2,'worst cat:',max(worst_cat.items(),key= operator.itemgetter(1)))
+if len(worst_cat) != 0:
+    print('1 worst cat:',max(worst_cat.items(),key= operator.itemgetter(1)))
+    for i in range(len(worst_cat)):
+        del worst_cat[max(worst_cat.items(),key= operator.itemgetter(1))[0]]
+        if len(worst_cat) == 0:
+            break
+        print(i+2,'worst cat:',max(worst_cat.items(),key= operator.itemgetter(1)))

@@ -54,7 +54,8 @@ public class Main {
     private static Class[]  all_classes_byte =      {   DenseNet121_Byte.class,    DenseNet169_Byte.class,     DenseNet201_Byte.class,     ResNet50_Byte.class,    MobileNet_Byte.class,   VGG16_Byte.class,   VGG19_Byte.class,   Xception_Byte.class     };
     private static String[] all_classNames_byte =   {   "DenseNet121_Byte",        "DenseNet169_Byte",         "DenseNet201_Byte",         "ResNet50_Byte",        "MobileNet_Byte",       "VGG16_Byte",       "VGG19_Byte",       "Xception_Byte"         };
 
-    private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{AutoColorCorrelogram.class, CEDD.class, ACCID.class, ColorLayout.class, EdgeHistogram.class, FCTH.class,  Gabor.class, JCD.class, LuminanceLayout.class,PHOG.class, ScalableColor.class, Tamura.class};
+//    private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{AutoColorCorrelogram.class, CEDD.class, ACCID.class, ColorLayout.class, EdgeHistogram.class, FCTH.class,  Gabor.class, JCD.class, LuminanceLayout.class,PHOG.class, ScalableColor.class, Tamura.class};
+    private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{ACCID.class, ColorLayout.class};
 
 
 
@@ -98,26 +99,26 @@ public class Main {
         String[] indexPath = {basePath + "index/" + "global/" + "MetricSpaces/" , basePath + "index/" + "global/"+ "BitSampling/"};
         KerasDocumentBuilderImpl.maxDimensions = 1024;
 
-//        Class[] classes =     new Class[all_classes_int.length + globalFeatures.length];
-//        String[] classNames = new String[all_classNames_int.length + globalFeaturesNames.length];
+        Class[] classes =     new Class[all_classes_int.length + globalFeatures.length];
+        String[] classNames = new String[all_classNames_int.length + globalFeatures.length];
+//
+        for(int i = 0; i < all_classes_int.length; i++){
+            classes[i] = all_classes_int[i];
+            classNames[i] = all_classNames_int[i];
+        }
+        for (int i = all_classes_int.length; i < classes.length ; i++) {
+            classes[i] = globalFeatures[i-all_classes_int.length];
+            classNames[i] = globalFeatures[i-all_classes_int.length].getName().replace("net.semanticmetadata.lire.imageanalysis.features.global.","");
+        }
 
-//        for(int i = 0; i < all_classes_int.length; i++){
-//            classes[i] = all_classes_int[i];
-//            classNames[i] = all_classNames_int[i];
-//        }
-//        for (int i = all_classes_int.length; i < classes.length ; i++) {
-//            classes[i] = globalFeatures[i-all_classes_int.length];
-//            classNames[i] = globalFeaturesNames[i-all_classes_int.length];
-//        }
-
-        int featureIndex = 11; //stopped at FCTH - index 5
-        Class[] classes = new Class[]{globalFeatures[featureIndex]};
-        String[] classNames = new String[]{globalFeatures[featureIndex].getName().replace("net.semanticmetadata.lire.imageanalysis.features.global.","")};
+//        int featureIndex = 11; //stopped at FCTH - index 5
+//        Class[] classes = new Class[]{globalFeatures[featureIndex]};
+//        String[] classNames = new String[]{globalFeatures[featureIndex].getName().replace("net.semanticmetadata.lire.imageanalysis.features.global.","")};
         if (!(new File(outputFolderPath).exists())) {
             new File(outputFolderPath).mkdirs();
         }
-        new File(outputFolderPath + classNames[0] ).mkdirs();
-        String outputFilePathBase = outputFolderPath + classNames[0] + "/"  + "results_";
+        new File(outputFolderPath + "keras_global" ).mkdirs();
+        String outputFilePathBase = outputFolderPath + "keras_global" + "/"  + "results_";
 
 
 
