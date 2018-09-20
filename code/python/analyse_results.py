@@ -88,64 +88,82 @@ class Result():
     def get_matrix_value_at(self,idx_h,idx_w):
         return self.confusion_matrix[idx_h][idx_w]
 
+    def get_correct_pcnt_of_cat(self,cat):
+        sum = 0
+        for i in range(len(self.confusion_matrix)):
+            sum += self.confusion_matrix[i][cat]
+        return self.get_matrix_value_at(cat,cat)/float(sum) * 100
 
-filenames = get_files_prefix('/home/michael/master_thesis/data/results/global','results_')
+
+filenames = get_files_prefix('/home/michael/master_thesis/data/results','results_')
 worst_cat = dict()
 max_results = 20
 top_filenames = []
 top_filenames_ESO_NZL = []
+
 for f in filenames:
+    if f.find('MetricSpaces') != -1:
+        continue
+    if f.find('COSINE') == -1:
+        continue
     test = Result(f)
-    if len(top_filenames) >= max_results and top_filenames[0][0] <= test.get_correct_percent() :
-        for i in reversed(range(len(top_filenames)-1)):
-            top_filenames[i+1] = top_filenames[i]
-        top_filenames[0] = (test.get_correct_percent(),test.get_filename())
-    elif len(top_filenames) < max_results:
-        top_filenames.append((test.get_correct_percent(),test.get_filename()))
-    else:
-        for i in range(len(top_filenames)):
-            if test.get_correct_percent() > top_filenames[i][0]:
-                top_filenames.insert(i-1,(test.get_correct_percent(),test.get_filename() ))
-                top_filenames.pop()
+    top_filenames.append((test.get_correct_percent(),f))
+    # if len(top_filenames) >= max_results and top_filenames[0][0] <= test.get_correct_percent() :
+    #     for i in reversed(range(len(top_filenames)-1)):
+    #         top_filenames[i+1] = top_filenames[i]
+    #     top_filenames[0] = (test.get_correct_percent(),test.get_filename())
+    # elif len(top_filenames) < max_results:
+    #     top_filenames.append((test.get_correct_percent(),test.get_filename()))
+    # else:
+    #     for i in range(len(top_filenames)):
+    #         if test.get_correct_percent() > top_filenames[i][0]:
+    #             top_filenames.insert(i-1,(test.get_correct_percent(),test.get_filename() ))
+    #             top_filenames.pop()
 
-    if len(top_filenames_ESO_NZL) >= max_results and top_filenames_ESO_NZL[0][0] >= test.get_matrix_value_at(Category.CATEGORY_NORMAL_Z_LINE.value,Category.CATEGORY_ESOPHAGITIS.value) :
-        for i in reversed(range(len(top_filenames_ESO_NZL)-1)):
-            top_filenames_ESO_NZL[i+1] = top_filenames_ESO_NZL[i]
-        top_filenames_ESO_NZL[0] = (test.get_matrix_value_at(Category.CATEGORY_NORMAL_Z_LINE.value,Category.CATEGORY_ESOPHAGITIS.value),test.get_filename())
-    elif len(top_filenames_ESO_NZL) < max_results:
-        top_filenames_ESO_NZL.append((test.get_matrix_value_at(Category.CATEGORY_NORMAL_Z_LINE.value,Category.CATEGORY_ESOPHAGITIS.value),test.get_filename()))
-    else:
-        for i in range(len(top_filenames_ESO_NZL)):
-            if test.get_matrix_value_at(Category.CATEGORY_NORMAL_Z_LINE.value,Category.CATEGORY_ESOPHAGITIS.value) < top_filenames_ESO_NZL[i][0]:
-                top_filenames_ESO_NZL.insert(i-1,(test.get_matrix_value_at(Category.CATEGORY_NORMAL_Z_LINE.value,Category.CATEGORY_ESOPHAGITIS.value),test.get_filename() ))
-                top_filenames_ESO_NZL.pop()
-    top_filenames = list(set(top_filenames))
+    # if len(top_filenames_ESO_NZL) >= max_results and top_filenames_ESO_NZL[0][0] >= test.get_matrix_value_at(Category.CATEGORY_NORMAL_Z_LINE.value,Category.CATEGORY_ESOPHAGITIS.value) :
+    #     for i in reversed(range(len(top_filenames_ESO_NZL)-1)):
+    #         top_filenames_ESO_NZL[i+1] = top_filenames_ESO_NZL[i]
+    #     top_filenames_ESO_NZL[0] = (test.get_matrix_value_at(Category.CATEGORY_NORMAL_Z_LINE.value,Category.CATEGORY_ESOPHAGITIS.value),test.get_filename())
+    # elif len(top_filenames_ESO_NZL) < max_results:
+    #     top_filenames_ESO_NZL.append((test.get_matrix_value_at(Category.CATEGORY_NORMAL_Z_LINE.value,Category.CATEGORY_ESOPHAGITIS.value),test.get_filename()))
+    # else:
+    #     for i in range(len(top_filenames_ESO_NZL)):
+    #         if test.get_matrix_value_at(Category.CATEGORY_NORMAL_Z_LINE.value,Category.CATEGORY_ESOPHAGITIS.value) < top_filenames_ESO_NZL[i][0]:
+    #             top_filenames_ESO_NZL.insert(i-1,(test.get_matrix_value_at(Category.CATEGORY_NORMAL_Z_LINE.value,Category.CATEGORY_ESOPHAGITIS.value),test.get_filename() ))
+    #             top_filenames_ESO_NZL.pop()
+    # top_filenames = list(set(top_filenames))
     top_filenames.sort(key=lambda tup: tup[0], reverse=True)
-    top_filenames_ESO_NZL = list(set(top_filenames_ESO_NZL))
-    top_filenames_ESO_NZL.sort(key=lambda tup: tup[0])
-
+    # top_filenames_ESO_NZL = list(set(top_filenames_ESO_NZL))
+    # top_filenames_ESO_NZL.sort(key=lambda tup: tup[0])
+    cat_pcnt = []
+    print(f, test.get_correct_percent())
+    for cat in range(len(Category)):
+        cat_pcnt.append((str(Category(cat).name),test.get_correct_pcnt_of_cat(cat)))
+    # cat_pcnt.sort(key=lambda tup: tup[1], reverse=True)
+    for i in range(len(cat_pcnt)):
+        print('{:<2}'.format(i+1)+':','{:<6.2f}'.format(cat_pcnt[i][1]) + "%",cat_pcnt[i][0])
     # print(test.get_filename())
     res = test.get_worst_category()
     # print(res)
-    for l in res:
-        if (l[1],l[2]) in worst_cat:
-            worst_cat[(l[1],l[2])] = worst_cat[(l[1],l[2])] + 1
-        else:
-            worst_cat[(l[1],l[2])] = 1
+    # for l in res:
+    #     if (l[1],l[2]) in worst_cat:
+    #         worst_cat[(l[1],l[2])] = worst_cat[(l[1],l[2])] + 1
+    #     else:
+    #         worst_cat[(l[1],l[2])] = 1
        
     
     # print()
 
 for i in range(len(top_filenames)):
     print(i+1,':','{:<5}'.format(top_filenames[i][0]) + '%',top_filenames[i][1])
-print()
-for i in range(len(top_filenames_ESO_NZL)):
-    print(i+1,':','{:<5}'.format(top_filenames_ESO_NZL[i][0]),top_filenames_ESO_NZL[i][1])
-print()
-if len(worst_cat) != 0:
-    print('1 worst cat:',max(worst_cat.items(),key= operator.itemgetter(1)))
-    for i in range(len(worst_cat)):
-        del worst_cat[max(worst_cat.items(),key= operator.itemgetter(1))[0]]
-        if len(worst_cat) == 0:
-            break
-        print(i+2,'worst cat:',max(worst_cat.items(),key= operator.itemgetter(1)))
+# print()
+# for i in range(len(top_filenames_ESO_NZL)):
+#     print(i+1,':','{:<5}'.format(top_filenames_ESO_NZL[i][0]),top_filenames_ESO_NZL[i][1])
+# print()
+# if len(worst_cat) != 0:
+#     print('1 worst cat:',max(worst_cat.items(),key= operator.itemgetter(1)))
+#     for i in range(len(worst_cat)):
+#         del worst_cat[max(worst_cat.items(),key= operator.itemgetter(1))[0]]
+#         if len(worst_cat) == 0:
+#             break
+#         print(i+2,'worst cat:',max(worst_cat.items(),key= operator.itemgetter(1)))

@@ -1,20 +1,16 @@
 package main;
 
+import classifier.WeightedImageSearchHitClassifier;
+import classifier.Weights;
 import keras.documentbuilder.KerasDocumentBuilderImpl;
 import keras.features.*;
-import keras.features.quantized.*;
 import keras.indexer.KerasIndexer;
 import keras.searcher.KerasBitSamplingImageSearcher;
 import keras.searcher.KerasMetricSpacesImageSearcher;
 import keras.searcher.KerasSearcher;
 import keras.searcher.SearchRunnable;
 import net.semanticmetadata.lire.imageanalysis.features.global.*;
-import net.semanticmetadata.lire.imageanalysis.features.global.centrist.SimpleCentrist;
-import net.semanticmetadata.lire.imageanalysis.features.global.centrist.SpatialPyramidCentrist;
-import net.semanticmetadata.lire.imageanalysis.features.global.joint.JointHistogram;
-import net.semanticmetadata.lire.imageanalysis.features.global.joint.LocalBinaryPatternsAndOpponent;
-import net.semanticmetadata.lire.imageanalysis.features.global.joint.RankAndOpponent;
-import net.semanticmetadata.lire.imageanalysis.features.global.spatialpyramid.*;
+import org.apache.commons.io.FileUtils;
 import utils.Category;
 import utils.MedicoConfusionMatrix;
 import classifier.ImageSearchHitClassifier;
@@ -29,12 +25,12 @@ import org.apache.lucene.store.FSDirectory;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.LinkedHashMap;
-import java.util.Vector;
+import java.util.*;
 
 /***
  * class to perform experiments for task
@@ -42,19 +38,14 @@ import java.util.Vector;
 public class Main {
 
     private static Class[]  all_classes_double =    {   DenseNet121_Double.class,  DenseNet169_Double.class,   DenseNet201_Double.class,   ResNet50_Double.class,  MobileNet_Double.class, VGG16_Double.class, VGG19_Double.class, Xception_Double.class   };
-    private static String[] all_classNames_double = {   "DenseNet121_Double",      "DenseNet169_Double",       "DenseNet201_Double",       "ResNet50_Double",      "MobileNet_Double",     "VGG16_Double",     "VGG19_Double",     "Xception_Double"       };
     private static Class[]  all_classes_float =     {   DenseNet121_Float.class,   DenseNet169_Float.class,    DenseNet201_Float.class,    ResNet50_Float.class,   MobileNet_Float.class,  VGG16_Float.class,  VGG19_Float.class,  Xception_Float.class    };
-    private static String[] all_classNames_float =  {   "DenseNet121_Float",       "DenseNet169_Float",        "DenseNet201_Float",        "ResNet50_Float",       "MobileNet_Float",      "VGG16_Float",      "VGG19_Float",      "Xception_Float"        };
     private static Class[]  all_classes_long =      {   DenseNet121_Long.class,    DenseNet169_Long.class,     DenseNet201_Long.class,      ResNet50_Long.class,    MobileNet_Long.class,   VGG16_Long.class,   VGG19_Long.class,   Xception_Long.class     };
-    private static String[] all_classNames_long =   {   "DenseNet121_Long",        "DenseNet169_Long",         "DenseNet201_Long",         "ResNet50_Long",        "MobileNet_Long",       "VGG16_Long",       "VGG19_Long",       "Xception_Long"         };
     private static Class[]  all_classes_int =       {   DenseNet121_Int.class,     DenseNet169_Int.class,      DenseNet201_Int.class,      ResNet50_Int.class,     MobileNet_Int.class,    VGG16_Int.class,    VGG19_Int.class,    Xception_Int.class      };
-    private static String[] all_classNames_int =    {   "DenseNet121_Int",         "DenseNet169_Int",          "DenseNet201_Int",          "ResNet50_Int",         "MobileNet_Int",        "VGG16_Int",        "VGG19_Int",        "Xception_Int"          };
     private static Class[]  all_classes_short =     {   DenseNet121_Short.class,   DenseNet169_Short.class,    DenseNet201_Short.class,    ResNet50_Short.class,   MobileNet_Short.class,  VGG16_Short.class,  VGG19_Short.class,  Xception_Short.class    };
-    private static String[] all_classNames_short =  {   "DenseNet121_Short",       "DenseNet169_Short",        "DenseNet201_Short",        "ResNet50_Short",       "MobileNet_Short",      "VGG16_Short",      "VGG19_Short",      "Xception_Short"        };
     private static Class[]  all_classes_byte =      {   DenseNet121_Byte.class,    DenseNet169_Byte.class,     DenseNet201_Byte.class,     ResNet50_Byte.class,    MobileNet_Byte.class,   VGG16_Byte.class,   VGG19_Byte.class,   Xception_Byte.class     };
-    private static String[] all_classNames_byte =   {   "DenseNet121_Byte",        "DenseNet169_Byte",         "DenseNet201_Byte",         "ResNet50_Byte",        "MobileNet_Byte",       "VGG16_Byte",       "VGG19_Byte",       "Xception_Byte"         };
 
 //    private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{AutoColorCorrelogram.class, CEDD.class, ACCID.class, ColorLayout.class, EdgeHistogram.class, FCTH.class,  Gabor.class, JCD.class, LuminanceLayout.class,PHOG.class, ScalableColor.class, Tamura.class};
+//private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{/*ACCID.class, ColorLayout.class*/};
     private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{ACCID.class, ColorLayout.class};
 
 
@@ -74,6 +65,7 @@ public class Main {
     private static String imageFolderPath = basePath + "Medico_2018_development_set/";
     private static boolean useBitSampling = true;
     private static boolean useMetricSpaces = false;
+    private static boolean skipIndexing = true;
 
     public static void main(String[] args) throws Exception {
 
@@ -93,18 +85,20 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String csvBasePath = basePath + "csv/1024Max/" ;
-        String outFileBasePath = basePath + "indexCreationFiles/" + "globalFeatureTest/";
-        String outputFolderPath =  basePath + "results/" + "global/";
-        String[] indexPath = {basePath + "index/" + "global/" + "MetricSpaces/" , basePath + "index/" + "global/"+ "BitSampling/"};
+
+        String folder = "kgcw/";
+        String csvBasePath = basePath + "csv/1024orLess/" ;
+        String outFileBasePath = basePath + "indexCreationFiles/" + folder;
+        String outputFolderPath =  basePath + "results/" + folder;
+        String[] indexPath = {basePath + "index/" + folder+ "MetricSpaces/" , basePath + "index/" + folder+ "BitSampling/"};
         KerasDocumentBuilderImpl.maxDimensions = 1024;
 
         Class[] classes =     new Class[all_classes_int.length + globalFeatures.length];
-        String[] classNames = new String[all_classNames_int.length + globalFeatures.length];
+        String[] classNames = new String[all_classes_int.length + globalFeatures.length];
 //
         for(int i = 0; i < all_classes_int.length; i++){
             classes[i] = all_classes_int[i];
-            classNames[i] = all_classNames_int[i];
+            classNames[i] = all_classes_int[i].getName().replace("keras.features.","");
         }
         for (int i = all_classes_int.length; i < classes.length ; i++) {
             classes[i] = globalFeatures[i-all_classes_int.length];
@@ -117,8 +111,8 @@ public class Main {
         if (!(new File(outputFolderPath).exists())) {
             new File(outputFolderPath).mkdirs();
         }
-        new File(outputFolderPath + "keras_global" ).mkdirs();
-        String outputFilePathBase = outputFolderPath + "keras_global" + "/"  + "results_";
+        new File(outputFolderPath  ).mkdirs();
+        String outputFilePathBase = outputFolderPath   + "results_";
 
 
 
@@ -134,11 +128,21 @@ public class Main {
             csvFiles[i] = csvBasePath + "quantized/" + classNames[i].toLowerCase() + ".csv";
         }
 
-        if(useMetricSpaces)
-            index(HashingMode.HASHING_MODE_METRIC_SPACES, indexPath[0], inFileTrain, classes, outFiles, csvFiles, trainFiles);
-        if(useBitSampling)
-            index(HashingMode.HASHING_MODE_BITSAMPLING, indexPath[1], inFileTrain, classes, outFiles, csvFiles, trainFiles);
 
+        if(!skipIndexing) {
+            if (useMetricSpaces)
+                index(HashingMode.HASHING_MODE_METRIC_SPACES, indexPath[0], inFileTrain, classes, outFiles, csvFiles, trainFiles);
+            if (useBitSampling)
+                index(HashingMode.HASHING_MODE_BITSAMPLING, indexPath[1], inFileTrain, classes, outFiles, csvFiles, trainFiles);
+        }
+        else{
+            for(int i = 0; i< classes.length;i++) {
+                if(KerasFeature.class.isAssignableFrom(classes[i])) {
+                    Method m = classes[i].getMethod("setCsvFilename", String.class);
+                    m.invoke(null, csvFiles[i]);
+                }
+            }
+        }
         IndexReader[] readers = new IndexReader[classes.length * ((useMetricSpaces && useBitSampling )?2:1)];
         try {
             if(useMetricSpaces)
@@ -153,7 +157,8 @@ public class Main {
             e.printStackTrace();
         }
         KerasSearcher[] searchers = new KerasSearcher[classes.length* ((useMetricSpaces && useBitSampling )?2:1)];
-        for(int numResults = 1; numResults <= 10; numResults++) {
+//        for(int numResults = 1; numResults <= 10; numResults++) {
+        int numResults = 9;
             if (useMetricSpaces)
                 setupSearchers(HashingMode.HASHING_MODE_METRIC_SPACES, classes, outFiles, readers, searchers, 0, numResults);
             if (useBitSampling)
@@ -185,16 +190,17 @@ public class Main {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(df.name() + ":");
+            System.out.println(df.name()+ " " + numResults + ":");
 
             int counter = 1;
 
+            StringBuilder b = new StringBuilder();
             MedicoConfusionMatrix matrix = new MedicoConfusionMatrix();
-            for (String s : testFiles) {
+            for (String testFile : testFiles) {
                 Instant st = Instant.now();
 
                 for (int i = 0; i < hits.length; i++) {
-                    runnables[i] = new SearchRunnable(searchers[i], readers[i], s);
+                    runnables[i] = new SearchRunnable(searchers[i], readers[i], testFile);
                     threads[i] = new Thread(runnables[i]);
                     threads[i].start();
                 }
@@ -207,17 +213,23 @@ public class Main {
                     }
                     hits[i] = runnables[i].getResult();
                 }
+                //Weights weights, Vector<ImageSearchHits> imageSearchHits, Vector<String> classNames, Vector<IndexReader> indexReaders
+                WeightedImageSearchHitClassifier classifier = new WeightedImageSearchHitClassifier(setupWeights(new Vector<>(Arrays.asList(classNames))),
+                        new Vector<>(Arrays.asList(hits)),
+                        new Vector<>(Arrays.asList(classNames)),
+                        new Vector<>(Arrays.asList(readers)));
+                Vector<WeightedImageSearchHitClassifier.Prediction> predictions = classifier.getPredictions();
 
-
-                LinkedHashMap<String, Double> preds = getResults(hits, readers, new Vector<String>(Category.getCategoryNames()));
-                String k = preds.entrySet().iterator().next().getKey();
-
+                b.append(testFile + ":\n");
+                for(WeightedImageSearchHitClassifier.Prediction p : predictions){
+                    b.append(p.score + " : " + p.category.getName() + "\n");
+                }
                 Category catGold = null, catPred = null;
                 for (Category c : Category.values()) {
-                    if (s.contains("/" + c.getName() + "/")) {
+                    if (testFile.contains("/" + c.getName() + "/")) {
                         catGold = c;
                     }
-                    if (k.equals(c.getName())) {
+                    if (predictions.get(0).category == c) {
                         catPred = c;
                     }
                 }
@@ -227,13 +239,14 @@ public class Main {
                 Instant e = Instant.now();
                 System.out.printf("\rprocessed file %4s of %d in %s / total %s", (counter++) + "", testFiles.size(), Duration.between(st, e),Duration.between(startDf, e));
             }
+            FileUtils.writeStringToFile(new File(outputFilePathBase + "scores_per_class.txt"),b.toString(),(String)null);
             System.out.println();
             Instant endDf = Instant.now();
             out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n", matrix.getTotal(), matrix.getCorrect(), matrix.getIncorrect(), matrix.getCorrectPcnt()));
             System.out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n%s", matrix.getTotal(), matrix.getCorrect(), matrix.getIncorrect(), matrix.getCorrectPcnt(), Duration.between(startDf, endDf)));
             out.println(matrix.toString());
             matrix.printConfusionMatrix();
-        }
+//        }
         for (Class c : classes) {
             try {
                 c.getDeclaredField("reader").set(null, null);
@@ -328,7 +341,7 @@ public class Main {
                     }
                 }
 
-                indexer.index();
+//                indexer.index();
 
             } catch (IllegalAccessException | IOException | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
@@ -342,17 +355,21 @@ public class Main {
      * @param allCategories list of categories
      * @return map with predictions and scores
      */
-    public static  LinkedHashMap<String, Double> getResults(ImageSearchHits[] hits, IndexReader[] readers,Vector<String> allCategories) {
+    public static  LinkedHashMap<String, Double> getResults(ImageSearchHits[] hits, IndexReader[] readers,Vector<String> allCategories, String[] classNames, StringBuilder b) {
         Vector<String> hitsStrings = new Vector<>();
         for(int j = 0; j < hits.length; j++){
+            b.append(classNames[j] + ":\n");
             for (int i = 0; i < hits[j].length(); i++) {
                 String filename = null;
+                double score = 0;
                 try {
+                    score = hits[j].score(i);
                     filename = readers[j].document(hits[j].documentID(i)).getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0];
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                b.append(score + ":" +filename + "\n");
                 hitsStrings.add(filename);
 
 
@@ -360,6 +377,52 @@ public class Main {
         }
         ImageSearchHitClassifier classifier = new ImageSearchHitClassifier(allCategories, hitsStrings);
         return (LinkedHashMap<String, Double>) classifier.getPredictions();
+    }
+    private static Weights setupWeights(Vector<String>classNames){
+        Weights w = new Weights(classNames, new Vector<>(Arrays.asList(Category.values())));
+        /*
+        1  CATEGORY_BLURRY_NOTHING,
+        2  CATEGORY_COLON_CLEAR,
+        3  CATEGORY_DYED_LIFTED_POLYPS,
+        4  CATEGORY_DYED_RESECTION_MARGINS ,
+        5  CATEGORY_ESOPHAGITIS,
+        6  CATEGORY_INSTRUMENTS,
+        7  CATEGORY_NORMAL_CECUM,
+        8  CATEGORY_NORMAL_PYLORUS,
+        9  CATEGORY_NORMAL_Z_LINE,
+        10 CATEGORY_OUT_OF_PATIENT,
+        11 CATEGORY_POLYPS,
+        12 CATEGORY_RETROFLEX_RECTUM,
+        13 CATEGORY_RETROFLEX_STOMACH,
+        14 CATEGORY_STOOL_INCLUSIONS,
+        15 CATEGORY_STOOL_PLENTY,
+        16 CATEGORY_ULCERATIVE_COLITIS;
+
+         */
+        int index = 0;
+        Vector<Float> weights0,weights1,weights2,weights3,weights4,weights5,weights6,weights7,weights8,weights9;
+        //                                    1      2      3      4        5       6      7      8      9      10    11     12     13     14     15     16
+        weights0 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.1f,   0.19f,  0.23f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//DenseNet121_Int
+        weights1 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.14f,  0.19f,  0.13f,  0.1f,  0.1f,  0.1f,  0.18f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//DenseNet169_Int
+        weights2 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.16f,  0.19f,  0.23f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//DenseNet201_Int
+        weights3 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.19f,  0.19f,  0.17f,  0.1f,  0.1f,  0.1f,  0.07f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//ResNet50_Int
+        weights4 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.05f,  0.01f,  0.1f,   0.1f,  0.1f,  0.1f,  0.07f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//MobileNet_Int
+        weights5 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.15f,  0.1f,   0.01f,  0.1f,  0.1f,  0.1f,  0.18f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//VGG16_Int
+        weights6 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.1f,   0.1f,   0.01f,  0.1f,  0.1f,  0.1f,  0.18f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//VGG19_Int
+        weights7 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.05f,  0.01f,  0.01f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//Xception_Int
+        weights8 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.05f,  0.1f,   0.01f,  0.1f,  0.1f,  0.1f,  0.01f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//ACCID
+        weights9 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.01f,  0.01f,  0.1f,   0.1f,  0.1f,  0.1f,  0.01f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//ColorLayout
+        w.setWeightsForClass(classNames.get(index++),weights0);//DenseNet121_Int
+        w.setWeightsForClass(classNames.get(index++),weights1);//DenseNet169_Int
+        w.setWeightsForClass(classNames.get(index++),weights2);//DenseNet201_Int
+        w.setWeightsForClass(classNames.get(index++),weights3);//ResNet50_Int
+        w.setWeightsForClass(classNames.get(index++),weights4);//MobileNet_Int
+        w.setWeightsForClass(classNames.get(index++),weights5);//VGG16_Int
+        w.setWeightsForClass(classNames.get(index++),weights6);//VGG19_Int
+        w.setWeightsForClass(classNames.get(index++),weights7);//Xception_Int
+        w.setWeightsForClass(classNames.get(index++),weights8);//ACCID
+        w.setWeightsForClass(classNames.get(index++),weights9);//ColorLayout
+        return w;
     }
 }
 

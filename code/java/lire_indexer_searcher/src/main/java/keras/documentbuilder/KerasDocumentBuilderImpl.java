@@ -135,10 +135,10 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
     private static void testHashes() {
 //        Let's try to read the hash functions right here and we don't have to care about it right now.
         try {
-                if(new File(hashFilePath).exists())
-                    new File(hashFilePath).delete();
-                BitSampling.dimensions = maxDimensions;
-                BitSampling.generateHashFunctions(hashFilePath);
+                if(!(new File(hashFilePath).exists())){
+                    BitSampling.dimensions = maxDimensions;
+                    BitSampling.generateHashFunctions(hashFilePath);
+                }
                 BitSampling.readHashFunctions(new FileInputStream(new File(hashFilePath)));
 //            BitSampling.readHashFunctions();
 //            LocalitySensitiveHashing.readHashFunctions();
