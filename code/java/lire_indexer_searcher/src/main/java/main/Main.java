@@ -12,6 +12,7 @@ import keras.searcher.SearchRunnable;
 import net.semanticmetadata.lire.imageanalysis.features.global.*;
 import org.apache.commons.io.FileUtils;
 import utils.Category;
+import utils.FilePrep;
 import utils.MedicoConfusionMatrix;
 import classifier.ImageSearchHitClassifier;
 import net.semanticmetadata.lire.builders.DocumentBuilder;
@@ -45,8 +46,8 @@ public class Main {
     private static Class[]  all_classes_byte =      {   DenseNet121_Byte.class,    DenseNet169_Byte.class,     DenseNet201_Byte.class,     ResNet50_Byte.class,    MobileNet_Byte.class,   VGG16_Byte.class,   VGG19_Byte.class,   Xception_Byte.class     };
 
 //    private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{AutoColorCorrelogram.class, CEDD.class, ACCID.class, ColorLayout.class, EdgeHistogram.class, FCTH.class,  Gabor.class, JCD.class, LuminanceLayout.class,PHOG.class, ScalableColor.class, Tamura.class};
-//private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{/*ACCID.class, ColorLayout.class*/};
-    private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{ACCID.class, ColorLayout.class};
+private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
+//    private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{ACCID.class, ColorLayout.class};
 
 
 
@@ -65,100 +66,104 @@ public class Main {
     private static String imageFolderPath = basePath + "Medico_2018_development_set/";
     private static boolean useBitSampling = true;
     private static boolean useMetricSpaces = false;
-    private static boolean skipIndexing = true;
-
+    private static boolean skipIndexing = false;
+    private static boolean generateInFiles = true;
     public static void main(String[] args) throws Exception {
 
+
         Instant startAll = Instant.now();
-//        FilePrep prep = new FilePrep(imageFolderPath,5,inFileTrain,inFileTest);
-//        prep.writeSetFiles();
-        Vector<String> trainFiles = null;
-        try {
-            trainFiles = new Vector<>(Files.readAllLines(Paths.get(inFileTrain)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        for(int runIdx = 1; runIdx <= 10; runIdx++) {
+            System.out.println("run " + runIdx);
+            if (generateInFiles) {
+                FilePrep prep = new FilePrep(imageFolderPath, 5, inFileTrain, inFileTest);
+                prep.writeSetFiles();
+            }
+            Vector<String> trainFiles = null;
+            try {
+                trainFiles = new Vector<>(Files.readAllLines(Paths.get(inFileTrain)));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        Vector<String> testFiles = new Vector<>();
-        try {
-            testFiles = new Vector<>(Files.readAllLines(Paths.get(inFileTest)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            Vector<String> testFiles = new Vector<>();
+            try {
+                testFiles = new Vector<>(Files.readAllLines(Paths.get(inFileTest)));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        String folder = "kgcw/";
-        String csvBasePath = basePath + "csv/1024orLess/" ;
-        String outFileBasePath = basePath + "indexCreationFiles/" + folder;
-        String outputFolderPath =  basePath + "results/" + folder;
-        String[] indexPath = {basePath + "index/" + folder+ "MetricSpaces/" , basePath + "index/" + folder+ "BitSampling/"};
-        KerasDocumentBuilderImpl.maxDimensions = 1024;
+            String folder = "kgcw/" + runIdx + "/";
+            String csvBasePath = basePath + "csv/1024orLess/";
+            String outFileBasePath = basePath + "indexCreationFiles/" + folder;
+            String outputFolderPath = basePath + "results/" + folder;
+            String[] indexPath = {basePath + "index/" + folder + "MetricSpaces/", basePath + "index/" + folder + "BitSampling/"};
+            KerasDocumentBuilderImpl.maxDimensions = 1024;
 
-        Class[] classes =     new Class[all_classes_int.length + globalFeatures.length];
-        String[] classNames = new String[all_classes_int.length + globalFeatures.length];
+            Class[] classes = new Class[all_classes_int.length + globalFeatures.length];
+            String[] classNames = new String[all_classes_int.length + globalFeatures.length];
 //
-        for(int i = 0; i < all_classes_int.length; i++){
-            classes[i] = all_classes_int[i];
-            classNames[i] = all_classes_int[i].getName().replace("keras.features.","");
-        }
-        for (int i = all_classes_int.length; i < classes.length ; i++) {
-            classes[i] = globalFeatures[i-all_classes_int.length];
-            classNames[i] = globalFeatures[i-all_classes_int.length].getName().replace("net.semanticmetadata.lire.imageanalysis.features.global.","");
-        }
+            for (int i = 0; i < all_classes_int.length; i++) {
+                classes[i] = all_classes_int[i];
+                classNames[i] = all_classes_int[i].getName().replace("keras.features.", "");
+            }
+            for (int i = all_classes_int.length; i < classes.length; i++) {
+                classes[i] = globalFeatures[i - all_classes_int.length];
+                classNames[i] = globalFeatures[i - all_classes_int.length].getName().replace("net.semanticmetadata.lire.imageanalysis.features.global.", "");
+            }
 
 //        int featureIndex = 11; //stopped at FCTH - index 5
 //        Class[] classes = new Class[]{globalFeatures[featureIndex]};
 //        String[] classNames = new String[]{globalFeatures[featureIndex].getName().replace("net.semanticmetadata.lire.imageanalysis.features.global.","")};
-        if (!(new File(outputFolderPath).exists())) {
+            if (!(new File(outputFolderPath).exists())) {
+                new File(outputFolderPath).mkdirs();
+            }
             new File(outputFolderPath).mkdirs();
-        }
-        new File(outputFolderPath  ).mkdirs();
-        String outputFilePathBase = outputFolderPath   + "results_";
+            String outputFilePathBase = outputFolderPath + "results_";
 
 
+            String[] outFiles = new String[classes.length];
+            String[] csvFiles = new String[classes.length];
+            for (int i = 0; i < classes.length; i++) {
+                if (!(new File(outFileBasePath).exists()))
+                    new File(outFileBasePath).mkdirs();
+                outFiles[i] = outFileBasePath + "out." + classNames[i] + ".dat";
+                csvFiles[i] = csvBasePath + "quantized/" + classNames[i].toLowerCase() + ".csv";
+            }
 
 
+            Instant startIndex = Instant.now();
+            if (!skipIndexing || generateInFiles) {
+                if (useMetricSpaces)
+                    index(HashingMode.HASHING_MODE_METRIC_SPACES, indexPath[0], inFileTrain, classes, outFiles, csvFiles, trainFiles);
+                if (useBitSampling)
+                    index(HashingMode.HASHING_MODE_BITSAMPLING, indexPath[1], inFileTrain, classes, outFiles, csvFiles, trainFiles);
 
-
-        String[] outFiles = new String[classes.length];
-        String[] csvFiles = new String[classes.length];
-        for (int i = 0; i < classes.length; i++) {
-            if (!(new File(outFileBasePath).exists()))
-                new File(outFileBasePath).mkdirs();
-            outFiles[i] = outFileBasePath + "out." + classNames[i] + ".dat";
-            csvFiles[i] = csvBasePath + "quantized/" + classNames[i].toLowerCase() + ".csv";
-        }
-
-
-        if(!skipIndexing) {
-            if (useMetricSpaces)
-                index(HashingMode.HASHING_MODE_METRIC_SPACES, indexPath[0], inFileTrain, classes, outFiles, csvFiles, trainFiles);
-            if (useBitSampling)
-                index(HashingMode.HASHING_MODE_BITSAMPLING, indexPath[1], inFileTrain, classes, outFiles, csvFiles, trainFiles);
-        }
-        else{
-            for(int i = 0; i< classes.length;i++) {
-                if(KerasFeature.class.isAssignableFrom(classes[i])) {
-                    Method m = classes[i].getMethod("setCsvFilename", String.class);
-                    m.invoke(null, csvFiles[i]);
+            } else {
+                for (int i = 0; i < classes.length; i++) {
+                    if (KerasFeature.class.isAssignableFrom(classes[i])) {
+                        Method m = classes[i].getMethod("setCsvFilename", String.class);
+                        m.invoke(null, csvFiles[i]);
+                    }
                 }
             }
-        }
-        IndexReader[] readers = new IndexReader[classes.length * ((useMetricSpaces && useBitSampling )?2:1)];
-        try {
-            if(useMetricSpaces)
-                for (int i = 0; i < classes.length; i++) {
-                    readers[i] = DirectoryReader.open(FSDirectory.open(Paths.get(indexPath[0])));
-                }
-            if(useBitSampling)
-                for (int i = useMetricSpaces?classes.length:0; i < readers.length; i++) {
-                    readers[i] = DirectoryReader.open(FSDirectory.open(Paths.get(indexPath[1])));
-                }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        KerasSearcher[] searchers = new KerasSearcher[classes.length* ((useMetricSpaces && useBitSampling )?2:1)];
+            Instant endIndex = Instant.now();
+            System.out.println("Indexing took: " + Duration.between(startIndex, endIndex));
+            IndexReader[] readers = new IndexReader[classes.length * ((useMetricSpaces && useBitSampling) ? 2 : 1)];
+            try {
+                if (useMetricSpaces)
+                    for (int i = 0; i < classes.length; i++) {
+                        readers[i] = DirectoryReader.open(FSDirectory.open(Paths.get(indexPath[0])));
+                    }
+                if (useBitSampling)
+                    for (int i = useMetricSpaces ? classes.length : 0; i < readers.length; i++) {
+                        readers[i] = DirectoryReader.open(FSDirectory.open(Paths.get(indexPath[1])));
+                    }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            KerasSearcher[] searchers = new KerasSearcher[classes.length * ((useMetricSpaces && useBitSampling) ? 2 : 1)];
 //        for(int numResults = 1; numResults <= 10; numResults++) {
-        int numResults = 9;
+            int numResults = 9;
             if (useMetricSpaces)
                 setupSearchers(HashingMode.HASHING_MODE_METRIC_SPACES, classes, outFiles, readers, searchers, 0, numResults);
             if (useBitSampling)
@@ -172,14 +177,13 @@ public class Main {
 
             Instant startDf = Instant.now();
             for (Class c : classes) {
-                try{
+                try {
                     c.getDeclaredField("USED_DISTANCE_FUN").set(null, df);
-                }
-                catch(Exception e){//catch and ignore exception to support global features in classes list
+                } catch (Exception e) {//catch and ignore exception to support global features in classes list
                 }
             }
 
-            String outputFilePath = outputFilePathBase + df.name() +"_" + numResults + ".txt";
+            String outputFilePath = outputFilePathBase + df.name() + "_" + numResults + ".txt";
             PrintStream out = null;
             try {
 
@@ -190,12 +194,15 @@ public class Main {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(df.name()+ " " + numResults + ":");
+            System.out.println(df.name() + " " + numResults + ":");
 
             int counter = 1;
 
             StringBuilder b = new StringBuilder();
+            StringBuilder b2 = new StringBuilder();
+            StringBuilder b3 = new StringBuilder();
             MedicoConfusionMatrix matrix = new MedicoConfusionMatrix();
+
             for (String testFile : testFiles) {
                 Instant st = Instant.now();
 
@@ -213,15 +220,27 @@ public class Main {
                     }
                     hits[i] = runnables[i].getResult();
                 }
+
+                b2.append(testFile);
+                b2.append(":");
+                b2.append("\n");
                 //Weights weights, Vector<ImageSearchHits> imageSearchHits, Vector<String> classNames, Vector<IndexReader> indexReaders
                 WeightedImageSearchHitClassifier classifier = new WeightedImageSearchHitClassifier(setupWeights(new Vector<>(Arrays.asList(classNames))),
                         new Vector<>(Arrays.asList(hits)),
                         new Vector<>(Arrays.asList(classNames)),
-                        new Vector<>(Arrays.asList(readers)));
-                Vector<WeightedImageSearchHitClassifier.Prediction> predictions = classifier.getPredictions();
+                        new Vector<>(Arrays.asList(readers)),
+                        b2
 
+                );
+                Vector<WeightedImageSearchHitClassifier.Prediction> predictions = classifier.getPredictions();
+                b3.append(testFile.substring(testFile.lastIndexOf('/') + 1));
+                b3.append(',');
+                b3.append(predictions.get(0).category.getName());
+                b3.append(',');
+                b3.append(String.format("%.3f",predictions.get(0).score));
+                b3.append('\n');
                 b.append(testFile + ":\n");
-                for(WeightedImageSearchHitClassifier.Prediction p : predictions){
+                for (WeightedImageSearchHitClassifier.Prediction p : predictions) {
                     b.append(p.score + " : " + p.category.getName() + "\n");
                 }
                 Category catGold = null, catPred = null;
@@ -237,9 +256,11 @@ public class Main {
                 matrix.increaseValue(catGold, catPred);
 
                 Instant e = Instant.now();
-                System.out.printf("\rprocessed file %4s of %d in %s / total %s", (counter++) + "", testFiles.size(), Duration.between(st, e),Duration.between(startDf, e));
+                System.out.printf("\rprocessed file %4s of %d in %s / total %s", (counter++) + "", testFiles.size(), Duration.between(st, e), Duration.between(startDf, e));
             }
-            FileUtils.writeStringToFile(new File(outputFilePathBase + "scores_per_class.txt"),b.toString(),(String)null);
+            FileUtils.writeStringToFile(new File(outputFilePathBase + "findings_per_class.txt"), b2.toString(), (String) null);
+            FileUtils.writeStringToFile(new File(outputFilePathBase + "scores_per_class.txt"), b.toString(), (String) null);
+            FileUtils.writeStringToFile(new File(outputFilePathBase + "run_output.txt"), b3.toString(), (String) null);
             System.out.println();
             Instant endDf = Instant.now();
             out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n", matrix.getTotal(), matrix.getCorrect(), matrix.getIncorrect(), matrix.getCorrectPcnt()));
@@ -247,16 +268,15 @@ public class Main {
             out.println(matrix.toString());
             matrix.printConfusionMatrix();
 //        }
-        for (Class c : classes) {
-            try {
-                c.getDeclaredField("reader").set(null, null);
+            for (Class c : classes) {
+                try {
+                    c.getDeclaredField("reader").set(null, null);
+                } catch (Exception e) {//catch and ignore exception to support global features in classes list
+                }
             }
-            catch(Exception e){//catch and ignore exception to support global features in classes list
-            }
+            System.gc();
+
         }
-        System.gc();
-
-
 
         Instant endAll = Instant.now();
         System.out.println(Duration.between(startAll, endAll));
@@ -341,7 +361,7 @@ public class Main {
                     }
                 }
 
-//                indexer.index();
+                indexer.index();
 
             } catch (IllegalAccessException | IOException | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
@@ -401,17 +421,17 @@ public class Main {
          */
         int index = 0;
         Vector<Float> weights0,weights1,weights2,weights3,weights4,weights5,weights6,weights7,weights8,weights9;
-        //                                    1      2      3      4        5       6      7      8      9      10    11     12     13     14     15     16
-        weights0 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.1f,   0.19f,  0.23f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//DenseNet121_Int
-        weights1 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.14f,  0.19f,  0.13f,  0.1f,  0.1f,  0.1f,  0.18f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//DenseNet169_Int
-        weights2 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.16f,  0.19f,  0.23f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//DenseNet201_Int
-        weights3 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.19f,  0.19f,  0.17f,  0.1f,  0.1f,  0.1f,  0.07f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//ResNet50_Int
-        weights4 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.05f,  0.01f,  0.1f,   0.1f,  0.1f,  0.1f,  0.07f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//MobileNet_Int
-        weights5 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.15f,  0.1f,   0.01f,  0.1f,  0.1f,  0.1f,  0.18f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//VGG16_Int
-        weights6 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.1f,   0.1f,   0.01f,  0.1f,  0.1f,  0.1f,  0.18f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//VGG19_Int
-        weights7 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.05f,  0.01f,  0.01f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//Xception_Int
-        weights8 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.05f,  0.1f,   0.01f,  0.1f,  0.1f,  0.1f,  0.01f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//ACCID
-        weights9 = new Vector<>(Arrays.asList(0.1f,  0.1f,  0.01f,  0.01f,  0.1f,   0.1f,  0.1f,  0.1f,  0.01f,  0.1f, 0.1f,  0.1f,  0.1f,  0.1f,  0.1f,  0.1f));//ColorLayout
+        //                                    1      2      3      4      5       6      7      8      9      10    11     12     13     14     15     16
+        weights0 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.19f, 0.1f,  0.2f,   0.125f,  0.125f,  0.125f,  0.1f,  0.125f, 0.19f, 0.125f,  0.125f,  0.125f,  0.125f,  0.1f));//DenseNet121_Int
+        weights1 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.19f, 0.1f,  0.23f,  0.125f,  0.125f,  0.125f,  0.15f, 0.125f, 0.19f, 0.125f,  0.125f,  0.125f,  0.125f,  0.1f));//DenseNet169_Int
+        weights2 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.1f,  0.15f, 0.15f,  0.125f,  0.125f,  0.125f,  0.1f,  0.125f, 0.1f,  0.125f,  0.125f,  0.125f,  0.125f,  0.17f));//DenseNet201_Int
+        weights3 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.2f,  0.25f, 0.12f,  0.125f,  0.125f,  0.125f,  0.15f, 0.125f, 0.3f,  0.125f,  0.125f,  0.125f,  0.125f,  0.17f));//ResNet50_Int
+        weights4 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.15f, 0.1f,  0.12f,  0.125f,  0.125f,  0.125f,  0.15f, 0.125f, 0.1f,  0.125f,  0.125f,  0.125f,  0.125f,  0.1f));//MobileNet_Int
+        weights5 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.15f, 0.1f,  0.08f,  0.125f,  0.125f,  0.125f,  0.1f,  0.125f, 0.01f, 0.125f,  0.125f,  0.125f,  0.125f,  0.16f));//VGG16_Int
+        weights6 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f, 0.1f,  0.07f,  0.125f,  0.125f,  0.125f,  0.2f,  0.125f, 0.01f, 0.125f,  0.125f,  0.125f,  0.125f,  0.1f));//VGG19_Int
+        weights7 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f, 0.1f,  0.04f,  0.125f,  0.125f,  0.125f,  0.06f, 0.125f, 0.1f,  0.125f,  0.125f,  0.125f,  0.125f,  0.1f));//Xception_Int
+//        weights8 = new Vector<>(Arrays.asList(0.1f,  0.1f,    0.15f, 0.05f, 0.05f,  0.1f,    0.1f,    0.1f,    0.05f, 0.1f,   0.01f, 0.1f,    0.1f,    0.1f,    0.1f,    0.04f));//ACCID
+//        weights9 = new Vector<>(Arrays.asList(0.1f,  0.1f,    0.01f, 0.05f, 0.04f,  0.1f,    0.1f,    0.1f,    0.06f, 0.1f,   0.01f, 0.1f,    0.1f,    0.1f,    0.1f,    0.01f));//ColorLayout
         w.setWeightsForClass(classNames.get(index++),weights0);//DenseNet121_Int
         w.setWeightsForClass(classNames.get(index++),weights1);//DenseNet169_Int
         w.setWeightsForClass(classNames.get(index++),weights2);//DenseNet201_Int
@@ -420,11 +440,17 @@ public class Main {
         w.setWeightsForClass(classNames.get(index++),weights5);//VGG16_Int
         w.setWeightsForClass(classNames.get(index++),weights6);//VGG19_Int
         w.setWeightsForClass(classNames.get(index++),weights7);//Xception_Int
-        w.setWeightsForClass(classNames.get(index++),weights8);//ACCID
-        w.setWeightsForClass(classNames.get(index++),weights9);//ColorLayout
+//        w.setWeightsForClass(classNames.get(index++),weights8);//ACCID
+//        w.setWeightsForClass(classNames.get(index++),weights9);//ColorLayout
         return w;
     }
 }
+
+
+
+
+
+
 
 
 

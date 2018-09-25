@@ -6,7 +6,7 @@ Runs to try:
     ✔ combine best global features @done(18-09-18 13:40)
     ✔ combine best global feature combination with keras features @done(18-09-18 13:40)
     ✔ add weighting to classifier @done(18-09-19 13:57)
-    ☐ test with equal weights to see if same results are generated
+    ✔ test with equal weights to see if same results are generated @done(18-09-20 10:36)
     ☐ find weights to improve accuracy
 
 

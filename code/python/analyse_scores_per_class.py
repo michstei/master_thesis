@@ -1,4 +1,13 @@
-base_path = "/home/michael/master_thesis/data/results/kg/results_scores_per_class.txt"
+base_paths = ["/home/michael/master_thesis/data/results/kgcw/1/results_findings_per_class.txt",
+            "/home/michael/master_thesis/data/results/kgcw/2/results_findings_per_class.txt",
+            "/home/michael/master_thesis/data/results/kgcw/3/results_findings_per_class.txt",
+            "/home/michael/master_thesis/data/results/kgcw/4/results_findings_per_class.txt",
+            "/home/michael/master_thesis/data/results/kgcw/5/results_findings_per_class.txt",
+            "/home/michael/master_thesis/data/results/kgcw/6/results_findings_per_class.txt",
+            "/home/michael/master_thesis/data/results/kgcw/7/results_findings_per_class.txt",
+            "/home/michael/master_thesis/data/results/kgcw/8/results_findings_per_class.txt",
+            "/home/michael/master_thesis/data/results/kgcw/9/results_findings_per_class.txt",
+            "/home/michael/master_thesis/data/results/kgcw/10/results_findings_per_class.txt"]
 
 categories = ['blurry-nothing','colon-clear','dyed-lifted-polyps','dyed-resection-margins','esophagitis','instruments','normal-cecum','normal-pylorus','normal-z-line','out-of-patient','polyps','retroflex-rectum','retroflex-stomach','stool-inclusions','stool-plenty','ulcerative-colitis']
 class_names = ['DenseNet121_Int','DenseNet169_Int','DenseNet201_Int','ResNet50_Int','MobileNet_Int','VGG16_Int','VGG19_Int','Xception_Int','ACCID','ColorLayout']
@@ -7,70 +16,99 @@ class Record():
     def __init__(self):
         self.filename = ''
         self.category = ''
+        self.counter = dict()
         self.corrects = dict()
         self.incorrects = dict()
         self.total = dict()
-            
 
-lines = []
-with open(base_path) as f:
-    lines = f.readlines()
-records = []
-current_record = None
-current_class_name = ''
-for line in lines:
-    if line.startswith('/home'):
-        if current_record is not None:
-            records.append(current_record)
-        current_record = Record()
-        current_record.filename = line.split(':')[0]
-        for cat in categories:
-            if '/' + cat + '/' in current_record.filename:
-                current_record.category = cat 
-        continue
-    if line.split(':')[0] in class_names:
-        current_class_name = line.split(':')[0]
-        if current_class_name not in current_record.total:
-            current_record.total[current_class_name] = 0
-        if current_class_name not in current_record.corrects:
-            current_record.corrects[current_class_name] = 0
-        if current_class_name not in current_record.incorrects:
-            current_record.incorrects[current_class_name] = 0
-        continue
-    if line[0].isdigit():
-        current_record.total[current_class_name] = current_record.total[current_class_name] + 1
-        if '/' + current_record.category + '/' not in line:
-            if current_class_name not in current_record.incorrects:
-                current_record.incorrects[current_class_name] = 1
-            else:
-                current_record.incorrects[current_class_name] = current_record.incorrects[current_class_name] + 1
-        else:
+records = dict()         
+for path_idx in range(len(base_paths)):
+    lines = []
+    with open(base_paths[path_idx]) as f:
+        lines = f.readlines()
+   
+    records[path_idx] = []
+    current_record = None
+    current_class_name = ''
+
+    for line in lines:
+        # print(line)
+        if line.startswith('/home'):
+            if current_record is not None:
+                records[path_idx].append(current_record)
+            current_record = Record()
+            current_record.filename = line.split(':')[0]
+            for cat in categories:
+                if '/' + cat + '/' in current_record.filename:
+                    current_record.category = cat 
+            continue
+        if line.split(':')[0] in class_names:
+            current_class_name = line.split(':')[0]
+            if current_class_name not in current_record.total:
+                current_record.total[current_class_name] = 0
             if current_class_name not in current_record.corrects:
-                current_record.corrects[current_class_name] = 1
+                current_record.corrects[current_class_name] = 0
+            if current_class_name not in current_record.incorrects:
+                current_record.incorrects[current_class_name] = 0
+            if current_class_name not in current_record.counter:
+                current_record.counter[current_class_name] = dict()
+            continue
+        if line[0].isdigit():
+            found_category = None
+            for cat in categories:
+                if '/' + cat + '/' in line:
+                    found_category = cat
+                    break
+            if found_category not in current_record.counter[current_class_name]:
+                current_record.counter[current_class_name][found_category] = 1
             else:
-                current_record.corrects[current_class_name] = current_record.corrects[current_class_name] + 1
+                current_record.counter[current_class_name][found_category] = current_record.counter[current_class_name][found_category] + 1
+            current_record.total[current_class_name] = current_record.total[current_class_name] + 1
+            if '/' + current_record.category + '/' not in line:
+                if current_class_name not in current_record.incorrects:
+                    current_record.incorrects[current_class_name] = 1
+                else:
+                    current_record.incorrects[current_class_name] = current_record.incorrects[current_class_name] + 1
+            else:
+                if current_class_name not in current_record.corrects:
+                    current_record.corrects[current_class_name] = 1
+                else:
+                    current_record.corrects[current_class_name] = current_record.corrects[current_class_name] + 1
 
-results = dict()
-totals = dict()
-for record in records:
-    if record.category not in results:
-        results[record.category] = dict()
-        totals[record.category] = dict()
-    for key in record.total:
-        total = record.total[key]
-        correct = record.corrects[key]
-        incorrect = record.incorrects[key]
-        if key not in results[record.category]:
-            results[record.category][key] = 0
-        if key not in totals[record.category]:
-            totals[record.category][key] = 0
-        results[record.category][key] = results[record.category][key] + correct
-        totals[record.category][key] = totals[record.category][key] + total
-for r in results:
-    for c in results[r]:
-        results[r][c] = results[r][c] / totals[r][c] * 100
 
-for r in results:
-    print(r)
-    for c in results[r]:
-        print('%s %15s %s %2.2f'%('\t',c,':',results[r][c]))
+for cat in categories:
+    print(cat)
+    wrong_class = dict()
+    for path_idx in range(len(base_paths)):
+        wrong_class[path_idx] = dict()
+        for record in records[path_idx]:
+            if record.category == cat:
+                i = 1
+                for key in record.counter:
+                    if key not in wrong_class[path_idx]:
+                        wrong_class[path_idx][key] = 0
+                    key_max = []
+                    val_max = 0
+                    for key2 in record.counter[key]:
+                        if val_max < record.counter[key][key2]:
+                            val_max = record.counter[key][key2]
+                            key_max = [key2]
+                        elif val_max == record.counter[key][key2]:
+                            key_max.append(key2)
+                    # print("%2d : %15s : %r"%(i,key,cat in key_max and len(key_max) == 1),key_max)
+                    i += 1
+                    if cat not in key_max or len(key_max) != 1:
+                        wrong_class[path_idx][key] = wrong_class[path_idx][key] + 1
+
+    # print(wrong_class)
+    # print(wrong_class.keys())
+    # print(wrong_class[ next(iter(wrong_class.keys()))])
+    # print(wrong_class[wrong_class.keys].keys)
+    for k in class_names:
+        sum = 0
+        print("\t%15s : "%k,end=" ")
+        for path_idx in range(len(base_paths)):
+            print("%2d"%(wrong_class[path_idx][k]),end=" ")
+            sum += wrong_class[path_idx][k]
+        print("avg: %2.1f"%(sum/float(len(wrong_class[path_idx]))),end="\n")
+        

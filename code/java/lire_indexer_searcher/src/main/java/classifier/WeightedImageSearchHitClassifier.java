@@ -2,13 +2,13 @@ package classifier;
 
 import net.semanticmetadata.lire.builders.DocumentBuilder;
 import net.semanticmetadata.lire.searchers.ImageSearchHits;
+import org.apache.commons.io.FileUtils;
 import org.apache.lucene.index.IndexReader;
 import utils.Category;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Vector;
 
 public class WeightedImageSearchHitClassifier {
@@ -16,12 +16,13 @@ public class WeightedImageSearchHitClassifier {
     private Vector<ImageSearchHits> imageSearchHits;
     private Vector<String> classNames;
     private Vector<IndexReader> indexReaders;
-
-    public WeightedImageSearchHitClassifier(Weights weights, Vector<ImageSearchHits> imageSearchHits, Vector<String> classNames, Vector<IndexReader> indexReaders){
+    private StringBuilder builder;
+    public WeightedImageSearchHitClassifier(Weights weights, Vector<ImageSearchHits> imageSearchHits, Vector<String> classNames, Vector<IndexReader> indexReaders,StringBuilder builder){
         this.imageSearchHits = imageSearchHits;
         this.weights = weights;
         this.classNames = classNames;
         this.indexReaders = indexReaders;
+        this.builder = builder;
     }
 
     public Vector<Prediction> getPredictions(){
@@ -29,13 +30,20 @@ public class WeightedImageSearchHitClassifier {
         Vector<Vector<Prediction>> allPredictions = new Vector<>();
         for(int classIndex = 0; classIndex< this.imageSearchHits.size();classIndex++){
             ImageSearchHits hits = this.imageSearchHits.get(classIndex);
-            String className = this.classNames.get(classIndex);
+            String className = this.classNames.get(classIndex%classNames.size());
             IndexReader reader = this.indexReaders.get(classIndex);
             Vector<Prediction> predictionsOfClass = new Vector<>();
+            builder.append(className );
+            builder.append(":");
+            builder.append("\n");
             for(int hitIndex = 0; hitIndex < hits.length(); hitIndex++){
                 try {
                     double score = hits.score(hitIndex);
                     String filename = reader.document(hits.documentID(hitIndex)).getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0];
+                    builder.append(score);
+                    builder.append(":");
+                    builder.append(filename);
+                    builder.append("\n");
                     for (Category cat : Category.values()) {
                         if(filename.contains("/" + cat.getName() + "/")){
                             boolean found = false;
