@@ -5,8 +5,8 @@ from keras.preprocessing import image
 import keras.applications as appl
 from keras.models import Model
 from keras.layers import  GlobalAveragePooling2D,GlobalMaxPooling2D ,Dense
-filesdir = '/home/mst/master_thesis/data/Medico_2018_development_set/Medico_2018_development_set/'
-csv_folder = '/home/mst/master_thesis/code/python/csv/1024orLess/'
+filesdir = '/home/mst/master_thesis/data/Medico_2018_test_set/'
+csv_folder = '/home/mst/master_thesis/code/python/csv/1024orLessTest/'
 def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_input, model_targetsize):
    
     img = image.load_img(img_path, target_size=model_targetsize)
@@ -16,7 +16,7 @@ def extract_features_to_csv_string(img_path,model,feature_reshape_param,prep_inp
     x = prep_input(x)
     features = model.predict(x)
     features = features.reshape(feature_reshape_param)
-    text = img_path.replace('/home/mst/master_thesis/data/Medico_2018_development_set/','/home/michael/master_thesis/data/') + ','
+    text = img_path.replace('/home/mst/master_thesis/data/','/home/michael/master_thesis/data/') + ','
     for x in features:
         for y in x:
             text = text + "{:.40f}".format(y).rstrip('0').rstrip('.')+ ','
@@ -52,12 +52,12 @@ if __name__ == '__main__':
     model = appl.resnet50.ResNet50(weights='imagenet', include_top=False)
     model = addLayer(model)
     models['resnet50'] =    model
-    model = appl.inception_v3.InceptionV3(weights='imagenet', include_top=False)
-    model = addLayer(model)
-    models['inceptionv3'] = model
-    model = appl.inception_resnet_v2.InceptionResNetV2(weights='imagenet', include_top = False)
-    model = addLayer(model)
-    models['incresnetv2'] = model
+    #model = appl.inception_v3.InceptionV3(weights='imagenet', include_top=False)
+    #model = addLayer(model)
+    #models['inceptionv3'] = model
+    #model = appl.inception_resnet_v2.InceptionResNetV2(weights='imagenet', include_top = False)
+    #model = addLayer(model)
+    #models['incresnetv2'] = model
     model = appl.mobilenet.MobileNet(weights='imagenet', include_top=False)
     model = addLayer(model)
     models['mobilenet'] =   model
