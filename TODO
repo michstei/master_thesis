@@ -9,4 +9,6 @@ Runs to try:
     ✔ test with equal weights to see if same results are generated @done(18-09-20 10:36)
     ☐ find weights to improve accuracy
 
+    ☐ modify weights based on average of 40 runs
+
 
