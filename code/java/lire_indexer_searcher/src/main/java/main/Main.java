@@ -268,12 +268,12 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
             out.println(matrix.toString());
             matrix.printConfusionMatrix();
 //        }
-            for (Class c : classes) {
-                try {
-                    c.getDeclaredField("reader").set(null, null);
-                } catch (Exception e) {//catch and ignore exception to support global features in classes list
-                }
-            }
+//            for (Class c : classes) {
+//                try {
+//                    c.getDeclaredField("reader").set(null, null);
+//                } catch (Exception e) {//catch and ignore exception to support global features in classes list
+//                }
+//            }
             System.gc();
 
         }

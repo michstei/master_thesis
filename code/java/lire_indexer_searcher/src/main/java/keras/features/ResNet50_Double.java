@@ -1,6 +1,5 @@
 package keras.features;
 
-import keras.features.KerasFeature;
 import utils.Quantization;
 import net.semanticmetadata.lire.imageanalysis.features.LireFeature;
 import utils.KerasCSVReader;
@@ -23,10 +22,7 @@ public class ResNet50_Double implements KerasFeature {
     public static KerasCSVReader reader = null;
 
     public static void setCsvFilename(String csvFilename) {
-        if(csvFilename != null && (reader != null && !csvFilename.equals(reader.getFilepath()))) {
-            // get featureVector from csv file
-            reader = new KerasCSVReader(csvFilename, ",");
-        }
+        reader = KerasFeature.setCsvFilename(csvFilename,reader);
     }
     //
     @Override

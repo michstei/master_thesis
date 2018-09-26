@@ -2,6 +2,7 @@ package keras.features;
 
 import net.semanticmetadata.lire.imageanalysis.features.GlobalFeature;
 import net.semanticmetadata.lire.utils.MetricsUtils;
+import utils.KerasCSVReader;
 
 public interface KerasFeature extends GlobalFeature, KerasExtractor {
     enum DistanceFunction{
@@ -46,7 +47,17 @@ public interface KerasFeature extends GlobalFeature, KerasExtractor {
         }
     }
 
+    static KerasCSVReader setCsvFilename(String csvFilename, KerasCSVReader reader) {
 
+        if(csvFilename != null ) {
+            if (reader == null || !csvFilename.equals((reader.getFilepath()))) {
+                // get featureVector from csv file
+                reader = new KerasCSVReader(csvFilename, ",");
+            }
+
+        }
+        return reader;
+    }
 
 
 }
