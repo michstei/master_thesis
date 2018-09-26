@@ -1,14 +1,7 @@
-base_paths = ["/home/michael/master_thesis/data/results/kgcw/1/results_findings_per_class.txt",
-            "/home/michael/master_thesis/data/results/kgcw/2/results_findings_per_class.txt",
-            "/home/michael/master_thesis/data/results/kgcw/3/results_findings_per_class.txt",
-            "/home/michael/master_thesis/data/results/kgcw/4/results_findings_per_class.txt",
-            "/home/michael/master_thesis/data/results/kgcw/5/results_findings_per_class.txt",
-            "/home/michael/master_thesis/data/results/kgcw/6/results_findings_per_class.txt",
-            "/home/michael/master_thesis/data/results/kgcw/7/results_findings_per_class.txt",
-            "/home/michael/master_thesis/data/results/kgcw/8/results_findings_per_class.txt",
-            "/home/michael/master_thesis/data/results/kgcw/9/results_findings_per_class.txt",
-            "/home/michael/master_thesis/data/results/kgcw/10/results_findings_per_class.txt"]
 
+base_path = "/home/michael/master_thesis/data/results/kgcw/"
+filename = "/results_findings_per_class.txt"
+range_ = range(1,21)
 categories = ['blurry-nothing','colon-clear','dyed-lifted-polyps','dyed-resection-margins','esophagitis','instruments','normal-cecum','normal-pylorus','normal-z-line','out-of-patient','polyps','retroflex-rectum','retroflex-stomach','stool-inclusions','stool-plenty','ulcerative-colitis']
 class_names = ['DenseNet121_Int','DenseNet169_Int','DenseNet201_Int','ResNet50_Int','MobileNet_Int','VGG16_Int','VGG19_Int','Xception_Int']
 
@@ -22,9 +15,9 @@ class Record():
         self.total = dict()
 
 records = dict()         
-for path_idx in range(len(base_paths)):
+for path_idx in range_:
     lines = []
-    with open(base_paths[path_idx]) as f:
+    with open(base_path + str(path_idx) + filename) as f:
         lines = f.readlines()
    
     records[path_idx] = []
@@ -79,7 +72,7 @@ for path_idx in range(len(base_paths)):
 for cat in categories:
     print(cat)
     wrong_class = dict()
-    for path_idx in range(len(base_paths)):
+    for path_idx in range_:
         wrong_class[path_idx] = dict()
         for record in records[path_idx]:
             if record.category == cat:
@@ -102,7 +95,7 @@ for cat in categories:
     for k in class_names:
         sum = 0
         print("\t%15s : "%k,end=" ")
-        for path_idx in range(len(base_paths)):
+        for path_idx in range_:
             print("%2d"%(wrong_class[path_idx][k]),end=" ")
             sum += wrong_class[path_idx][k]
         print("avg: %2.1f"%(sum/float(len(wrong_class))),end="\n")

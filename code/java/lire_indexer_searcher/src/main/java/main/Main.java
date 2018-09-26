@@ -423,14 +423,14 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
         int index = 0;
         Vector<Float> weights0,weights1,weights2,weights3,weights4,weights5,weights6,weights7,weights8,weights9;
         //                                    1        2        3       4      5       6        7        8        9      10      11     12       13       14       15       16
-        weights0 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.245f, 0.05f, 0.25f,  0.125f,  0.1f,    0.15f,   0.1f,  0.125f, 0.19f, 0.125f,  0.125f,  0.125f,  0.125f,  0.1f));//DenseNet121_Int
-        weights1 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.245f, 0.1f,  0.23f,  0.125f,  0.125f,  0.15f,   0.1f,  0.125f, 0.19f, 0.15f,   0.125f,  0.125f,  0.125f,  0.01f));//DenseNet169_Int
-        weights2 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f,  0.1f,  0.2f,   0.125f,  0.125f,  0.15f,   0.1f,  0.125f, 0.19f,  0.15f,   0.125f,  0.125f,  0.125f, 0.17f));//DenseNet201_Int
-        weights3 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.29f,  0.35f, 0.17f,  0.125f,  0.15f,   0.125f,  0.1f,  0.125f, 0.3f,  0.15f,   0.125f,  0.125f,  0.125f,  0.17f));//ResNet50_Int
-        weights4 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.19f,  0.1f,  0.12f,  0.125f,  0.125f,  0.125f,  0.15f, 0.125f, 0.1f,  0.125f,  0.125f,  0.125f,  0.125f,  0.24f));//MobileNet_Int
-        weights5 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f,  0.1f,  0.01f,  0.125f,  0.125f,  0.1f,    0.15f, 0.125f, 0.01f,  0.1f,    0.125f,  0.125f,  0.125f, 0.16f));//VGG16_Int
-        weights6 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f,  0.1f,  0.01f,  0.125f,  0.15f,   0.1f,    0.15f, 0.125f, 0.01f, 0.1f,    0.125f,  0.125f,  0.125f,  0.1f));//VGG19_Int
-        weights7 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f,  0.1f,  0.01f,  0.125f,  0.1f,    0.1f,    0.15f, 0.125f, 0.01f, 0.1f,    0.125f,  0.125f,  0.125f,  0.05f));//Xception_Int
+        weights0 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.24f,  0.05f, 0.2f,   0.125f,  0.01f,   0.2f,    0.1f,  0.125f, 0.26f, 0.125f,  0.18f,   0.125f,  0.125f,  0.1f));//DenseNet121_Int
+        weights1 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.31f,  0.1f,  0.2f,   0.125f,  0.23f,   0.15f,   0.1f,  0.125f, 0.2f,  0.15f,   0.125f,  0.125f,  0.125f,  0.01f));//DenseNet169_Int
+        weights2 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f,  0.35f, 0.2f,   0.125f,  0.15f,   0.25f,   0.1f,  0.125f, 0.1f,  0.15f,   0.226f,  0.125f,  0.125f,  0.17f));//DenseNet201_Int
+        weights3 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.31f,  0.19f, 0.25f,  0.125f,  0.15f,   0.2f,    0.1f,  0.125f, 0.31f, 0.15f,   0.183f,  0.125f,  0.125f,  0.17f));//ResNet50_Int
+        weights4 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.1f,   0.1f,  0.12f,  0.125f,  0.125f,  0.05f,   0.05f, 0.125f, 0.1f,  0.275f,  0.216f,  0.125f,  0.125f,  0.28f));//MobileNet_Int
+        weights5 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f,  0.01f, 0.01f,  0.125f,  0.125f,  0.05f,   0.15f, 0.125f, 0.01f, 0.05f,   0.05f,   0.125f,  0.125f,  0.16f));//VGG16_Int
+        weights6 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f,  0.01f, 0.01f,  0.125f,  0.2f,    0.05f,   0.25f, 0.125f, 0.01f, 0.05f,   0.01f,   0.125f,  0.125f,  0.1f));//VGG19_Int
+        weights7 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f,  0.19f, 0.01f,  0.125f,  0.01f,   0.05f,   0.15f, 0.125f, 0.01f, 0.05f,   0.01f,   0.125f,  0.125f,  0.01f));//Xception_Int
 //        weights8 = new Vector<>(Arrays.asList(0.1f,  0.1f,    0.15f, 0.05f, 0.05f,  0.1f,    0.1f,    0.1f,    0.05f, 0.1f,   0.01f, 0.1f,    0.1f,    0.1f,    0.1f,    0.04f));//ACCID
 //        weights9 = new Vector<>(Arrays.asList(0.1f,  0.1f,    0.01f, 0.05f, 0.04f,  0.1f,    0.1f,    0.1f,    0.06f, 0.1f,   0.01f, 0.1f,    0.1f,    0.1f,    0.1f,    0.01f));//ColorLayout
         w.setWeightsForClass(classNames.get(index++),weights0);//DenseNet121_Int

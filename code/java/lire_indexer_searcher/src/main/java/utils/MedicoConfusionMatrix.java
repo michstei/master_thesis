@@ -24,7 +24,7 @@ public class MedicoConfusionMatrix {
      */
     public void increaseValue(Category catGold, Category catPred){
         if(catGold != null && catPred != null)
-            confusionMatrix[catPred.ordinal()][catGold.ordinal()] = confusionMatrix[catPred.ordinal()][catGold.ordinal()] + 1;
+            confusionMatrix[catGold.ordinal()][catPred.ordinal()] = confusionMatrix[catGold.ordinal()][catPred.ordinal()] + 1;
     }
 
     /**
@@ -69,36 +69,28 @@ public class MedicoConfusionMatrix {
      * prints the confusionmatrix to stdout
      */
     public void printConfusionMatrix(){
-        System.out.printf("%5s","P \\ G");
-        for(Category cat : Category.values()){
-            System.out.printf("%5s",cat.getShortName());
-        }
-        System.out.println();
-        for(int i = 0; i < Category.values().length;i++){
-            System.out.printf("%5s",Category.values()[i].getShortName());
-            for(int j = 0; j < Category.values().length;j++){
-                System.out.printf("%5s", confusionMatrix[i][j] + "");
-            }
-            System.out.println();
-        }
+        System.out.println(this.toString());
     }
 
     /**
-     * @return String representation of the Matrix (same as {@link MedicoConfusionMatrix#printConfusionMatrix()}  )
+     * @return String representation of the Matrix
      */
     @Override
     public String toString(){
         StringBuilder b = new StringBuilder();
-        b.append(String.format("%5s","P \\ G"));
+        b.append(String.format("%5s","A \\ P"));
         for(Category cat : Category.values()){
             b.append(String.format("%5s",cat.getShortName()));
         }
         b.append("\n");
         for(int i = 0; i < Category.values().length;i++){
             b.append(String.format("%5s",Category.values()[i].getShortName()));
+            double sum = 0.0;
             for(int j = 0; j < Category.values().length;j++){
+                sum += confusionMatrix[i][j];
                 b.append(String.format("%5s", confusionMatrix[i][j] + ""));
             }
+            b.append(String.format("\t%6.2f %%", (confusionMatrix[i][i]/sum)*100));
             b.append("\n");
         }
         return b.toString();
