@@ -231,76 +231,76 @@ public class Quantization {
             double[] array = values.get(filename);
             double min = getMin(array);
             double max = getMax(array);
-            stringBuilder.append(filename.replace("/home/mst/master_thesis/data/Medico_2018_development_set","/home/michael/master_thesis/data") + ",");
+            stringBuilder.append(filename.replace("/home/mst/master_thesis/data/Medico_2018_development_set", "/home/michael/master_thesis/data")).append(",");
             switch (type) {
                 case QUANTIZATION_TYPE_DOUBLE:
                 {
-                    String valuesString = "";
+                    StringBuilder valuesString = new StringBuilder();
                     for (double f : array) {
                         String s = String.format("%.40f",f ).replaceAll("0+$", "");
-                        valuesString += s + ",";
+                        valuesString.append(s).append(",");
                     }
-                    valuesString = valuesString.substring(0,valuesString.length()-1);
+                    valuesString = new StringBuilder(valuesString.substring(0, valuesString.length() - 1));
                     stringBuilder.append(valuesString);
                     break;
                 }
                 case QUANTIZATION_TYPE_FLOAT:
                 {
                     float [] newValues = quantizeDoubleToFloat(array, min, max);
-                    String valuesString = "";
+                    StringBuilder valuesString = new StringBuilder();
                     for (float f : newValues) {
                         String s = String.format("%.40f",f ).replaceAll("0+$", "");
-                        valuesString += s + ",";
+                        valuesString.append(s).append(",");
                     }
-                    valuesString = valuesString.substring(0,valuesString.length()-1);
+                    valuesString = new StringBuilder(valuesString.substring(0, valuesString.length() - 1));
                     stringBuilder.append(valuesString);
                     break;
                 }
                 case QUANTIZATION_TYPE_LONG:
                 {
                     long [] newValues = quantizeDoubleToLong(array, min, max);
-                    String valuesString = "";
+                    StringBuilder valuesString = new StringBuilder();
                     for (long f : newValues) {
                         String s = f + "";
-                        valuesString += s + ",";
+                        valuesString.append(s).append(",");
                     }
-                    valuesString = valuesString.substring(0,valuesString.length()-1);
+                    valuesString = new StringBuilder(valuesString.substring(0, valuesString.length() - 1));
                     stringBuilder.append(valuesString);
                     break;
                 }
                 case QUANTIZATION_TYPE_INT:
                 {
                     int [] newValues = quantizeDoubleToInt(array, min, max);
-                    String valuesString = "";
+                    StringBuilder valuesString = new StringBuilder();
                     for (int f : newValues) {
                         String s = f + "";
-                        valuesString += s + ",";
+                        valuesString.append(s).append(",");
                     }
-                    valuesString = valuesString.substring(0,valuesString.length()-1);
+                    valuesString = new StringBuilder(valuesString.substring(0, valuesString.length() - 1));
                     stringBuilder.append(valuesString);
                     break;
                 }
                 case QUANTIZATION_TYPE_SHORT:
                 {
                     short [] newValues = quantizeDoubleToShort(array, min, max);
-                    String valuesString = "";
+                    StringBuilder valuesString = new StringBuilder();
                     for (short f : newValues) {
                         String s = f + "";
-                        valuesString += s + ",";
+                        valuesString.append(s).append(",");
                     }
-                    valuesString = valuesString.substring(0,valuesString.length()-1);
+                    valuesString = new StringBuilder(valuesString.substring(0, valuesString.length() - 1));
                     stringBuilder.append(valuesString);
                     break;
                 }
                 case QUANTIZATION_TYPE_BYTE:
                 {
                     byte [] newValues = quantizeDoubleToByte(array, min, max);
-                    String valuesString = "";
+                    StringBuilder valuesString = new StringBuilder();
                     for (byte f : newValues) {
                         String s = f + "";
-                        valuesString += s + ",";
+                        valuesString.append(s).append(",");
                     }
-                    valuesString = valuesString.substring(0,valuesString.length()-1);
+                    valuesString = new StringBuilder(valuesString.substring(0, valuesString.length() - 1));
                     stringBuilder.append(valuesString);
                     break;
                 }

@@ -9,8 +9,6 @@ import java.nio.ByteBuffer;
 
 public class IncResNetV2_Float implements KerasFeature{
 
-    private final String featureName    = "IncResNetV2_Float";
-    private final String fieldName      = "IncResNetV2_Float";
     public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
     public IncResNetV2_Float(){
     }
@@ -32,18 +30,18 @@ public class IncResNetV2_Float implements KerasFeature{
             // get featureVector from csv file
             featureVector = reader.getValuesOfFileFloat(imageFilename);
         }
-        if(featureVector == null){
-            //TODO: get featureVector from somewhere else (python?)
-        }
+        //TODO: get featureVector from somewhere else (python?)
     }
 
     @Override
     public String getFeatureName() {
+        String featureName = "IncResNetV2_Float";
         return featureName;
     }
 
     @Override
     public String getFieldName() {
+        String fieldName = "IncResNetV2_Float";
         return fieldName;
     }
 

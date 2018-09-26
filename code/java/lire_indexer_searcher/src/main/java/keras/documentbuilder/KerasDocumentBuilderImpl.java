@@ -28,7 +28,7 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
     private GlobalDocumentBuilder.HashingMode hashingMode = GlobalDocumentBuilder.HashingMode.BitSampling;
     private boolean hashingEnabled = false;
 
-    private HashMap<ExtractorItem, String[]> extractorItems = new HashMap<ExtractorItem, String[]>(10);
+    private HashMap<ExtractorItem, String[]> extractorItems = new HashMap<>(10);
     private boolean docsCreated = false;
 
     public KerasDocumentBuilderImpl() {
@@ -189,7 +189,7 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
 //        if (hashingEnabled) result = new Field[2];
 //        else result = new Field[1];
         Field hash = null;
-        Field vector = null;
+        Field vector;
 
         GlobalFeature kerasFeature = extractorItem.getExtractorInstance() instanceof KerasFeature ? extractKerasFeature(imagePath, (KerasFeature) extractorItem.getExtractorInstance()) : extractGlobalFeature(imagePath,(GlobalFeature)extractorItem.getExtractorInstance());
 
@@ -230,7 +230,7 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
     @Override
     public Field[] createDescriptorFields(String imagePath) throws IOException {
         docsCreated = true;
-        LinkedList<Field> resultList = new LinkedList<Field>();
+        LinkedList<Field> resultList = new LinkedList<>();
         Field[] fields;
         if (extractorItems.size() > 0) {
             for (Map.Entry<ExtractorItem, String[]> extractorItemEntry : extractorItems.entrySet()) {

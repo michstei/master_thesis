@@ -27,7 +27,7 @@ import java.util.TreeSet;
 public class KerasMetricSpacesImageSearcher implements KerasSearcher{
     private MetricSpaces.Parameters metricSpacesParameters;
     private int maxResultsHashBased = 1000;
-    private int maximumHits = 100;
+    private int maximumHits;
     private String featureFieldName = null;
     private GlobalFeature feature = null;
     private String hashesFieldName = null;
@@ -126,7 +126,7 @@ public class KerasMetricSpacesImageSearcher implements KerasSearcher{
     }
 
     public ImageSearchHits search(Document doc, IndexReader reader) throws IOException {
-        GlobalFeature queryFeature = null;
+        GlobalFeature queryFeature;
 
         try {
             queryFeature = this.feature.getClass().newInstance();
@@ -170,7 +170,7 @@ public class KerasMetricSpacesImageSearcher implements KerasSearcher{
             return null;
         } else {
             TopDocs docs = searcher.search(query, this.maxResultsHashBased);
-            TreeSet<SimpleResult> resultScoreDocs = new TreeSet();
+            TreeSet<SimpleResult> resultScoreDocs = new TreeSet<>();
             double maxDistance = -1.0D;
 
             for(int i = 0; i < docs.scoreDocs.length; ++i) {
@@ -185,7 +185,7 @@ public class KerasMetricSpacesImageSearcher implements KerasSearcher{
                 } else if (tmpScore < maxDistance) {
                     resultScoreDocs.remove(resultScoreDocs.last());
                     resultScoreDocs.add(new SimpleResult(tmpScore, docs.scoreDocs[i].doc));
-                    maxDistance = ((SimpleResult)resultScoreDocs.last()).getDistance();
+                    maxDistance = resultScoreDocs.last().getDistance();
                 }
             }
 
@@ -211,7 +211,7 @@ public class KerasMetricSpacesImageSearcher implements KerasSearcher{
             return null;
         } else {
             TopDocs docs = searcher.search(query, this.maxResultsHashBased);
-            TreeSet<SimpleResult> resultScoreDocs = new TreeSet();
+            TreeSet<SimpleResult> resultScoreDocs = new TreeSet<>();
             double maxDistance = -1.0D;
 
             for(int i = 0; i < docs.scoreDocs.length; ++i) {
@@ -226,7 +226,7 @@ public class KerasMetricSpacesImageSearcher implements KerasSearcher{
                 } else if (tmpScore < maxDistance) {
                     resultScoreDocs.remove(resultScoreDocs.last());
                     resultScoreDocs.add(new SimpleResult(tmpScore, docs.scoreDocs[i].doc));
-                    maxDistance = ((SimpleResult)resultScoreDocs.last()).getDistance();
+                    maxDistance = resultScoreDocs.last().getDistance();
                 }
             }
 
@@ -236,7 +236,7 @@ public class KerasMetricSpacesImageSearcher implements KerasSearcher{
         }
     }
 
-    public ImageDuplicates findDuplicates(IndexReader reader) throws IOException {
+    public ImageDuplicates findDuplicates(IndexReader reader) {
         throw new UnsupportedOperationException("not implemented.");
     }
 

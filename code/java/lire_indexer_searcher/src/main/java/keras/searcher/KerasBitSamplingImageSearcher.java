@@ -24,10 +24,10 @@ import java.util.TreeSet;
 
 public class KerasBitSamplingImageSearcher implements KerasSearcher{
     private int maxResultsHashBased = 1000;
-    private int maximumHits = 100;
-    private String featureFieldName = null;
-    private GlobalFeature feature = null;
-    private String hashesFieldName = null;
+    private int maximumHits;
+    private String featureFieldName;
+    private GlobalFeature feature;
+    private String hashesFieldName;
     private boolean partialHashes = false;
     /**
      * Creates a new searcher for BitSampling based hashes.
@@ -187,7 +187,7 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
         return null;
     }
 
-    public ImageSearchHits search(Document doc, IndexReader reader) throws IOException {
+    public ImageSearchHits search(Document doc, IndexReader reader) {
         try {
             GlobalFeature queryFeature = feature.getClass().newInstance();
             queryFeature.setByteArrayRepresentation(doc.getBinaryValue(featureFieldName).bytes,
@@ -205,7 +205,7 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
         // first search by text:
         IndexSearcher searcher = new IndexSearcher(reader);
         searcher.setSimilarity(new KerasBitSamplingImageSearcher.BaseSimilarity());
-        BooleanQuery query = null;
+        BooleanQuery query;
         BooleanQuery.Builder builder = new BooleanQuery.Builder();
         for (int i = 0; i < hashes.length; i++) {
             // be aware that the hashFunctionsFileName of the field must match the one you put the hashes in before.
@@ -221,7 +221,7 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
         TopDocs docs = searcher.search(query, maxResultsHashBased);
 //        System.out.println(docs.totalHits);
         // then re-rank
-        TreeSet<SimpleResult> resultScoreDocs = new TreeSet<SimpleResult>();
+        TreeSet<SimpleResult> resultScoreDocs = new TreeSet<>();
         double maxDistance = -1d;
         double tmpScore;
         for (int i = 0; i < docs.scoreDocs.length; i++) {
@@ -248,7 +248,7 @@ public class KerasBitSamplingImageSearcher implements KerasSearcher{
         return new SimpleImageSearchHits(resultScoreDocs, maxDistance);
     }
 
-    public ImageDuplicates findDuplicates(IndexReader reader) throws IOException {
+    public ImageDuplicates findDuplicates(IndexReader reader) {
         throw new UnsupportedOperationException("not implemented.");
     }
 

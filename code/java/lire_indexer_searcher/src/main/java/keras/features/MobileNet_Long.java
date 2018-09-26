@@ -9,8 +9,6 @@ import java.nio.ByteBuffer;
 
 public class MobileNet_Long implements KerasFeature{
 
-    private final String featureName    = "MobileNet_Long";
-    private final String fieldName      = "MobileNet_Long";
     public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
     public MobileNet_Long(){
     }
@@ -32,19 +30,19 @@ public class MobileNet_Long implements KerasFeature{
             // get featureVector from csv file
             featureVector = reader.getValuesOfFileLong(imageFilename);
         }
-        if(featureVector == null){
-            //TODO: get featureVector from somewhere else (python?)
-        }
+        //TODO: get featureVector from somewhere else (python?)
     }
 
 
     @Override
     public String getFeatureName() {
+        String featureName = "MobileNet_Long";
         return featureName;
     }
 
     @Override
     public String getFieldName() {
+        String fieldName = "MobileNet_Long";
         return fieldName;
     }
 

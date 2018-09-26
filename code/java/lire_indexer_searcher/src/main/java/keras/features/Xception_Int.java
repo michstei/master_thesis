@@ -9,8 +9,6 @@ import java.nio.ByteBuffer;
 
 public class Xception_Int implements KerasFeature{
 
-    private final String featureName    = "Xception_Int";
-    private final String fieldName      = "Xception_Int";
     public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
     public Xception_Int(){
     }
@@ -34,20 +32,20 @@ public class Xception_Int implements KerasFeature{
             // get featureVector from csv file
             featureVector = reader.getValuesOfFileInt(imageFilename);
         }
-        if(featureVector == null){
-            //TODO: get featureVector from somewhere else (python?)
-        }
+        //TODO: get featureVector from somewhere else (python?)
     }
 
 
 
     @Override
     public String getFeatureName() {
+        String featureName = "Xception_Int";
         return featureName;
     }
 
     @Override
     public String getFieldName() {
+        String fieldName = "Xception_Int";
         return fieldName;
     }
 

@@ -9,8 +9,6 @@ import java.nio.ByteBuffer;
 
 public class InceptionV3_Short implements KerasFeature{
 
-    private final String featureName    = "InceptionV3_Short";
-    private final String fieldName      = "InceptionV3_Short";
     public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
 
     public InceptionV3_Short(){
@@ -34,18 +32,18 @@ public class InceptionV3_Short implements KerasFeature{
             // get featureVector from csv file
             featureVector = reader.getValuesOfFileShort(imageFilename);
         }
-        if(featureVector == null){
-            //TODO: get featureVector from somewhere else (python?)
-        }
+        //TODO: get featureVector from somewhere else (python?)
     }
 
     @Override
     public String getFeatureName() {
+        String featureName = "InceptionV3_Short";
         return featureName;
     }
 
     @Override
     public String getFieldName() {
+        String fieldName = "InceptionV3_Short";
         return fieldName;
     }
 

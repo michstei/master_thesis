@@ -10,8 +10,6 @@ import java.nio.ByteBuffer;
 
 public class VGG16_Double implements KerasFeature {
 
-    private final String featureName    = "VGG16_Double";
-    private final String fieldName      = "VGG16_Double";
     public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
     public VGG16_Double(){
     }
@@ -34,20 +32,20 @@ public class VGG16_Double implements KerasFeature {
             // get featureVector from csv file
             featureVector = reader.getValuesOfFileDouble(imageFilename);
         }
-        if(featureVector == null){
-            //TODO: get featureVector from somewhere else (python?)
-        }
+        //TODO: get featureVector from somewhere else (python?)
     }
 
 
 
     @Override
     public String getFeatureName() {
+        String featureName = "VGG16_Double";
         return featureName;
     }
 
     @Override
     public String getFieldName() {
+        String fieldName = "VGG16_Double";
         return fieldName;
     }
 

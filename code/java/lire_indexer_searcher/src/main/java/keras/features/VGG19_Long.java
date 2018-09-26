@@ -9,8 +9,6 @@ import java.nio.ByteBuffer;
 
 public class VGG19_Long implements KerasFeature{
 
-    private final String featureName    = "VGG19_Long";
-    private final String fieldName      = "VGG19_Long";
     public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
     public VGG19_Long(){
     }
@@ -32,18 +30,18 @@ public class VGG19_Long implements KerasFeature{
             // get featureVector from csv file
             featureVector = reader.getValuesOfFileLong(imageFilename);
         }
-        if(featureVector == null){
-            //TODO: get featureVector from somewhere else (python?)
-        }
+        //TODO: get featureVector from somewhere else (python?)
     }
 
     @Override
     public String getFeatureName() {
+        String featureName = "VGG19_Long";
         return featureName;
     }
 
     @Override
     public String getFieldName() {
+        String fieldName = "VGG19_Long";
         return fieldName;
     }
 

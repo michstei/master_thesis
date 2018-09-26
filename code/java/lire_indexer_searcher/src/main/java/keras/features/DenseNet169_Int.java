@@ -9,8 +9,6 @@ import java.nio.ByteBuffer;
 
 public class DenseNet169_Int implements KerasFeature{
 
-    private final String featureName    = "DenseNet169_Int";
-    private final String fieldName      = "DenseNet169_Int";
     public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
     public DenseNet169_Int(){
     }
@@ -31,20 +29,20 @@ public class DenseNet169_Int implements KerasFeature{
             // get featureVector from csv file
             featureVector = reader.getValuesOfFileInt(imageFilename);
         }
-        if(featureVector == null){
-            //TODO: get featureVector from somewhere else (python?)
-        }
+        //TODO: get featureVector from somewhere else (python?)
     }
 
 
 
     @Override
     public String getFeatureName() {
+        String featureName = "DenseNet169_Int";
         return featureName;
     }
 
     @Override
     public String getFieldName() {
+        String fieldName = "DenseNet169_Int";
         return fieldName;
     }
 

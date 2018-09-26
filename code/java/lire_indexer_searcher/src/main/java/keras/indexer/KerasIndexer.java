@@ -19,14 +19,14 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class KerasIndexer {
-    private KerasDocumentBuilderImpl documentBuilder = null;
-    private IndexWriter indexWriter = null;
-    private ArrayList<String> filesToindex = null;
-    private String indexFolder = null;
+    private KerasDocumentBuilderImpl documentBuilder;
+    private IndexWriter indexWriter;
+    private ArrayList<String> filesToindex;
+    private String indexFolder;
 
-    private GlobalDocumentBuilder.HashingMode hashingMode = null;
-    private boolean hashingEnabled = false;
-    private boolean useDocValues = false;
+    private GlobalDocumentBuilder.HashingMode hashingMode;
+    private boolean hashingEnabled;
+    private boolean useDocValues;
 
     public KerasIndexer(String indexFolder,
                         boolean iwCreate,
@@ -102,7 +102,7 @@ public class KerasIndexer {
     public void indexReferencePoints(Class globalFeatureClass, int numberOfReferencePoints, int lenghtOfPostingList, File inFile, File outFile) throws IOException, IllegalAccessException, InstantiationException {
         BufferedReader br = new BufferedReader(new FileReader(inFile));
         BufferedWriter bw = new BufferedWriter(new FileWriter(outFile), 26214400);
-        LinkedList<String> lines = new LinkedList();
+        LinkedList<String> lines = new LinkedList<>();
         System.out.println("Reading input file.");
 
         String line;

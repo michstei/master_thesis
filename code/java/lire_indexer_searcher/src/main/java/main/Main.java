@@ -9,7 +9,6 @@ import keras.searcher.KerasBitSamplingImageSearcher;
 import keras.searcher.KerasMetricSpacesImageSearcher;
 import keras.searcher.KerasSearcher;
 import keras.searcher.SearchRunnable;
-import net.semanticmetadata.lire.imageanalysis.features.global.*;
 import org.apache.commons.io.FileUtils;
 import utils.Category;
 import utils.FilePrep;
@@ -241,9 +240,9 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
                 b3.append(',');
                 b3.append(String.format("%.3f",predictions.get(0).score));
                 b3.append('\n');
-                b.append(testFile + ":\n");
+                b.append(testFile).append(":\n");
                 for (WeightedImageSearchHitClassifier.Prediction p : predictions) {
-                    b.append(p.score + " : " + p.category.getName() + "\n");
+                    b.append(p.score).append(" : ").append(p.category.getName()).append("\n");
                 }
                 Category catGold = null, catPred = null;
                 for (Category c : Category.values()) {
@@ -381,7 +380,7 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
     public static  LinkedHashMap<String, Double> getResults(ImageSearchHits[] hits, IndexReader[] readers,Vector<String> allCategories, String[] classNames, StringBuilder b) {
         Vector<String> hitsStrings = new Vector<>();
         for(int j = 0; j < hits.length; j++){
-            b.append(classNames[j] + ":\n");
+            b.append(classNames[j]).append(":\n");
             for (int i = 0; i < hits[j].length(); i++) {
                 String filename = null;
                 double score = 0;
@@ -392,7 +391,7 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                b.append(score + ":" +filename + "\n");
+                b.append(score).append(":").append(filename).append("\n");
                 hitsStrings.add(filename);
 
 

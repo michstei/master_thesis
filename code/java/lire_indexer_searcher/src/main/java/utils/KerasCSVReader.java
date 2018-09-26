@@ -30,7 +30,7 @@ public class KerasCSVReader {
         try {
             parseFile();
             System.out.println("initialized KerasCSVReader : " + this.filepath);
-        } catch(Exception e){
+        } catch(Exception ignored){
 
         }
     }
@@ -122,7 +122,7 @@ public class KerasCSVReader {
         @Override
         public void run() {
 
-            String filename = null;
+            String filename;
             for(String line : lines) {
                 String[] splits = line.split(this.splitChar);
                 filename = splits[0];
@@ -133,7 +133,7 @@ public class KerasCSVReader {
                         s = s.substring(0, s.length() - 1);
                     }
                     try {
-                        res[i - 1] = new Double(s).doubleValue();
+                        res[i - 1] = Double.parseDouble(s);
                     } catch (Exception e) {
                         res = null;
                         break;
@@ -166,7 +166,7 @@ public class KerasCSVReader {
         @Override
         public void run() {
 
-            String filename = null;
+            String filename;
             for(String line : lines) {
                 String[] splits = line.split(this.splitChar);
                 filename = splits[0];
@@ -177,7 +177,7 @@ public class KerasCSVReader {
                         s = s.substring(0, s.length() - 1);
                     }
                     try {
-                        res[i - 1] = new Float(s).floatValue();
+                        res[i - 1] = Float.parseFloat(s);
                     } catch (Exception e) {
                         res = null;
                         break;
@@ -210,7 +210,7 @@ public class KerasCSVReader {
         @Override
         public void run() {
 
-            String filename = null;
+            String filename;
             for(String line : lines) {
                 String[] splits = line.split(this.splitChar);
                 filename = splits[0];
@@ -221,7 +221,7 @@ public class KerasCSVReader {
                         s = s.substring(0, s.length() - 1);
                     }
                     try {
-                        res[i - 1] = new Long(s).longValue();
+                        res[i - 1] = Long.parseLong(s);
                     } catch (Exception e) {
                         res = null;
                         break;
@@ -254,7 +254,7 @@ public class KerasCSVReader {
         @Override
         public void run() {
 
-            String filename = null;
+            String filename;
             for(String line : lines) {
                 String[] splits = line.split(this.splitChar);
                 filename = splits[0];
@@ -265,7 +265,7 @@ public class KerasCSVReader {
                         s = s.substring(0, s.length() - 1);
                     }
                     try {
-                        res[i - 1] = new Integer(s).intValue();
+                        res[i - 1] = Integer.parseInt(s);
                     } catch (Exception e) {
                         res = null;
                         break;
@@ -298,7 +298,7 @@ public class KerasCSVReader {
         @Override
         public void run() {
 
-            String filename = null;
+            String filename;
             for(String line : lines) {
                 String[] splits = line.split(this.splitChar);
                 filename = splits[0];
@@ -309,7 +309,7 @@ public class KerasCSVReader {
                         s = s.substring(0, s.length() - 1);
                     }
                     try {
-                        res[i - 1] = new Short(s).shortValue();
+                        res[i - 1] = Short.parseShort(s);
                     } catch (Exception e) {
                         res = null;
                         break;
@@ -342,7 +342,7 @@ public class KerasCSVReader {
         @Override
         public void run() {
 
-            String filename = null;
+            String filename;
             for(String line : lines) {
                 String[] splits = line.split(this.splitChar);
                 filename = splits[0];
@@ -353,7 +353,7 @@ public class KerasCSVReader {
                         s = s.substring(0, s.length() - 1);
                     }
                     try {
-                        res[i - 1] = new Byte(s).byteValue();
+                        res[i - 1] = Byte.parseByte(s);
                     } catch (Exception e) {
                         res = null;
                         break;

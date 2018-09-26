@@ -9,8 +9,6 @@ import java.nio.ByteBuffer;
 
 public class ResNet50_Short implements KerasFeature{
 
-    private final String featureName    = "ResNet50_Short";
-    private final String fieldName      = "ResNet50_Short";
     public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
     public ResNet50_Short(){
     }
@@ -32,19 +30,19 @@ public class ResNet50_Short implements KerasFeature{
             // get featureVector from csv file
             featureVector = reader.getValuesOfFileShort(imageFilename);
         }
-        if(featureVector == null){
-            //TODO: get featureVector from somewhere else (python?)
-        }
+        //TODO: get featureVector from somewhere else (python?)
     }
 
 
     @Override
     public String getFeatureName() {
+        String featureName = "ResNet50_Short";
         return featureName;
     }
 
     @Override
     public String getFieldName() {
+        String fieldName = "ResNet50_Short";
         return fieldName;
     }
 

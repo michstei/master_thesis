@@ -9,8 +9,6 @@ import java.nio.ByteBuffer;
 
 public class ResNet50_Float implements KerasFeature{
 
-    private final String featureName    = "ResNet50_Float";
-    private final String fieldName      = "ResNet50_Float";
     public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
     public ResNet50_Float(){
     }
@@ -32,20 +30,20 @@ public class ResNet50_Float implements KerasFeature{
             // get featureVector from csv file
             featureVector = reader.getValuesOfFileFloat(imageFilename);
         }
-        if(featureVector == null){
-            //TODO: get featureVector from somewhere else (python?)
-        }
+        //TODO: get featureVector from somewhere else (python?)
     }
 
 
 
     @Override
     public String getFeatureName() {
+        String featureName = "ResNet50_Float";
         return featureName;
     }
 
     @Override
     public String getFieldName() {
+        String fieldName = "ResNet50_Float";
         return fieldName;
     }
 

@@ -3,7 +3,6 @@ package keras.documentbuilder;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public interface KerasDocumentBuilder {

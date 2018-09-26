@@ -2,13 +2,12 @@ package classifier;
 
 import net.semanticmetadata.lire.builders.DocumentBuilder;
 import net.semanticmetadata.lire.searchers.ImageSearchHits;
-import org.apache.commons.io.FileUtils;
 import org.apache.lucene.index.IndexReader;
 import utils.Category;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Vector;
 
 public class WeightedImageSearchHitClassifier {
@@ -84,15 +83,7 @@ public class WeightedImageSearchHitClassifier {
                     predictions.add(p);
             }
         }
-        Collections.sort(predictions, (Prediction o1, Prediction o2) -> {
-            if(o1.score > o2.score){
-                return 1;
-            }
-            if(o1.score < o2.score){
-                return -1;
-            }
-            return 0;
-        });
+        predictions.sort(Comparator.comparingDouble((Prediction o) -> o.score));
         Collections.reverse(predictions);
         return  predictions;
 

@@ -9,8 +9,6 @@ import java.nio.ByteBuffer;
 
 public class Xception_Float implements KerasFeature{
 
-    private final String featureName    = "Xception_Float";
-    private final String fieldName      = "Xception_Float";
     public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
     public Xception_Float(){
     }
@@ -34,19 +32,19 @@ public class Xception_Float implements KerasFeature{
             // get featureVector from csv file
             featureVector = reader.getValuesOfFileFloat(imageFilename);
         }
-        if(featureVector == null){
-            //TODO: get featureVector from somewhere else (python?)
-        }
+        //TODO: get featureVector from somewhere else (python?)
     }
 
 
     @Override
     public String getFeatureName() {
+        String featureName = "Xception_Float";
         return featureName;
     }
 
     @Override
     public String getFieldName() {
+        String fieldName = "Xception_Float";
         return fieldName;
     }
 

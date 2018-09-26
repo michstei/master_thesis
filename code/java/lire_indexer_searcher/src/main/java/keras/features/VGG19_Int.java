@@ -9,8 +9,6 @@ import java.nio.ByteBuffer;
 
 public class VGG19_Int implements KerasFeature{
 
-    private final String featureName    = "VGG19_Int";
-    private final String fieldName      = "VGG19_Int";
     public static DistanceFunction USED_DISTANCE_FUN = DistanceFunction.DISTANCEFUNCTION_COSINE;
     public VGG19_Int(){
     }
@@ -32,19 +30,19 @@ public class VGG19_Int implements KerasFeature{
             // get featureVector from csv file
             featureVector = reader.getValuesOfFileInt(imageFilename);
         }
-        if(featureVector == null){
-            //TODO: get featureVector from somewhere else (python?)
-        }
+        //TODO: get featureVector from somewhere else (python?)
     }
 
 
     @Override
     public String getFeatureName() {
+        String featureName = "VGG19_Int";
         return featureName;
     }
 
     @Override
     public String getFieldName() {
+        String fieldName = "VGG19_Int";
         return fieldName;
     }
 
