@@ -86,7 +86,7 @@ public class FilePrep {
      * @param directoryName path to directory
      * @param files list to which filepaths are added
      */
-    private void listFilesFromDirectory(String directoryName, List<String> files) {
+    public static void listFilesFromDirectory(String directoryName, List<String> files) {
         File directory = new File(directoryName);
 
         // Get all the files from a directory.
@@ -104,27 +104,25 @@ public class FilePrep {
      * writes the testset to file inFileTest
      */
     public void writeTestSetFile(){
+        writeFIle(inFileTest, test);
+    }
+
+    private void writeFIle(String inFile, Vector<String> lines) {
         try {
-            if(!(new File(inFileTest).exists())){
-                new File(inFileTest).createNewFile();
+            if(!(new File(inFile).exists())){
+                new File(inFile).createNewFile();
             }
-            FileUtils.writeLines(new File(inFileTest),test);
+            FileUtils.writeLines(new File(inFile), lines);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     /***
      * writes the trainset to file inFileTrain
      */
     public void writeTrainSetFile(){
-        try {
-            if(!(new File(inFileTrain).exists())){
-                new File(inFileTrain).createNewFile();
-            }
-            FileUtils.writeLines(new File(inFileTrain),train);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        writeFIle(inFileTrain, train);
     }
 
     /***

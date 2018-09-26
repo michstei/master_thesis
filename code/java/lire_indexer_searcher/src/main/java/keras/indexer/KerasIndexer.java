@@ -9,6 +9,7 @@ import net.semanticmetadata.lire.utils.LuceneUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexWriter;
+import utils.FilePrep;
 
 import javax.imageio.ImageIO;
 import java.io.*;
@@ -39,7 +40,7 @@ public class KerasIndexer {
         this.useDocValues = useDocValues;
         this.hashingMode = hashingMode;
         this.filesToindex = new ArrayList<>();
-        listFilesFromDirectory(pathToFilesFolder,this.filesToindex);
+        FilePrep.listFilesFromDirectory(pathToFilesFolder,this.filesToindex);
         this.documentBuilder = new KerasDocumentBuilderImpl(this.hashingEnabled,this.hashingMode,this.useDocValues);
         this.indexWriter = LuceneUtils.createIndexWriter(this.indexFolder,iwCreate,analyzerType);
 
@@ -170,18 +171,6 @@ public class KerasIndexer {
             FileUtils.writeLines(new File(inFilePath),this.filesToindex);
         }
     }
-    private void listFilesFromDirectory(String directoryName, List<String> files) {
-        File directory = new File(directoryName);
 
-        // Get all the files from a directory.
-        File[] fList = directory.listFiles();
-        for (File file : fList) {
-            if (file.isFile()) {
-                files.add(file.getPath());
-            } else if (file.isDirectory()) {
-                listFilesFromDirectory(file.getPath(), files);
-            }
-        }
-    }
 
 }
