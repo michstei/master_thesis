@@ -10,7 +10,7 @@ base_paths = ["/home/michael/master_thesis/data/results/kgcw/1/results_findings_
             "/home/michael/master_thesis/data/results/kgcw/10/results_findings_per_class.txt"]
 
 categories = ['blurry-nothing','colon-clear','dyed-lifted-polyps','dyed-resection-margins','esophagitis','instruments','normal-cecum','normal-pylorus','normal-z-line','out-of-patient','polyps','retroflex-rectum','retroflex-stomach','stool-inclusions','stool-plenty','ulcerative-colitis']
-class_names = ['DenseNet121_Int','DenseNet169_Int','DenseNet201_Int','ResNet50_Int','MobileNet_Int','VGG16_Int','VGG19_Int','Xception_Int','ACCID','ColorLayout']
+class_names = ['DenseNet121_Int','DenseNet169_Int','DenseNet201_Int','ResNet50_Int','MobileNet_Int','VGG16_Int','VGG19_Int','Xception_Int']
 
 class Record():
     def __init__(self):
@@ -99,16 +99,11 @@ for cat in categories:
                     i += 1
                     if cat not in key_max or len(key_max) != 1:
                         wrong_class[path_idx][key] = wrong_class[path_idx][key] + 1
-
-    # print(wrong_class)
-    # print(wrong_class.keys())
-    # print(wrong_class[ next(iter(wrong_class.keys()))])
-    # print(wrong_class[wrong_class.keys].keys)
     for k in class_names:
         sum = 0
         print("\t%15s : "%k,end=" ")
         for path_idx in range(len(base_paths)):
             print("%2d"%(wrong_class[path_idx][k]),end=" ")
             sum += wrong_class[path_idx][k]
-        print("avg: %2.1f"%(sum/float(len(wrong_class[path_idx]))),end="\n")
+        print("avg: %2.1f"%(sum/float(len(wrong_class))),end="\n")
         

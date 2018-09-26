@@ -23,12 +23,11 @@ public class IncResNetV2_Short implements KerasFeature{
     public static KerasCSVReader reader = null;
 
     public static void setCsvFilename(String csvFilename) {
-        if(csvFilename != null) {
+        if(csvFilename != null && (reader != null && !csvFilename.equals(reader.getFilepath()))) {
             // get featureVector from csv file
             reader = new KerasCSVReader(csvFilename, ",");
         }
     }
-
     @Override
     public void extract(String imageFilename) {
         featureVector = null;

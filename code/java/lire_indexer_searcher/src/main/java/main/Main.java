@@ -72,7 +72,8 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
 
 
         Instant startAll = Instant.now();
-        for(int runIdx = 1; runIdx <= 10; runIdx++) {
+        MedicoConfusionMatrix globalMatrix = new MedicoConfusionMatrix();
+        for(int runIdx = 1; runIdx <= 20; runIdx++) {
             System.out.println("run " + runIdx);
             if (generateInFiles) {
                 FilePrep prep = new FilePrep(imageFolderPath, 5, inFileTrain, inFileTest);
@@ -183,7 +184,7 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
                 }
             }
 
-            String outputFilePath = outputFilePathBase + df.name() + "_" + numResults + ".txt";
+            String outputFilePath = outputFilePathBase +  "run.txt";
             PrintStream out = null;
             try {
 
@@ -194,7 +195,6 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println(df.name() + " " + numResults + ":");
 
             int counter = 1;
 
@@ -254,7 +254,7 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
                 }
 
                 matrix.increaseValue(catGold, catPred);
-
+                globalMatrix.increaseValue(catGold,catPred);
                 Instant e = Instant.now();
                 System.out.printf("\rprocessed file %4s of %d in %s / total %s", (counter++) + "", testFiles.size(), Duration.between(st, e), Duration.between(startDf, e));
             }
@@ -277,9 +277,10 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
             System.gc();
 
         }
-
         Instant endAll = Instant.now();
-        System.out.println(Duration.between(startAll, endAll));
+        System.out.println("TOTAL:");
+        System.out.println(String.format("total: %d\ncorrect: %d\nincorrect: %d\ncorrect Pcnt: %.2f%%\n%s", globalMatrix.getTotal(), globalMatrix.getCorrect(), globalMatrix.getIncorrect(), globalMatrix.getCorrectPcnt(), Duration.between(startAll,endAll )));
+        globalMatrix.printConfusionMatrix();
 
     }
     /**
@@ -421,15 +422,15 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
          */
         int index = 0;
         Vector<Float> weights0,weights1,weights2,weights3,weights4,weights5,weights6,weights7,weights8,weights9;
-        //                                    1      2      3      4      5       6      7      8      9      10    11     12     13     14     15     16
-        weights0 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.19f, 0.1f,  0.2f,   0.125f,  0.125f,  0.125f,  0.1f,  0.125f, 0.19f, 0.125f,  0.125f,  0.125f,  0.125f,  0.1f));//DenseNet121_Int
-        weights1 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.19f, 0.1f,  0.23f,  0.125f,  0.125f,  0.125f,  0.15f, 0.125f, 0.19f, 0.125f,  0.125f,  0.125f,  0.125f,  0.1f));//DenseNet169_Int
-        weights2 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.1f,  0.15f, 0.15f,  0.125f,  0.125f,  0.125f,  0.1f,  0.125f, 0.1f,  0.125f,  0.125f,  0.125f,  0.125f,  0.17f));//DenseNet201_Int
-        weights3 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.2f,  0.25f, 0.12f,  0.125f,  0.125f,  0.125f,  0.15f, 0.125f, 0.3f,  0.125f,  0.125f,  0.125f,  0.125f,  0.17f));//ResNet50_Int
-        weights4 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.15f, 0.1f,  0.12f,  0.125f,  0.125f,  0.125f,  0.15f, 0.125f, 0.1f,  0.125f,  0.125f,  0.125f,  0.125f,  0.1f));//MobileNet_Int
-        weights5 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.15f, 0.1f,  0.08f,  0.125f,  0.125f,  0.125f,  0.1f,  0.125f, 0.01f, 0.125f,  0.125f,  0.125f,  0.125f,  0.16f));//VGG16_Int
-        weights6 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f, 0.1f,  0.07f,  0.125f,  0.125f,  0.125f,  0.2f,  0.125f, 0.01f, 0.125f,  0.125f,  0.125f,  0.125f,  0.1f));//VGG19_Int
-        weights7 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f, 0.1f,  0.04f,  0.125f,  0.125f,  0.125f,  0.06f, 0.125f, 0.1f,  0.125f,  0.125f,  0.125f,  0.125f,  0.1f));//Xception_Int
+        //                                    1        2        3       4      5       6        7        8        9      10      11     12       13       14       15       16
+        weights0 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.245f, 0.05f, 0.25f,  0.125f,  0.1f,    0.15f,   0.1f,  0.125f, 0.19f, 0.125f,  0.125f,  0.125f,  0.125f,  0.1f));//DenseNet121_Int
+        weights1 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.245f, 0.1f,  0.23f,  0.125f,  0.125f,  0.15f,   0.1f,  0.125f, 0.19f, 0.15f,   0.125f,  0.125f,  0.125f,  0.01f));//DenseNet169_Int
+        weights2 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f,  0.1f,  0.2f,   0.125f,  0.125f,  0.15f,   0.1f,  0.125f, 0.19f,  0.15f,   0.125f,  0.125f,  0.125f, 0.17f));//DenseNet201_Int
+        weights3 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.29f,  0.35f, 0.17f,  0.125f,  0.15f,   0.125f,  0.1f,  0.125f, 0.3f,  0.15f,   0.125f,  0.125f,  0.125f,  0.17f));//ResNet50_Int
+        weights4 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.19f,  0.1f,  0.12f,  0.125f,  0.125f,  0.125f,  0.15f, 0.125f, 0.1f,  0.125f,  0.125f,  0.125f,  0.125f,  0.24f));//MobileNet_Int
+        weights5 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f,  0.1f,  0.01f,  0.125f,  0.125f,  0.1f,    0.15f, 0.125f, 0.01f,  0.1f,    0.125f,  0.125f,  0.125f, 0.16f));//VGG16_Int
+        weights6 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f,  0.1f,  0.01f,  0.125f,  0.15f,   0.1f,    0.15f, 0.125f, 0.01f, 0.1f,    0.125f,  0.125f,  0.125f,  0.1f));//VGG19_Int
+        weights7 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f,  0.1f,  0.01f,  0.125f,  0.1f,    0.1f,    0.15f, 0.125f, 0.01f, 0.1f,    0.125f,  0.125f,  0.125f,  0.05f));//Xception_Int
 //        weights8 = new Vector<>(Arrays.asList(0.1f,  0.1f,    0.15f, 0.05f, 0.05f,  0.1f,    0.1f,    0.1f,    0.05f, 0.1f,   0.01f, 0.1f,    0.1f,    0.1f,    0.1f,    0.04f));//ACCID
 //        weights9 = new Vector<>(Arrays.asList(0.1f,  0.1f,    0.01f, 0.05f, 0.04f,  0.1f,    0.1f,    0.1f,    0.06f, 0.1f,   0.01f, 0.1f,    0.1f,    0.1f,    0.1f,    0.01f));//ColorLayout
         w.setWeightsForClass(classNames.get(index++),weights0);//DenseNet121_Int
