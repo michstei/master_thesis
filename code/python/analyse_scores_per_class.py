@@ -1,7 +1,7 @@
 
 base_path = "/home/michael/master_thesis/data/results/kgcw/"
 filename = "/results_findings_per_class.txt"
-range_ = range(1,21)
+range_ = range(1,41)
 categories = ['blurry-nothing','colon-clear','dyed-lifted-polyps','dyed-resection-margins','esophagitis','instruments','normal-cecum','normal-pylorus','normal-z-line','out-of-patient','polyps','retroflex-rectum','retroflex-stomach','stool-inclusions','stool-plenty','ulcerative-colitis']
 class_names = ['DenseNet121_Int','DenseNet169_Int','DenseNet201_Int','ResNet50_Int','MobileNet_Int','VGG16_Int','VGG19_Int','Xception_Int']
 

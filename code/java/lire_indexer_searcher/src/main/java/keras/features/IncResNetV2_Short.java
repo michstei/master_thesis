@@ -35,14 +35,12 @@ public class IncResNetV2_Short implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "IncResNetV2_Short";
-        return featureName;
+        return "IncResNetV2_Short";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "IncResNetV2_Short";
-        return fieldName;
+        return "IncResNetV2_Short";
     }
 
 

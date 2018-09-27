@@ -39,14 +39,12 @@ public class VGG16_Long implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "VGG16_Long";
-        return featureName;
+        return "VGG16_Long";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "VGG16_Long";
-        return fieldName;
+        return "VGG16_Long";
     }
 
 

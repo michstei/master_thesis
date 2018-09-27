@@ -38,14 +38,12 @@ public class VGG16_Float implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "VGG16_Float";
-        return featureName;
+        return "VGG16_Float";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "VGG16_Float";
-        return fieldName;
+        return "VGG16_Float";
     }
 
 

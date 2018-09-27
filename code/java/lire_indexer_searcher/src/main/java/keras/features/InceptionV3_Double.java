@@ -39,14 +39,12 @@ public class InceptionV3_Double implements KerasFeature {
 
     @Override
     public String getFeatureName() {
-        String featureName = "InceptionV3_Double";
-        return featureName;
+        return "InceptionV3_Double";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "InceptionV3_Double";
-        return fieldName;
+        return "InceptionV3_Double";
     }
 
     @Override

@@ -37,14 +37,12 @@ public class InceptionV3_Float implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "InceptionV3_Float";
-        return featureName;
+        return "InceptionV3_Float";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "InceptionV3_Float";
-        return fieldName;
+        return "InceptionV3_Float";
     }
 
 

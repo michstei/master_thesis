@@ -37,14 +37,12 @@ public class MobileNet_Float implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "MobileNet_Float";
-        return featureName;
+        return "MobileNet_Float";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "MobileNet_Float";
-        return fieldName;
+        return "MobileNet_Float";
     }
 
 

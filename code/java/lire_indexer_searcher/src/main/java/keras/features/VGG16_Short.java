@@ -36,14 +36,12 @@ public class VGG16_Short implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "VGG16_Short";
-        return featureName;
+        return "VGG16_Short";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "VGG16_Short";
-        return fieldName;
+        return "VGG16_Short";
     }
 
 

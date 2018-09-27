@@ -36,14 +36,12 @@ public class DenseNet121_Float implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "DenseNet121_Float";
-        return featureName;
+        return "DenseNet121_Float";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "DenseNet121_Float";
-        return fieldName;
+        return "DenseNet121_Float";
     }
 
 

@@ -64,7 +64,7 @@ public class WeightedImageSearchHitClassifier {
                 }
             }
             for(Prediction pred : predictionsOfClass){
-                pred.score = pred.score * this.weights.getWeight(className,pred.category) / hits.length();
+                pred.score = pred.score * this.weights.getWeight(className,pred.category) / (double)hits.length();
             }
             allPredictions.add(predictionsOfClass);
         }

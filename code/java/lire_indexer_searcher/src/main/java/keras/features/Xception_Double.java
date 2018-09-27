@@ -37,14 +37,12 @@ public class Xception_Double implements KerasFeature {
 
     @Override
     public String getFeatureName() {
-        String featureName = "Xception_Double";
-        return featureName;
+        return "Xception_Double";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "Xception_Double";
-        return fieldName;
+        return "Xception_Double";
     }
 
     @Override

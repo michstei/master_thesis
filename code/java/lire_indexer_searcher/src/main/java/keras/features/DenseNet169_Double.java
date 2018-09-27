@@ -38,14 +38,12 @@ public class DenseNet169_Double implements KerasFeature {
 
     @Override
     public String getFeatureName() {
-        String featureName = "DenseNet169_Double";
-        return featureName;
+        return "DenseNet169_Double";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "DenseNet169_Double";
-        return fieldName;
+        return "DenseNet169_Double";
     }
 
     @Override

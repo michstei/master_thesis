@@ -29,4 +29,19 @@ public class Weights {
     public float getWeight(String className, Category category){
         return this.weights[classNames.indexOf(className)][categories.indexOf(category)];
     }
+
+    public boolean checkWeightSums(){
+        boolean correct = true;
+        for(int catIndex = 0; catIndex < this.weights.length;catIndex++){
+            float sum = 0.f;
+            for(int classIndex = 0; classIndex < this.weights.length;classIndex++){
+                sum += this.weights[classIndex][catIndex];
+            }
+            if(Math.abs(1.0-sum)>0.001){
+                correct = false;
+                break;
+            }
+        }
+        return correct;
+    }
 }

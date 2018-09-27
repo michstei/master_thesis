@@ -37,14 +37,12 @@ public class Xception_Byte implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "Xception_Byte";
-        return featureName;
+        return "Xception_Byte";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "Xception_Byte";
-        return fieldName;
+        return "Xception_Byte";
     }
 
 

@@ -240,7 +240,7 @@ public class KerasDocumentBuilderImpl implements KerasDocumentBuilder {
             }
         }
 
-        return resultList.toArray(new Field[resultList.size()]);
+        return resultList.toArray(new Field[0]);
     }
 
     @Override

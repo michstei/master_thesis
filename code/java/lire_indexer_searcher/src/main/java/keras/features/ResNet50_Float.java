@@ -37,14 +37,12 @@ public class ResNet50_Float implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "ResNet50_Float";
-        return featureName;
+        return "ResNet50_Float";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "ResNet50_Float";
-        return fieldName;
+        return "ResNet50_Float";
     }
 
 

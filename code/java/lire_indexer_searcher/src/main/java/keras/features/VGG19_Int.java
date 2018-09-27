@@ -36,14 +36,12 @@ public class VGG19_Int implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "VGG19_Int";
-        return featureName;
+        return "VGG19_Int";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "VGG19_Int";
-        return fieldName;
+        return "VGG19_Int";
     }
 
 

@@ -37,14 +37,12 @@ public class VGG19_Double implements KerasFeature {
 
     @Override
     public String getFeatureName() {
-        String featureName = "VGG19_Double";
-        return featureName;
+        return "VGG19_Double";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "VGG19_Double";
-        return fieldName;
+        return "VGG19_Double";
     }
 
     @Override

@@ -36,14 +36,12 @@ public class MobileNet_Byte implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "MobileNet_Byte";
-        return featureName;
+        return "MobileNet_Byte";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "MobileNet_Byte";
-        return fieldName;
+        return "MobileNet_Byte";
     }
 
 

@@ -38,14 +38,12 @@ public class InceptionV3_Byte implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "InceptionV3_Byte";
-        return featureName;
+        return "InceptionV3_Byte";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "InceptionV3_Byte";
-        return fieldName;
+        return "InceptionV3_Byte";
     }
 
 

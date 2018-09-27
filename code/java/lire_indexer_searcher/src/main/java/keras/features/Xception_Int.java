@@ -39,14 +39,12 @@ public class Xception_Int implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "Xception_Int";
-        return featureName;
+        return "Xception_Int";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "Xception_Int";
-        return fieldName;
+        return "Xception_Int";
     }
 
 

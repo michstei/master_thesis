@@ -36,14 +36,12 @@ public class ResNet50_Double implements KerasFeature {
 
     @Override
     public String getFeatureName() {
-        String featureName = "ResNet50_Double";
-        return featureName;
+        return "ResNet50_Double";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "ResNet50_Double";
-        return fieldName;
+        return "ResNet50_Double";
     }
 
     @Override

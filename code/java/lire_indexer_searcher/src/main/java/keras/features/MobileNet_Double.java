@@ -37,14 +37,12 @@ public class MobileNet_Double implements KerasFeature {
 
     @Override
     public String getFeatureName() {
-        String featureName = "MobileNet_Double";
-        return featureName;
+        return "MobileNet_Double";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "MobileNet_Double";
-        return fieldName;
+        return "MobileNet_Double";
     }
 
     @Override

@@ -36,14 +36,12 @@ public class MobileNet_Long implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "MobileNet_Long";
-        return featureName;
+        return "MobileNet_Long";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "MobileNet_Long";
-        return fieldName;
+        return "MobileNet_Long";
     }
 
     @Override

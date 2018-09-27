@@ -37,14 +37,12 @@ public class Xception_Long implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "Xception_Long";
-        return featureName;
+        return "Xception_Long";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "Xception_Long";
-        return fieldName;
+        return "Xception_Long";
     }
 
 

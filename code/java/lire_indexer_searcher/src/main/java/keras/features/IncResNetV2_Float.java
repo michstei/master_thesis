@@ -35,14 +35,12 @@ public class IncResNetV2_Float implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "IncResNetV2_Float";
-        return featureName;
+        return "IncResNetV2_Float";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "IncResNetV2_Float";
-        return fieldName;
+        return "IncResNetV2_Float";
     }
 
 

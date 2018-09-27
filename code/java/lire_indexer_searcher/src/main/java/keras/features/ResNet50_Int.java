@@ -37,14 +37,12 @@ public class ResNet50_Int implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "ResNet50_Int";
-        return featureName;
+        return "ResNet50_Int";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "ResNet50_Int";
-        return fieldName;
+        return "ResNet50_Int";
     }
 
 

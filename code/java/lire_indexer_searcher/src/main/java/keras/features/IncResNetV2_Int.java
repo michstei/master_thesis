@@ -37,14 +37,12 @@ public class IncResNetV2_Int implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "IncResNetV2_Int";
-        return featureName;
+        return "IncResNetV2_Int";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "IncResNetV2_Int";
-        return fieldName;
+        return "IncResNetV2_Int";
     }
 
 

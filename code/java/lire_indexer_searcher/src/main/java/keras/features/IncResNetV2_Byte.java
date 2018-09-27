@@ -36,14 +36,12 @@ public class IncResNetV2_Byte implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "IncResNetV2_Byte";
-        return featureName;
+        return "IncResNetV2_Byte";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "IncResNetV2_Byte";
-        return fieldName;
+        return "IncResNetV2_Byte";
     }
 
 

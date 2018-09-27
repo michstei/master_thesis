@@ -38,14 +38,12 @@ public class Xception_Short implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "Xception_Short";
-        return featureName;
+        return "Xception_Short";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "Xception_Short";
-        return fieldName;
+        return "Xception_Short";
     }
 
 

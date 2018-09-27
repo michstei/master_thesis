@@ -16,6 +16,13 @@ public interface KerasFeature extends GlobalFeature, KerasExtractor {
         DISTANCEFUNCTION_TANIMOTO
         }
 
+    /***
+     * caalculate distance betrween 2 featurevectors
+     * @param featureVectorSelf  featurevector 1
+     * @param featureVectorOther featurevector 2
+     * @param usedDistanceFun    distancefunction to use
+     * @return  Distance based on usedDistanceFun
+     */
     static double getDistance(double[] featureVectorSelf,double[] featureVectorOther, DistanceFunction usedDistanceFun ) {
         switch (usedDistanceFun) {
             case DISTANCEFUNCTION_COSINE: {
@@ -47,6 +54,13 @@ public interface KerasFeature extends GlobalFeature, KerasExtractor {
         }
     }
 
+
+    /***
+     * initializes the reader with the csvFilename (if name in reader equals csvFilename, reader is returned unchanged)
+     * @param csvFilename   path to the csv file
+     * @param reader        reader object or null
+     * @return  reader 
+     */
     static KerasCSVReader setCsvFilename(String csvFilename, KerasCSVReader reader) {
 
         if(csvFilename != null ) {

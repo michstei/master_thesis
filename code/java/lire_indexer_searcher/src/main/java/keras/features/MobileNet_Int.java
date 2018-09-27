@@ -37,14 +37,12 @@ public class MobileNet_Int implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "MobileNet_Int";
-        return featureName;
+        return "MobileNet_Int";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "MobileNet_Int";
-        return fieldName;
+        return "MobileNet_Int";
     }
 
 

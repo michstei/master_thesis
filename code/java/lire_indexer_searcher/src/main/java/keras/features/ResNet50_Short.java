@@ -36,14 +36,12 @@ public class ResNet50_Short implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "ResNet50_Short";
-        return featureName;
+        return "ResNet50_Short";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "ResNet50_Short";
-        return fieldName;
+        return "ResNet50_Short";
     }
 
 

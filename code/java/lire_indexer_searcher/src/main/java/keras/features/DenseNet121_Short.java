@@ -35,14 +35,12 @@ public class DenseNet121_Short implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "DenseNet121_Short";
-        return featureName;
+        return "DenseNet121_Short";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "DenseNet121_Short";
-        return fieldName;
+        return "DenseNet121_Short";
     }
 
     @Override

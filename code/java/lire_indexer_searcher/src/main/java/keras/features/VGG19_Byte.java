@@ -36,14 +36,12 @@ public class VGG19_Byte implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "VGG19_Byte";
-        return featureName;
+        return "VGG19_Byte";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "VGG19_Byte";
-        return fieldName;
+        return "VGG19_Byte";
     }
 
 

@@ -38,14 +38,12 @@ public class InceptionV3_Long implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "InceptionV3_Long";
-        return featureName;
+        return "InceptionV3_Long";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "InceptionV3_Long";
-        return fieldName;
+        return "InceptionV3_Long";
     }
 
     @Override

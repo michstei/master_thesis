@@ -104,10 +104,10 @@ public class FilePrep {
      * writes the testset to file inFileTest
      */
     public void writeTestSetFile(){
-        writeFIle(inFileTest, test);
+        writeFile(inFileTest, test);
     }
 
-    private void writeFIle(String inFile, Vector<String> lines) {
+    public static void writeFile(String inFile, Vector<String> lines) {
         try {
             if(!(new File(inFile).exists())){
                 new File(inFile).createNewFile();
@@ -122,7 +122,7 @@ public class FilePrep {
      * writes the trainset to file inFileTrain
      */
     public void writeTrainSetFile(){
-        writeFIle(inFileTrain, train);
+        writeFile(inFileTrain, train);
     }
 
     /***

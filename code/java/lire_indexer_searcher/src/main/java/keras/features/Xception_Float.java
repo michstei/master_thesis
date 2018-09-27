@@ -38,14 +38,12 @@ public class Xception_Float implements KerasFeature{
 
     @Override
     public String getFeatureName() {
-        String featureName = "Xception_Float";
-        return featureName;
+        return "Xception_Float";
     }
 
     @Override
     public String getFieldName() {
-        String fieldName = "Xception_Float";
-        return fieldName;
+        return "Xception_Float";
     }
 
 
