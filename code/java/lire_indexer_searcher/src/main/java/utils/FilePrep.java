@@ -88,7 +88,7 @@ public class FilePrep {
      */
     public static void listFilesFromDirectory(String directoryName, List<String> files) {
         File directory = new File(directoryName);
-
+        if(files == null) return;
         // Get all the files from a directory.
         File[] fList = directory.listFiles();
         for (File file : fList != null ? fList : new File[0]) {

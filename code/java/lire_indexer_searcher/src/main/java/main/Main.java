@@ -70,7 +70,8 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
     private static boolean skipIndexing = false;
     private static boolean generateInFiles = true;
     private static int numRuns = 40;
-    private static boolean testset = true;
+    private static boolean testset = false;
+    private static int testPercent = 10;
 
     public static void main(String[] args) throws Exception {
 
@@ -89,7 +90,7 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
                     FilePrep.writeFile(inFileTest,test);
                 }
                 else {
-                    FilePrep prep = new FilePrep(imageFolderPath, 5, inFileTrain, inFileTest);
+                    FilePrep prep = new FilePrep(imageFolderPath, testPercent, inFileTrain, inFileTest);
                     prep.writeSetFiles();
                 }
             }
@@ -107,7 +108,7 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
                 e.printStackTrace();
             }
 
-            String folder = testset?"testset/":"kgcw/" + runIdx + "/";
+            String folder = testset?"testset/":"kgcw"+testPercent+"/" + runIdx + "/";
             String csvBasePath = basePath + "csv/1024orLess/";
             String csvBasePathTest = basePath + "csv/1024orLessTest/";
             String outFileBasePath = basePath + "indexCreationFiles/" + folder;
@@ -187,14 +188,14 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
             }
             KerasSearcher[] searchers = new KerasSearcher[classes.length * ((useMetricSpaces && useBitSampling) ? 2 : 1)];
 //        for(int numResults = 1; numResults <= 10; numResults++) {
-
-            for (int i = 0; i < classes.length; i++) {
-                if (KerasFeature.class.isAssignableFrom(classes[i])) {
-                    Method m = classes[i].getMethod("setCsvFilename", String.class);
-                    m.invoke(null, csvFilesTest[i]);
+            if(testset) {
+                for (int i = 0; i < classes.length; i++) {
+                    if (KerasFeature.class.isAssignableFrom(classes[i])) {
+                        Method m = classes[i].getMethod("setCsvFilename", String.class);
+                        m.invoke(null, csvFilesTest[i]);
+                    }
                 }
             }
-
             int numResults = 9;
             if (useMetricSpaces)
                 setupSearchers(HashingMode.HASHING_MODE_METRIC_SPACES, classes, outFiles, readers, searchers, 0, numResults);
@@ -273,7 +274,7 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
                 for (WeightedImageSearchHitClassifier.Prediction p : predictions) {
                     scores.append(p.score).append(" : ").append(p.category.getName()).append("\n");
                 }
-                if(testset) {
+                if(!testset) {
                     findings.append(testFile);
                     findings.append(":");
                     findings.append("\n");
@@ -472,6 +473,15 @@ private static Class<? extends GlobalFeature>[] globalFeatures = new Class[]{};
         weights7 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.01f,  0.35f, 0.01f,  0.125f,  0.01f,   0.05f,   0.15f, 0.125f, 0.01f, 0.05f,   0.01f,   0.125f,  0.125f,  0.00f));//Xception_Int
 //        weights8 = new Vector<>(Arrays.asList(0.1f,  0.1f,    0.15f, 0.05f, 0.05f,  0.1f,    0.1f,    0.1f,    0.05f, 0.1f,   0.01f, 0.1f,    0.1f,    0.1f,    0.1f,    0.04f));//ACCID
 //        weights9 = new Vector<>(Arrays.asList(0.1f,  0.1f,    0.01f, 0.05f, 0.04f,  0.1f,    0.1f,    0.1f,    0.06f, 0.1f,   0.01f, 0.1f,    0.1f,    0.1f,    0.1f,    0.01f));//ColorLayout
+
+//        weights0 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.2f,  0.0f,  0.2f,  0.2f,  0.2f,  0.2f,  0.0f,  0.125f,  0.2f,  0.2f,  0.2f,  0.0f, 0.0f,  0.2f  ));//DenseNet121_Int
+//        weights1 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.2f,  0.2f,  0.2f,  0.2f,  0.2f,  0.2f,  0.2f,  0.125f,  0.2f,  0.2f,  0.2f,  0.2f, 0.0f,  0.0f  ));//DenseNet169_Int
+//        weights2 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.2f,  0.2f,  0.2f,  0.0f,  0.2f,  0.2f,  0.2f,  0.125f,  0.2f,  0.2f,  0.2f,  0.0f, 0.0f,  0.2f  ));//DenseNet201_Int
+//        weights3 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.2f,  0.2f,  0.2f,  0.0f,  0.0f,  0.2f,  0.0f,  0.125f,  0.2f,  0.2f,  0.2f,  0.2f, 0.2f,  0.2f  ));//ResNet50_Int
+//        weights4 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.0f,  0.2f,  0.2f,  0.0f,  0.0f,  0.2f,  0.0f,  0.125f,  0.0f,  0.2f,  0.2f,  0.2f, 0.2f,  0.0f  ));//MobileNet_Int
+//        weights5 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.2f,  0.0f,  0.0f,  0.2f,  0.2f,  0.0f,  0.2f,  0.125f,  0.2f,  0.0f,  0.0f,  0.2f, 0.2f,  0.2f  ));//VGG16_Int
+//        weights6 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.0f,  0.0f,  0.0f,  0.2f,  0.2f,  0.0f,  0.2f,  0.125f,  0.0f,  0.0f,  0.0f,  0.2f, 0.2f,  0.2f  ));//VGG19_Int
+//        weights7 = new Vector<>(Arrays.asList(0.125f,  0.125f,  0.0f,  0.2f,  0.0f,  0.2f,  0.0f,  0.0f,  0.2f,  0.125f,  0.0f,  0.0f,  0.0f,  0.0f, 0.2f,  0.0f  ));//Xception_Int
         w.setWeightsForClass(classNames.get(index++),weights0);//DenseNet121_Int
         w.setWeightsForClass(classNames.get(index++),weights1);//DenseNet169_Int
         w.setWeightsForClass(classNames.get(index++),weights2);//DenseNet201_Int

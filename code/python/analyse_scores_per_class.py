@@ -21,7 +21,7 @@ for path_idx in range_:
         lines = f.readlines()
    
     records[path_idx] = []
-    current_record = None
+    current_record = Record()
     current_class_name = ''
 
     for line in lines:
